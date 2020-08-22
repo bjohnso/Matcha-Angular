@@ -11,6 +11,7 @@ import { ExploreComponent } from './explore/explore.component';
 import { ChatComponent } from './chat/chat.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SharedComponent } from './shared/shared.component';
+import {CoreModule} from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,6 @@ import { SharedComponent } from './shared/shared.component';
     AuthComponent,
     LoginComponent,
     RegisterComponent,
-    CoreComponent,
     ExploreComponent,
     ChatComponent,
     ProfileComponent,
@@ -26,7 +26,9 @@ import { SharedComponent } from './shared/shared.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    // CUSTOM
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
