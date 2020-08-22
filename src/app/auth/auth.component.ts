@@ -1,15 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import {CoreComponent} from '../core/core.component';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent extends CoreComponent implements OnInit {
+  authMode = 'login';
 
-  constructor() { }
+  constructor() {
+    super();
+  }
+
 
   ngOnInit(): void {
+  }
+
+  setAuthMode(mode) {
+    this.authMode = mode;
   }
 
 }
