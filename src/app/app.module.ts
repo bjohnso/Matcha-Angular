@@ -21,7 +21,6 @@ import {ProfileModule} from './profile/profile.module';
     ExploreComponent,
     ChatComponent,
     SharedComponent,
-    EditProfileComponent
   ],
   imports: [
     NgbModule,
