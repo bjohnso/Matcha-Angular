@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AuthComponent} from './auth/auth.component';
+import {ProfileComponent} from './profile/profile.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/auth', pathMatch: 'full'},
+  {path: '', redirectTo: '/profile', pathMatch: 'full'},
   {
     path: 'auth',
     component: AuthComponent,
-  }
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+  },
 ];
 
 @NgModule({

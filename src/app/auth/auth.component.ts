@@ -13,7 +13,6 @@ export class AuthComponent extends CoreComponent implements OnInit {
     super();
   }
 
-
   ngOnInit(): void {
   }
 
