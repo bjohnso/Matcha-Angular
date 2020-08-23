@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {AuthComponent} from './auth/auth.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'profile', pathMatch: 'full'},
+  {path: '', redirectTo: 'auth', pathMatch: 'full'},
   {path: 'profile', loadChildren: () => import('./profile/profile-routing.module').then(m => m.ProfileRoutingModule)},
   {
     path: 'auth',

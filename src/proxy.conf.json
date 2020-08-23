@@ -1,0 +1,8 @@
+{
+  "/api/*": {
+    "target": "https://matcha-jronald.herokuapp.com",
+    "secure": true,
+    "changeOrigin" : true,
+    "logLevel": "debug"
+  }
+}
