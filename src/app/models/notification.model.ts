@@ -1,6 +1,6 @@
 export interface Notification {
-    type : string;
-    sender : number;
-    receiver : number;
-    content : string;
+    type: string;
+    sender: number;
+    receiver: number;
+    content: string;
 }
