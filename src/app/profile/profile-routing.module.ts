@@ -6,19 +6,11 @@ import {ProfileComponent} from './profile.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'default',
-    pathMatch: 'full',
+    component: ProfileComponent,
   },
   {
-    path: 'default',
-    component: ProfileComponent,
-    children: [
-      {
-        path: 'edit',
-        component: EditProfileComponent,
-        outlet: 'profile',
-      },
-    ]
+    path: 'edit',
+    component: EditProfileComponent,
   }
 ];
 
