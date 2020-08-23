@@ -12,14 +12,16 @@ import {AuthModule} from './auth/auth.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import {ProfileModule} from './profile/profile.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ExploreComponent,
     ChatComponent,
-    ProfileComponent,
-    SharedComponent
+    SharedComponent,
+    EditProfileComponent
   ],
   imports: [
     NgbModule,
@@ -30,7 +32,8 @@ import {HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     // CUSTOM
     CoreModule,
-    AuthModule
+    AuthModule,
+    ProfileModule
   ],
   providers: [],
   bootstrap: [AppComponent]
