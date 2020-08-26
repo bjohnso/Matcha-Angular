@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import {ProfileModule} from './profile/profile.module';
+import {SocketIOService} from './services/socket-io.service';
 
 @NgModule({
   declarations: [
