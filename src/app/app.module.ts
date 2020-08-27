@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ExploreComponent } from './explore/explore.component';
 import { ChatComponent } from './chat/chat.component';
 import { ProfileComponent } from './profile/profile.component';
+import {JWTTokenService} from './services/jwt-token.service';
 import { SharedComponent } from './shared/shared.component';
 import {CoreModule} from './core/core.module';
 import {AuthModule} from './auth/auth.module';
@@ -19,7 +20,7 @@ import {environment} from '../environments/environment'
  
 //temporary for testing
 const config: SocketIoConfig = { url: environment.api.baseURL, options: {query : {token : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjIzLCJpYXQiOjE1OTg1MjI1MzR9.tYa0OB9dm0gLwABXofuMRIW45e8G06GbW1IH0kBeCes'}}};
-
+// const config: SocketIoConfig = { url: environment.api.baseURL, options: {query : {token : JWTTokenService.jwtToken}}};
 @NgModule({
   declarations: [
     AppComponent,
