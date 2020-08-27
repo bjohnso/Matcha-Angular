@@ -1,8 +1,9 @@
 import { Injectable, ɵLocaleDataIndex } from '@angular/core';
-import {SocketIOService} from './socket-io.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { JWTTokenService } from './jwt-token.service';
+import { Socket } from 'ngx-socket-io';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,11 @@ import { JWTTokenService } from './jwt-token.service';
 
 export class ChatService {
 
-  socket;
   headers : HttpHeaders;
 
-  constructor(private SocketService : SocketIOService, private http: HttpClient, private tokenService : JWTTokenService) { 
-    this.socket = SocketService.socket;
-    this.headers = new HttpHeaders().set("auth-token", tokenService.jwtToken);
+  constructor( public socket : Socket,private http: HttpClient, private tokenService : JWTTokenService) { 
+    // this.headers = new HttpHeaders().set("auth-token", tokenService.jwtToken);
+    this.headers = new HttpHeaders().set("auth-token", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjIzLCJpYXQiOjE1OTg1MjI1MzR9.tYa0OB9dm0gLwABXofuMRIW45e8G06GbW1IH0kBeCes');
   }
 
   joinChatroom(matchId){
@@ -32,9 +32,9 @@ export class ChatService {
     }
   }
 
-  getMessages (matchId, date){
+  getMessages (matchId, date = null){
     let params : HttpParams;
-    if (matchId && matchId != null){
+    if (matchId && matchId != undefined){
       params = new HttpParams().set("match_id" , matchId);
       if (date && date != null)
         params.set("date", date);
@@ -52,5 +52,9 @@ export class ChatService {
     return this.http.get<any>("/message/count" , {headers : this.headers});
   }
 
-  
+  getMessagesFromSocket = () => {
+    return this.socket
+             .fromEvent("message")
+             .pipe(map((data) => data));
+    }
 }

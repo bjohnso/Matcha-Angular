@@ -14,7 +14,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import {ProfileModule} from './profile/profile.module';
-import {SocketIOService} from './services/socket-io.service';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import {environment} from '../environments/environment'
+ 
+//temporary for testing
+const config: SocketIoConfig = { url: environment.api.baseURL, options: {query : {token : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjIzLCJpYXQiOjE1OTg1MjI1MzR9.tYa0OB9dm0gLwABXofuMRIW45e8G06GbW1IH0kBeCes'}}};
 
 @NgModule({
   declarations: [
@@ -30,6 +34,7 @@ import {SocketIOService} from './services/socket-io.service';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    SocketIoModule.forRoot(config),
     // CUSTOM
     CoreModule,
     AuthModule,

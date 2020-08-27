@@ -1,0 +1,8 @@
+<div *ngFor="let message of messageList">
+    <p>{{message.content}}</p>
+    <p>{{message.author}}</p>
+    <p>{{message.date}}</p>
+</div>
+
+<input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" />
+<button (click)="sendMessage()">Send Message</button>
