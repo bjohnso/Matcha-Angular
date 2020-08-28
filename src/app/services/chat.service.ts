@@ -56,5 +56,5 @@ export class ChatService {
     return this.socket
              .fromEvent("message")
              .pipe(map((data) => data));
-    }
+  }
 }
