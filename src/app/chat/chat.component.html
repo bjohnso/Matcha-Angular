@@ -1,8 +1,109 @@
-<div *ngFor="let message of messageList">
-    <p>{{message.content}}</p>
-    <p>{{message.author}}</p>
-    <p>{{message.date}}</p>
-</div>
+<!doctype html>
+<html lang="en">
 
-<input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" />
-<button (click)="sendMessage()">Send Message</button>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="chat.component.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Matcha</title>
+</head>
+
+<body>
+    <!-- view container -->
+    <div class="container-fluid d-flex justify-content-center">
+
+        <!-- chat screen container -->
+        <div id="chat-screen" class="row col-sm-12 col-md-8 col-lg-6">
+
+            <!-- profile tray -->
+            <div class="row profile-tray col-12 mx-auto justify-content-center">
+                <img class="profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/robocop.jpg" alt="">
+                <div class="profile-name my-auto overflow-hidden">
+                    <h6 class="muted">{{message.author}}</h6>
+                </div>
+                <a class="return-icon float-right" href="#">
+                    <i class="material-icons cursor-pointer">keyboard_arrow_left</i>
+                </a>
+            </div>
+
+            <!-- chat area -->
+            <div class="row chat-area col-12 mx-auto">
+
+                <!-- chat history container (scrollable) -->
+                <div class="container-fluid">
+
+                    <!-- chat history display loop -->
+                    <div *ngFor="let message of messageList">
+
+                        <!-- sent texts -->
+                        <div class="row no-gutters justify-content-end" *ngIf="id == message.author; else elseBlock">
+                            <div class="col-10 ">
+                                <div class="chat-bubble chat-bubble--right justify-content-end">
+                                    <div class="timestamp-container text-center">
+                                        <span class="timestamp ">
+                                        {{message.date}}
+                                    </span>
+                                    </div>
+                                    <span>
+                                    <!-- {{message.content}} -->
+                                    in principio 
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ng-template #elseBlock>
+                            <!-- received texts -->
+                            <div class="row no-gutters ">
+                                <div class="col-10 ">
+                                    <div class="chat-bubble chat-bubble--left">
+                                        <div class="timestamp-container text-center">
+                                            <span class="timestamp ">
+                                            {{message.date}}
+                                        </span>
+                                        </div>
+                                        <span>
+                                        <!-- {{message.content}} -->
+                                        in principio creavit 
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- message input tray -->
+            <div class=" muted row message-tray col-sm-12 col-md-8 col-lg-6 fixed-bottom mx-auto justify-content-center">
+                <input class="muted" type="text" placeholder="Type your message here..." [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" />
+                <a style="cursor: pointer" (click)="sendMessage()">
+                    <i id="send-icon" class="material-icons cursor-pointer" onclick="sendMessage()">send</i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <!-- 
+            element.nativeElement.scrollTop = element.nativeElement.scrollHeight;
+            <div class="my-custom-scrollbar" #scroll></div>
+            @ViewChild('scroll', { static: true }) scroll: any;
+            ngOnChange or another event
+            this.scroll.nativeElement.scrollTop = this.scroll.nativeElement.scrollHeight; 
+        -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+
+</html>
