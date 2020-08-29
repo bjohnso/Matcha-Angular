@@ -28,4 +28,11 @@ export class MatchService {
     return this.http.get<any>('/match/count',{headers : this.headers});
   }
 
+  deleteMatch(id){
+    if (id && id != undefined){
+      let params : HttpParams = new HttpParams().set('id', id);
+      return this.http.delete('/match', {params,headers : this.headers});
+    }
+  }
+
 }

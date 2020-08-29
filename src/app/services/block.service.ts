@@ -28,4 +28,11 @@ export class BlockService {
     if (blocked_user && blocked_user != undefined)
       return this.http.post('/block', {blocked_user : blocked_user, date : new Date()}, {headers : this.headers});
   }
+
+  deleteBlocked(id){
+    if (id && id != undefined){
+      let params : HttpParams = new HttpParams().set('id' , id);
+      return this.http.delete('/block', {params, headers : this.headers});
+    }
+  }
 }

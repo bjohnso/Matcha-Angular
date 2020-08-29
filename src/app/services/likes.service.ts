@@ -32,4 +32,11 @@ export class LikesService {
     if (liked_user && liked_user != undefined)
       return this.http.post('/like', {liked_user : liked_user, date : new Date()}, {headers : this.headers});
   }
+
+  deleteLike(id){
+    if (id && id != undefined){
+      let params : HttpParams = new HttpParams().set('id', id);
+      return this.http.delete('/like', {params,headers : this.headers});
+    }
+  }
 }

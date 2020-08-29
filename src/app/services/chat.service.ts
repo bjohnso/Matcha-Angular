@@ -57,4 +57,11 @@ export class ChatService {
              .fromEvent("message")
              .pipe(map((data) => data));
   }
+
+  deleteMessage(id){
+    if (id && id != undefined){
+      let params : HttpParams = new HttpParams().set('id', id);
+      return this.http.delete('/block', {params,headers : this.headers});
+    }
+  }
 }
