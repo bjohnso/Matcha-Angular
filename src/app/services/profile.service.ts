@@ -118,4 +118,7 @@ export class ProfileService {
           {oldPassword : oldPassword, newPassword : newPassword}, {headers : this.headers})
       }
   }
+
+  //link to upload images in Angular https://www.techiediaries.com/angular-formdata/
+  
 }

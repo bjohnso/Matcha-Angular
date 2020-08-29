@@ -25,7 +25,7 @@
             <div class="row profile-tray col-12 mx-auto justify-content-center">
                 <img class="profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/robocop.jpg" alt="">
                 <div class="profile-name my-auto overflow-hidden">
-                    <h6 class="muted">{{message.author}}</h6>
+                    <h6 class="muted">Testname</h6>
                 </div>
                 <a class="return-icon float-right" href="#">
                     <i class="material-icons cursor-pointer">keyboard_arrow_left</i>
@@ -39,20 +39,20 @@
                 <div class="container-fluid">
 
                     <!-- chat history display loop -->
-                    <div *ngFor="let message of messageList">
+                    <div *ngFor="let m of messageList">
 
                         <!-- sent texts -->
-                        <div class="row no-gutters justify-content-end" *ngIf="id == message.author; else elseBlock">
+                        <div class="row no-gutters justify-content-end" *ngIf="id == m.author; else elseBlock">
                             <div class="col-10 ">
                                 <div class="chat-bubble chat-bubble--right justify-content-end">
                                     <div class="timestamp-container text-center">
                                         <span class="timestamp ">
-                                        {{message.date}}
+                                        {{m.date}}
                                     </span>
                                     </div>
                                     <span>
-                                    <!-- {{message.content}} -->
-                                    in principio 
+                                    {{m.content}}
+                                    
                                 </span>
                                 </div>
                             </div>
@@ -65,12 +65,11 @@
                                     <div class="chat-bubble chat-bubble--left">
                                         <div class="timestamp-container text-center">
                                             <span class="timestamp ">
-                                            {{message.date}}
+                                            {{m.date}}
                                         </span>
                                         </div>
                                         <span>
-                                        <!-- {{message.content}} -->
-                                        in principio creavit 
+                                        {{m.content}}
                                     </span>
                                     </div>
                                 </div>

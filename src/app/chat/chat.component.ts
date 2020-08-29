@@ -10,7 +10,7 @@ import { take } from 'rxjs/operators';
 })
 export class ChatComponent implements OnInit {
 
-  match_id :number = 1;
+  match_id :number = 2; //need to get from service
   messageList : Message[];
   message : string;
   id : number = 23; //temo not needed when login
@@ -33,7 +33,7 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage(){
-    this.chat.sendMessage(this.message, this.match_id).subscribe(data => console.log(data));
+    this.chat.sendMessage(this.message, this.match_id).subscribe(data => {return data});
     this.messageList.push({author : this.id, content : this.message, date : new Date()});
     this.message = "";
   }
