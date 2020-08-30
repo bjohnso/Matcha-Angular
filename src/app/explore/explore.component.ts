@@ -60,7 +60,7 @@ export class ExploreComponent implements OnInit {
 
     if (form.value.radius){
       radius = form.value.radius;
-      if (radius && radius < 0 || radius > 15000){
+      if (radius && radius < 0 || radius > 400075){
         this.notificationError('The radius is below 0 or over what is possible');
         return ;
       }
@@ -71,12 +71,11 @@ export class ExploreComponent implements OnInit {
 
     this.profile.getUserByFilter(radius, popularity,sexual_preference, interests, age).pipe(take(1)).subscribe((e) => {
       let data = e['data'];
-      console.log(form.value['sortable'])
       if (form.value.sortable){
          form.value['sortable'].forEach(element => {
           data = data.sort((a, b )=> {
             if (element == 'age')
-              return new Date(a.birthdate) - new Date(b.birthdate);
+              return (new Date(a.birthdate).getTime() - new Date(b.birthdate).getTime());
             else if (element == 'location')
               return  ((a.location[0] - b.location[0]) || (a.location[1] - b.location[1]));
             else if (element == 'popularity')
@@ -86,7 +85,6 @@ export class ExploreComponent implements OnInit {
       }
      
       this.profiles = data;
-      console.log(this.profiles);
       this.collectionSize = this.profiles.length;
       this.refreshProfiles();
     })
@@ -102,9 +100,5 @@ export class ExploreComponent implements OnInit {
   notificationError(error){
     this.errorMessage = error;
     this.formError = true;
-  }
-
-  filter(){
-
   }
 }

@@ -10,7 +10,7 @@ import { take } from 'rxjs/operators';
 })
 export class ChatComponent implements OnInit {
 
-  match_id :number = 2; //need to get from service
+  match_id :number = 1; //need to get from service
   messageList : Message[];
   message : string;
   id : number = 23; //temo not needed when login
