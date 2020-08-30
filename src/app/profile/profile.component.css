@@ -1,15 +1,181 @@
-.profile-header {
-  background-color: lightgrey;
+body {
+    /* border: 2px solid blue; */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
-.profile-photos {
-  background-color: lightgrey;
+
+/* profile tray */
+
+.profile-tray {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    /* border: 2px solid red; */
+    background: #eee;
+    padding: 10px 15px;
+    border-radius: 7px;
+}
+
+.profile-image {
+    min-width: 150px;
+    /* border: 2px solid yellow; */
+}
+
+.profile-image img {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
 
 .profile-details {
-  background-color: lightgrey;
+    max-height: 150px;
+    padding: 10px 10px;
+    /* border: 2px solid green; */
+    overflow: hidden;
+}
+
+.profile-details-container {
+    vertical-align: middle;
+    /* border: 2px solid hotpink; */
+}
+
+.profile-name {
+    /* border: 2px solid palevioletred; */
+    margin-left: 10px;
+    margin-right: 10px;
+    /* margin-bottom: 0px; */
+    max-width: 100%;
+    max-height: 30px;
+    overflow: hidden;
+}
+
+.profile-gender {
+    /* border: 2px solid palevioletred; */
+    margin-left: 10px;
+    margin-right: 10px;
+    /* margin-bottom: 0px; */
+    /* margin-top: 10px; */
+    padding-top: 10px;
+    max-width: 100%;
+    height: 50px;
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+
+.profile-interests {
+    /* border: 2px solid palevioletred; */
+    margin-left: 10px;
+    margin-right: 10px;
+    /* margin-bottom: 0px; */
+    max-width: 100%;
+    max-height: 25px;
+    overflow: hidden;
+}
+
+.fame-rating {
+    /* border: 2px solid purple; */
+}
+
+.fame-rating i {
+    /* color: gold; */
+    font-size: 100px;
+}
+
+.profile-rating {
+    /* color: gold; */
+    font-weight: bold;
+    /* border: 2px solid cyan; */
+}
+
+
+/* profile photos */
+
+.profile-photos-container {
+    background: #eee;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    /* border: 2px solid crimson; */
+    height: 100%;
+    white-space: nowrap;
+    overflow-x: auto;
+    /* overflow-y: hidden; */
+}
+
+.profile-photos-image-container {
+    /* border: 10px solid royalblue; */
+    height: 180px;
+}
+
+.profile-photos-image {
+    height: 180px;
+    width: 180px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 50%;
+}
+
+
+/*  */
+
+.bio-interests-tray {
+    /* border: 2px solid indianred; */
+}
+
+.bio-container {
+    min-width: 180px;
+    background: #eee;
+    margin: 10px;
+    /* border: 2px solid darkred; */
+}
+
+.bio-heading {
+    padding-top: 10px;
+}
+
+.interest-container {
+    min-width: 180px;
+    background: #eee;
+    margin: 10px;
+    /* border: 2px solid salmon; */
+}
+
+.interests-heading {
+    padding-top: 10px;
+}
+
+.interests {
+    background: #eee;
 }
 
 .interest-list {
-  background-color: lightgrey;
+    margin: none;
+    padding: 0px;
+    list-style-type: none;
+}
+
+.interest {
+    margin: 10px;
+    max-width: 90%;
+}
+
+.interest-input-field {
+    margin: 10px;
+    width: 70%;
+    border-radius: 7px;
+}
+
+.add-interest-button {
+    margin: 10px;
+    width: 20%;
+    min-width: 100px;
+    border-radius: 7px;
 }
