@@ -47,12 +47,12 @@ export class ProfileService {
       if (userId && userId != undefined){
           let params : HttpParams = new HttpParams().set('user' ,userId);
 
-          return this.http.get<any>('/profile/online', {params, headers : this.headers});
+          return this.http.get<any>('/api/profile/online', {params, headers : this.headers});
       }
   }
 
   getProfile(){
-      return this.http.get<any>('/profile', {headers : this.headers});
+      return this.http.get<any>('/api/profile', {headers : this.headers});
   }
 
   getLocation(){

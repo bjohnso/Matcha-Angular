@@ -18,13 +18,13 @@ export class MessageService {
   getMessages(date = null){
     if (date != null && date != undefined){
       let params = new HttpParams().set('date', date);
-      return this.http.get<any>('/message', {params, headers : this.headers});
+      return this.http.get<any>('/api/message', {params, headers : this.headers});
     }else{
-      return this.http.get<any>('/message', {headers : this.headers});
+      return this.http.get<any>('/api/message', {headers : this.headers});
     }
   }
 
   getMessagesCount(){
-    return this.http.get<any>('/message/count', {headers : this.headers});
+    return this.http.get<any>('/api/message/count', {headers : this.headers});
   }
 }
