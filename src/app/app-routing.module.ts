@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AuthComponent} from './auth/auth.component';
 import {ChatComponent} from './chat/chat.component'
+import { ExploreComponent } from './explore/explore.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'auth', pathMatch: 'full'},
@@ -10,7 +11,8 @@ const routes: Routes = [
     path: 'auth',
     component: AuthComponent,
   },
-  {path: 'chat', component : ChatComponent}
+  {path: 'chat', component : ChatComponent},
+  {path: 'explore', component : ExploreComponent}
   // {
   //   path: 'auth',
   //   component: AuthComponent,

@@ -16,6 +16,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import {ProfileModule} from './profile/profile.module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import {NgSelectModule} from '@ng-select/ng-select'
 import {environment} from '../environments/environment'
  
 //temporary for testing
@@ -30,6 +31,7 @@ const config: SocketIoConfig = { url: environment.api.baseURL, options: {query :
   ],
   imports: [
     NgbModule,
+    NgSelectModule,
     FormsModule,
     BrowserModule,
     ReactiveFormsModule,
