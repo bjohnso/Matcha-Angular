@@ -1,5 +1,5 @@
-<div class="row">
-    <div class="col-3 offset-3">
+<div class="row p-3">
+    <div class="col-5 offset-1">
       <form #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm)">
         <div class="form-group">
           <label for="sexual_preference">Sexual Preference</label>
@@ -83,8 +83,7 @@
                 name="interests">
             </ng-select>
         </div>
-        
-  
+     
   
         <div>
           <button
@@ -94,9 +93,17 @@
           </button>
         </div>
       </form>
+
+        <div class="py-3" *ngIf="formError">
+            <h6 class="text-danger">{{errorMessage}}</h6>
+        </div>
+
     </div>
+    
+    
 </div>
-  <div class="col-6 offset-3">
+
+  <div class="col-9 offset-1 p-3">
     <table class="table table-striped">
         <thead>
         <tr>
@@ -119,7 +126,7 @@
         </tbody>
       </table>
       
-      <div class="d-flex justify-content-between p-2">
+      <div class="d-flex justify-content-between p-2 col-9 offset-1">
         <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshProfiles()">
         </ngb-pagination>
       

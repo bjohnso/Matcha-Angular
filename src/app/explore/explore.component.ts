@@ -18,36 +18,56 @@ export class ExploreComponent implements OnInit {
   page = 1;
   pageSize = 10;
   collectionSize = 0;
+  formError = false;
+  errorMessage = "";
 
   constructor(private profile : ProfileService) {}
 
   ngOnInit(): void {
     this.profile.getInterests().pipe(take(1)).subscribe(data => {
       this.interests = data["data"]['hobbies'];
-    })
+    });
+    this.formError = false;
+    this.errorMessage = "";
   }
   
 
 
   onSubmit(form : NgForm){
     console.log(form.value)
-    let sexual_preference, age, popularity, radius, interests = null;
+    let sexual_preference, age: { min: any; max: any; }, 
+    popularity: { min: any; max: any; }, radius: number, interests = null;
     
     if (form.value.sexual_preference && form.value.sexual_preference != '')
       sexual_preference = form.value.sexual_preference;
 
-    if(form.value['age.min'] && form.value['age.max'])
+    if(form.value['age.min'] && form.value['age.max']){
       age = {min :form.value['age.min'] ,max : form.value['age.max']}
+      if (age && 'min' in age && age.min > age.max || age.min < 0){
+        this.notificationError('The age values are not correct');
+        return;
+      }
+    }
 
-    if (form.value['popularity.min'] && form.value['popularity.max'])
-      popularity = {min :form.value['popularity.min'] ,max : form.value['popularity.max']}
+    if (form.value['popularity.min'] && form.value['popularity.max']){
+      popularity = {min :form.value['popularity.min'] ,max : form.value['popularity.max']};
+      if (popularity && 'min' in popularity && popularity.min > popularity.max || popularity.min < 0){
+        this.notificationError('The popularity values are not correct');
+        return ;
+      }
+    }
 
-    if (form.value.radius)
+    if (form.value.radius){
       radius = form.value.radius;
+      if (radius && radius < 0 || radius > 15000){
+        this.notificationError('The radius is below 0 or over what is possible');
+        return ;
+      }
+    }
 
     if (form.value.interests && form.value.interests.length > 0)
       interests = form.value.interests;
-    
+
     this.profile.getUserByFilter(radius, popularity,sexual_preference, interests, age).pipe(take(1)).subscribe((e) => {
       this.profiles = e['data'];
       this.collectionSize = this.profiles.length;
@@ -58,5 +78,12 @@ export class ExploreComponent implements OnInit {
   refreshProfiles() {
     this.profilesShown = this.profiles
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+    this.formError = false;
+    this.errorMessage = "";
+  }
+
+  notificationError(error){
+    this.errorMessage = error;
+    this.formError = true;
   }
 }
