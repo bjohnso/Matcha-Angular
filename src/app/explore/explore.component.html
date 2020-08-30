@@ -71,6 +71,7 @@
               placeholder="Please input the radius in km of your Search"
               required/>
           </div>
+
         
         <div>
             <ng-select [items]="interests"
@@ -81,6 +82,18 @@
                 id="interests"
                 ngModel
                 name="interests">
+            </ng-select>
+        </div>
+
+        <div>
+            <ng-select [items]="sortable"
+                bindLabel="name"
+                placeholder="Select fields to sort by"
+                appendTo="body"
+                multiple="true"
+                id="sortable"
+                ngModel
+                name="sortable">
             </ng-select>
         </div>
      

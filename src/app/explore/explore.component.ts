@@ -15,6 +15,7 @@ export class ExploreComponent implements OnInit {
   interests :string [] = [];
   profiles : Profile [] = null;
   profilesShown : Profile [] = [];
+  sortable : string[] = ['age', 'location', 'popularity'];
   page = 1;
   pageSize = 10;
   collectionSize = 0;
@@ -69,7 +70,23 @@ export class ExploreComponent implements OnInit {
       interests = form.value.interests;
 
     this.profile.getUserByFilter(radius, popularity,sexual_preference, interests, age).pipe(take(1)).subscribe((e) => {
-      this.profiles = e['data'];
+      let data = e['data'];
+      console.log(form.value['sortable'])
+      if (form.value.sortable){
+         form.value['sortable'].forEach(element => {
+          data = data.sort((a, b )=> {
+            if (element == 'age')
+              return new Date(a.birthdate) - new Date(b.birthdate);
+            else if (element == 'location')
+              return  ((a.location[0] - b.location[0]) || (a.location[1] - b.location[1]));
+            else if (element == 'popularity')
+              return a['popularity'] - b['popularity'];
+           });
+        });
+      }
+     
+      this.profiles = data;
+      console.log(this.profiles);
       this.collectionSize = this.profiles.length;
       this.refreshProfiles();
     })
@@ -85,5 +102,9 @@ export class ExploreComponent implements OnInit {
   notificationError(error){
     this.errorMessage = error;
     this.formError = true;
+  }
+
+  filter(){
+
   }
 }
