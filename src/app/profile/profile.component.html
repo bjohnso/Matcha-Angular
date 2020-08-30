@@ -22,7 +22,7 @@
 
             <!-- profile image -->
             <div class="col-sm-4 profile-image text-center">
-                <img src=profile.profile_picture alt="">
+                <img [src]="profile.profile_picture"alt="">
             </div>
             <div class="col-sm-4 profile-details align-items-center">
 
@@ -35,7 +35,7 @@
                     </h6>
 
                     <h6 class="profile-interests ">
-                        Interested in: {{profile.profile_picture}}
+                        Interested in: {{profile.sexual_preference}}
                     </h6>
                 </div>
             </div>
