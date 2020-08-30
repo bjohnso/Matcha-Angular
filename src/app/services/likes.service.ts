@@ -18,25 +18,25 @@ export class LikesService {
   getLikes(date = null){
     if (date != null && date != undefined){
       let params = new HttpParams().set('date', date);
-      return this.http.get<any>('/like', {params, headers : this.headers});
+      return this.http.get<any>('/api/like', {params, headers : this.headers});
     }else{
-      return this.http.get<any>('/like', {headers : this.headers});
+      return this.http.get<any>('/api/like', {headers : this.headers});
     }
   }
 
   getLikesCount(){
-    return this.http.get<any>('/like/count', {headers : this.headers});
+    return this.http.get<any>('/api/like/count', {headers : this.headers});
   }
 
   postLike(liked_user){
     if (liked_user && liked_user != undefined)
-      return this.http.post('/like', {liked_user : liked_user, date : new Date()}, {headers : this.headers});
+      return this.http.post('/api/like', {liked_user : liked_user, date : new Date()}, {headers : this.headers});
   }
 
   deleteLike(id){
     if (id && id != undefined){
       let params : HttpParams = new HttpParams().set('id', id);
-      return this.http.delete('/like', {params,headers : this.headers});
+      return this.http.delete('/api/like', {params,headers : this.headers});
     }
   }
 }

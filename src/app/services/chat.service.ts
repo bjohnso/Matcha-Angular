@@ -61,7 +61,7 @@ export class ChatService {
   deleteMessage(id){
     if (id && id != undefined){
       let params : HttpParams = new HttpParams().set('id', id);
-      return this.http.delete('/block', {params,headers : this.headers});
+      return this.http.delete('/api/block', {params,headers : this.headers});
     }
   }
 }

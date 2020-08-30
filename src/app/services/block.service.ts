@@ -18,21 +18,21 @@ export class BlockService {
   getBlocked(date = null){
     if (date != null && date != undefined){
       let params = new HttpParams().set('date', date);
-      return this.http.get<any>('/block', {params, headers : this.headers});
+      return this.http.get<any>('/api/block', {params, headers : this.headers});
     }else{
-      return this.http.get<any>('/block', {headers : this.headers});
+      return this.http.get<any>('/api/block', {headers : this.headers});
     }
   }
 
   postBlocked(blocked_user){
     if (blocked_user && blocked_user != undefined)
-      return this.http.post('/block', {blocked_user : blocked_user, date : new Date()}, {headers : this.headers});
+      return this.http.post('/api/block', {blocked_user : blocked_user, date : new Date()}, {headers : this.headers});
   }
 
   deleteBlocked(id){
     if (id && id != undefined){
       let params : HttpParams = new HttpParams().set('id' , id);
-      return this.http.delete('/block', {params, headers : this.headers});
+      return this.http.delete('/api/block', {params, headers : this.headers});
     }
   }
 }
