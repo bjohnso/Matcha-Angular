@@ -1,0 +1,11 @@
+.explore-container {
+    border: 2px solid brown;
+}
+
+.explore-filter-container {
+    border: 2px solid olivedrab;
+}
+
+.filter-results-container {
+    border: 2px solid salmon;
+}

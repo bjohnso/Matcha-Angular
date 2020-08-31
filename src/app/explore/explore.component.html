@@ -1,152 +1,125 @@
-<div class="row p-3">
-    <div class="col-5 offset-1">
-      <form #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm)">
-        <div class="form-group">
-          <label for="sexual_preference">Sexual Preference</label>
-            <select id="sexual_preference"
-                class="form-control"
-                ngModel
-                name="sexual_preference"
-                >
-                <option value="">Choose your Sexual Preference</option>
-                <option *ngFor="let sex of sexual_preferences" [value]="sex" >{{sex}}
-                </option>
-             </select>
-        </div>
-  
-        <div class="form-group">
-          <label for="age">Age</label>
-          <input
-            type="number"
-            id="age.min"
-            class="form-control"
-            ngModel
-            name="age.min"
-            placeholder="Please input minimum age"
-            required/>
+<!doctype html>
+<html lang="en">
 
-            <input
-            type="number"
-            min = 18
-            id="age.max"
-            class="form-control"
-            ngModel
-            name="age.max"
-            placeholder="Please input max age"
-            required/>
-        </div>
-  
-        <div class="form-group">
-            <label for="popularity">Popularity</label>
-            <input
-              type="number"
-              min = 0
-              id="popularity.min"
-              class="form-control"
-              ngModel
-              name="popularity.min"
-              placeholder="Please input minimum popularity"
-              required/>
-  
-              <input
-              type="number"
-              min = 0
-              id="popularity.max"
-              class="form-control"
-              ngModel
-              name="popularity.max"
-              placeholder="Please input max popularity"
-              required/>
-          </div>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-          <div class="form-group">
-            <label for="radius">Location</label>
-            <input
-              type="number"
-              min = 0
-              id="radius"
-              class="form-control"
-              ngModel
-              name="radius"
-              placeholder="Please input the radius in km of your Search"
-              required/>
-          </div>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="explore.component.css">
+    <title>Matcha</title>
+</head>
 
-        
-        <div>
-            <ng-select [items]="interests"
-                bindLabel="name"
-                placeholder="Select interests"
-                appendTo="body"
-                multiple="true"
-                id="interests"
-                ngModel
-                name="interests">
-            </ng-select>
+<body>
+    <!-- page container -->
+    <div class="explore-container container-fluid">
+
+        <!-- filter input container -->
+        <div class="row explore-filter-container justify-content-center">
+
+            <div class="col-sm-12 col-md-8 col-lg-6">
+                <form #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm)">
+                    <div class="form-group">
+                        <label for="sexual_preference">Sexual Preference</label>
+                        <select id="sexual_preference" class="form-control" ngModel name="sexual_preference">
+                    <option value="">Choose your Sexual Preference</option>
+                    <option *ngFor="let sex of sexual_preferences" [value]="sex" >{{sex}}
+                    </option>
+                 </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age.min" min="18" max="120" class="form-control" ngModel name="age.min" placeholder="Please input minimum age (18+)" required/>
+
+                        <input type="number" id="age.max" min="18" max="120" class="form-control" ngModel name="age.max" placeholder="Please input max age (-120)" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="popularity">Popularity</label>
+                        <input type="number" min=0 id="popularity.min" class="form-control" ngModel name="popularity.min" placeholder="Please input minimum popularity" required/>
+
+                        <input type="number" min=0 id="popularity.max" class="form-control" ngModel name="popularity.max" placeholder="Please input max popularity" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="radius">Location</label>
+                        <input type="number" min=0 id="radius" class="form-control" ngModel name="radius" placeholder="Please input the radius in km of your Search" required/>
+                    </div>
+
+
+                    <div>
+                        <ng-select [items]="interests" bindLabel="name" placeholder="Select interests" appendTo="body" multiple="true" id="interests" ngModel name="interests">
+                        </ng-select>
+                    </div>
+
+                    <div>
+                        <ng-select [items]="sortable" bindLabel="name" placeholder="Select fields to sort by" appendTo="body" multiple="true" id="sortable" ngModel name="sortable">
+                        </ng-select>
+                    </div>
+
+
+                    <div>
+                        <button class="btn btn-primary" type="submit">
+                Search
+              </button>
+                    </div>
+                </form>
+
+                <div class="py-3" *ngIf="formError">
+                    <h6 class="text-danger">{{errorMessage}}</h6>
+                </div>
+
+            </div>
         </div>
 
-        <div>
-            <ng-select [items]="sortable"
-                bindLabel="name"
-                placeholder="Select fields to sort by"
-                appendTo="body"
-                multiple="true"
-                id="sortable"
-                ngModel
-                name="sortable">
-            </ng-select>
-        </div>
-     
-  
-        <div>
-          <button
-            class="btn btn-primary"
-            type="submit">
-            Search
-          </button>
-        </div>
-      </form>
+        <!-- filter results conainer -->
+        <!-- <div class="row filter-results-container">
+            <div class="col-sm-12 col-md-8 col-lg-6">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Interests</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let profile of profilesShown">
+                            <th scope="row">{{profile.id}}</th>
+                            <td class="overflow-hidden">
+                                <img [src]="profile.profile_picture" class="mr-2" style="width: 20px"> {{profile.username}} - {{profile.firstname}} {{profile.lastname}}
+                            </td>
+                            <td class="overflow-hidden">{{ profile.description}}</td>
+                            <td class="overflow-hidden">{{ profile.interests}}</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-        <div class="py-3" *ngIf="formError">
-            <h6 class="text-danger">{{errorMessage}}</h6>
-        </div>
+                <div class="d-flex justify-content-between p-2 col-9 offset-1">
+                    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshProfiles()">
+                    </ngb-pagination>
+
+                    <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshProfiles()">
+                  <option [ngValue]="10">10 items per page</option>
+                  <option [ngValue]="25">25 items per page</option>
+                  <option [ngValue]="50">50 items per page</option>
+                </select>
+                </div>
+            </div>
+        </div> -->
 
     </div>
-    
-    
-</div>
 
-  <div class="col-9 offset-1 p-3">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Interests</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let profile of profilesShown">
-          <th scope="row">{{profile.id}}</th>
-          <td  class="overflow-hidden">
-            <img [src]="profile.profile_picture" class="mr-2" style="width: 20px">
-            {{profile.username}} - {{profile.firstname}} {{profile.lastname}}
-          </td>
-          <td  class="overflow-hidden">{{ profile.description}}</td>
-          <td  class="overflow-hidden">{{ profile.interests}}</td>
-        </tr>
-        </tbody>
-      </table>
-      
-      <div class="d-flex justify-content-between p-2 col-9 offset-1">
-        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshProfiles()">
-        </ngb-pagination>
-      
-        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshProfiles()">
-          <option [ngValue]="10">10 items per page</option>
-          <option [ngValue]="25">25 items per page</option>
-          <option [ngValue]="50">50 items per page</option>
-        </select>
-      </div>
-  </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+
+</html>
