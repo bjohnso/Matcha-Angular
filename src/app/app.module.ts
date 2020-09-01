@@ -24,9 +24,9 @@ const config: SocketIoConfig = { url: environment.api.baseURL, options: {query :
 @NgModule({
   declarations: [
     AppComponent,
+    // TODO: CREATE MODULES AND ROUTING FLOWS FOR THESE ROGUE COMPONENTS
     ExploreComponent,
     ChatComponent,
-    HeaderComponent,
   ],
   imports: [
     NgbModule,
