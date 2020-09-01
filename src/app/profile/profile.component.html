@@ -1,95 +1,68 @@
-<!doctype html>
-<html lang="en">
+<div class="container ml-5 mr-5">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="profile.component.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <title>Matcha</title>
-</head>
-
-<body>
-    <div class="container-fluid">
-
-        <!-- profile tray -->
-        <div class="row profile-tray no-gutters">
-
-            <!-- profile image -->
-            <div class="col-sm-4 profile-image text-center">
-                <img [src]="profile.profile_picture"alt="">
-            </div>
-            <div class="col-sm-4 profile-details align-items-center">
-
-                <div class="profile-details-container">
-                    <h4 class="profile-name ">
-                        {{profile.firstname}} {{profile.lastname}}
-                    </h4>
-                    <h6 class="profile-gender ">
-                        {{profile.gender}}
-                    </h6>
-
-                    <h6 class="profile-interests ">
-                        Interested in: {{profile.sexual_preference}}
-                    </h6>
-                </div>
-            </div>
-
-            <div class=" col-sm-4 fame-rating text-center">
-                <i class="material-icons">star_half</i>
-                <div class="profile-rating">
-                    {{profile.popularity}}
-                </div>
-            </div>
-        </div>
-
-        <div class="row profile-photos">
-
-            <div class="profile-photos-container">
-
-                <div class="" *ngFor="let picture of profile.images">
-                    <div>
-                        <img class="profile-photos-image" src="picture" alt="">
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-
-        <div class="row bio-interests-tray">
-            <div class="col bio-container">
-
-                <h4 class="bio-heading text-sm-center">Bio</h4>
-                <p class="bio text-justify"> {{profile.description}} </p>
-            </div>
-
-            <div class="col interest-container">
-                <h4 class="interests-heading text-sm-center">
-                    Interests
-                </h4>
-                <div class="interests">
-
-                    <ul class="interest-list" *ngFor="let interest of profile.interests">
-                        <li class="interest">{{interest}}</li>
-                    </ul>
-                </div>
-                <input class="interest-input-field text-sm-center" type="text" placeholder="Enter your interests here">
-                <button class="btn-primary add-interest-button text-sm-center">Add </button>
-
-            </div>
-        </div>
+  <div class="row profile-header p-4">
+    <div class="col-3">
+      <img src="http://dummyimage.com/184x124.jpg/5fa2dd/ffffff">
     </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
 
-</html>
+    <div class="col-4">
+      <h2>Name Surname</h2>
+      <h3>Gender</h3>
+      <p>Interested in sexualPreference</p>
+    </div>
+
+    <div class="offset-2 col-2">
+      <h4>Fame : rating</h4>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-12 profile-photos p-4">
+      <h3>Photos</h3>
+      <img class="mr-2" src="http://dummyimage.com/184x124.jpg/5fa2dd/ffffff">
+      <img class="mr-2" src="http://dummyimage.com/184x124.jpg/5fa2dd/ffffff">
+      <img class="mr-2" src="http://dummyimage.com/184x124.jpg/5fa2dd/ffffff">
+      <img class="mr-2" src="http://dummyimage.com/184x124.jpg/5fa2dd/ffffff">
+      <img class="mr-2" src="http://dummyimage.com/184x124.jpg/5fa2dd/ffffff">
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="profile-details col-6 mt-3 p-4">
+      <h3>Bio</h3>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Pellentesque ac neque ligula. Mauris molestie tristique augue,
+        id congue enim euismod sit amet. Proin vitae justo ut ligula scelerisque
+        mattis. Integer at ligula bibendum, ornare mauris quis, tempor lorem.
+        Fusce lorem odio, finibus quis egestas in, imperdiet ut enim. Duis a
+        malesuada ante. Nullam tempor mi efficitur dolor tristique, vitae rutrum
+        erat faucibus. Sed ut urna at justo interdum laoreet. Aenean ultrices
+        lectus eleifend, rhoncus massa vitae, pretium ante. Maecenas sapien arcu,
+        ullamcorper eu euismod quis, posuere nec arcu.
+      </p>
+    </div>
+
+    <div class="interest-list col-6 mt-3 p-4">
+
+      <h3>Interests</h3>
+
+      <div class="row">
+        <input class="ml-3 col-8 mr-2">
+        <button class="col-3 btn-primary">Add Filter</button>
+      </div>
+
+      <br>
+
+      <ul class="list-group">
+        <li class="list-group-item">Cras justo odio</li>
+        <li class="list-group-item">Dapibus ac facilisis in</li>
+        <li class="list-group-item">Morbi leo risus</li>
+        <li class="list-group-item">Porta ac consectetur ac</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
