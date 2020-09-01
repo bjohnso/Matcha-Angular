@@ -10,11 +10,13 @@ import { take} from 'rxjs/operators';
 })
 export class ProfileComponent implements OnInit {
 
-  profile : Profile = null;
-  constructor(private profileService : ProfileService) { }
+  profile: Profile = null;
+  constructor(private profileService: ProfileService) { }
 
   ngOnInit(): void {
-    this.profileService.getProfile().pipe(take(1)).subscribe(e => this.profile = e.data);
+    this.profileService.getProfile().pipe(take(1)).subscribe(result => {
+        console.log(result);
+    });
   }
 
 }

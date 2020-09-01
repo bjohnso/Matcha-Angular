@@ -9,13 +9,14 @@ import {CoreModule} from './core/core.module';
 import {AuthModule} from './auth/auth.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ProfileModule} from './profile/profile.module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {environment} from '../environments/environment';
 import { HeaderComponent } from './shared/header/header.component';
 import {SharedModule} from './shared/shared.module';
+import {InterceptorService} from './services/interceptor.service';
 
 // temporary for testing
 // tslint:disable-next-line:max-line-length
@@ -43,7 +44,14 @@ const config: SocketIoConfig = { url: environment.api.baseURL, options: {query :
     AuthModule,
     ProfileModule,
   ],
-  providers: [],
+  providers: [
+    // THE INTERCEPTOR WILL CATCH ALL HTTP REQUESTS AND ADD AN AUTH TOKEN WHERE APPLICABLE
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,120 +9,135 @@ import { JWTTokenService } from './jwt-token.service';
 
 export class ProfileService {
 
-  headers : HttpHeaders;
-
-  constructor(private http: HttpClient, private tokenService : JWTTokenService) { 
-    // this.headers = new HttpHeaders().set("auth-token", tokenService.jwtToken);
-    this.headers = new HttpHeaders().set("auth-token", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjIzLCJpYXQiOjE1OTg1MjI1MzR9.tYa0OB9dm0gLwABXofuMRIW45e8G06GbW1IH0kBeCes');
+  constructor(private http: HttpClient) {
   }
 
-  getUserById(userId){
-      if (userId && userId != undefined){
-          return this.http.post('/api/profile/filter', {id : userId},{headers : this.headers})
+  getUserById(userId) {
+      if (userId && userId !== undefined) {
+          return this.http.post('/api/profile/filter', {id : userId});
       }
   }
 
-  getUserByFilter(radius = null, popularity = null, sexual_preference = null, interests = null, age = null){
-    let filter = {}  
+  getUserByFilter(radius = null, popularity = null, sexualPreference = null, interests = null, age = null) {
+    const filter: any = {};
 
-    if (age && 'min' in age && 'max' in age)
-        filter['age'] = age;
+    if (age && 'min' in age && 'max' in age) {
+        filter.age = age;
+    }
 
-    if (popularity && 'min' in popularity && 'max' in popularity)
-        filter['popularity'] = popularity;
+    if (popularity && 'min' in popularity && 'max' in popularity) {
+        filter.popularity = popularity;
+    }
 
-    if (sexual_preference && sexual_preference == 'male' || sexual_preference == 'female' || sexual_preference == 'both')
-        filter['sexual_preference'] = sexual_preference;
+    if (sexualPreference && sexualPreference === 'male' || sexualPreference === 'female' ||
+      sexualPreference === 'both') {
+        filter.sexual_preference = sexualPreference;
+    }
 
-    if (radius && radius != undefined && radius > 0)
-        filter['radius'] = radius;
+    if (radius && radius !== undefined && radius > 0) {
+        filter.radius = radius;
+    }
 
-    if (interests && interests != undefined && interests.length > 0)
-        filter['interests'] = interests;
+    if (interests && interests !== undefined && interests.length > 0) {
+        filter.interests = interests;
+    }
 
-    return this.http.post('/api/profile/filter', filter, {headers : this.headers});
+    return this.http.post('/api/profile/filter', filter);
   }
 
-  checkUserOnline(userId){
-      if (userId && userId != undefined){
-          let params : HttpParams = new HttpParams().set('user' ,userId);
+  checkUserOnline(userId) {
+      if (userId && userId !== undefined) {
+          const params: HttpParams = new HttpParams().set('user' , userId);
 
-          return this.http.get<any>('/api/profile/online', {params, headers : this.headers});
+          return this.http.get<any>('/api/profile/online', {params});
       }
   }
 
-  getProfile(){
-      return this.http.get<any>('/api/profile', {headers : this.headers});
+  getProfile() {
+      return this.http.get<any>('/api/profile');
   }
 
-  getLocation(){
-      return this.http.put('/api/profile/location',{} ,{headers : this.headers});
+  getLocation() {
+      return this.http.put('/api/profile/location', {} );
   }
 
-  updateProfile(username = null, firstname = null, lastname = null, email = null, gender = null, 
-                description = null, interests = null, last_visit = null, popularity = null, 
-                birthdate = null, sexual_preference = null, sexual_orientation = null){
+  updateProfile(username = null, firstname = null, lastname = null, email = null, gender = null,
+                description = null, interests = null, lastVisit = null, popularity = null,
+                birthdate = null, sexualPreference = null, sexualOrientation = null) {
 
-        let updateObject : object = {};
+        const updateObject: any = {};
 
-        if (username && username != undefined)
-            updateObject['username'] = username;
+        if (username && username !== undefined) {
+            updateObject.username = username;
+        }
 
-        if (firstname && firstname != undefined)
-            updateObject['firstname'] = firstname;
+        if (firstname && firstname !== undefined) {
+            updateObject.firstname = firstname;
+        }
 
-        if (lastname && lastname != undefined)
-            updateObject['lastname'] = lastname;
+        if (lastname && lastname !== undefined) {
+            updateObject.lastname = lastname;
+        }
 
-        if (email && email != undefined)
-            updateObject['email'] = email;
+        if (email && email !== undefined) {
+            updateObject.email = email;
+        }
 
-        if (gender && gender != undefined)
-            updateObject['gender'] = gender;
+        if (gender && gender !== undefined) {
+            updateObject.gender = gender;
+        }
 
-        if (description && description != undefined)
-            updateObject['description'] = description;
+        if (description && description !== undefined) {
+            updateObject.description = description;
+        }
 
-        if (interests && interests != undefined && interests.length > 0)
-            updateObject['interests'] = interests;
+        if (interests && interests !== undefined && interests.length > 0) {
+            updateObject.interests = interests;
+        }
 
-        if (last_visit && last_visit != undefined)
-            updateObject['last_visit'] = last_visit;
+        if (lastVisit && lastVisit !== undefined) {
+            updateObject.last_visit = lastVisit;
+        }
 
-        if (popularity && popularity != undefined && popularity > 0)
-            updateObject['popularity'] = popularity;
+        if (popularity && popularity !== undefined && popularity > 0) {
+            updateObject.popularity = popularity;
+        }
 
-        if (birthdate && birthdate != undefined)
-            updateObject['birthdate'] = birthdate;
+        if (birthdate && birthdate !== undefined) {
+            updateObject.birthdate = birthdate;
+        }
 
-        if (sexual_preference && sexual_preference != undefined && sexual_preference == 'male' || sexual_preference == 'female' || sexual_preference == 'both')
-            updateObject['sexual_preference'] = sexual_preference;
+        if (sexualPreference && sexualPreference !== undefined && sexualPreference === 'male' ||
+          sexualPreference === 'female' || sexualPreference === 'both') {
+            updateObject.sexual_preference = sexualPreference;
+        }
 
-        if (sexual_orientation && sexual_orientation != undefined)
-            updateObject['sexual_orientation'] = sexual_orientation;
-        
-        return this.http.put('/api/profile', updateObject, {headers : this.headers});
+        if (sexualOrientation && sexualOrientation !== undefined) {
+            updateObject.sexual_orientation = sexualOrientation;
+        }
+
+        return this.http.put('/api/profile', updateObject);
   }
 
-  updateLastOnline(){
-    return this.http.put('/api/profile', {last_online : new Date()}, {headers : this.headers});
+  updateLastOnline() {
+    return this.http.put('/api/profile', {last_online : new Date()});
   }
 
-  getAllProfile(){
-      return this.http.get('/api/profile/all', {headers : this.headers});
+  getAllProfile() {
+      return this.http.get('/api/profile/all');
   }
 
-  changePassword(oldPassword, newPassword){
-      if (oldPassword && oldPassword != undefined && newPassword && newPassword != undefined){
-          return this.http.post('/api/profile/changePassword', 
-          {oldPassword : oldPassword, newPassword : newPassword}, {headers : this.headers})
+  changePassword(oldPassword, newPassword) {
+      if (oldPassword && oldPassword !== undefined && newPassword && newPassword !== undefined) {
+          return this.http.post('/api/profile/changePassword',
+          {oldPassword, newPassword});
       }
   }
 
-  getInterests(){
+  getInterests() {
       return this.http.get('/api/interests');
   }
 
-  //link to upload images in Angular https://www.techiediaries.com/angular-formdata/
-  
+  // link to upload images in Angular https://www.techiediaries.com/angular-formdata/
+
 }
