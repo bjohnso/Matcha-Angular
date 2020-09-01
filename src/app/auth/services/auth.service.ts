@@ -1,10 +1,18 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
   constructor(private httpClient: HttpClient) {
+  }
+
+  login(data: any) {
+    // tslint:disable-next-line:new-parens
+    if (data.password && data.email) {
+      return this.httpClient.post(
+        '/api/auth/login/',
+        data);
+    }
   }
 
   register(data: any) {
@@ -14,6 +22,5 @@ export class AuthService {
         '/api/auth/register/',
         data);
     }
-    return null;
   }
 }

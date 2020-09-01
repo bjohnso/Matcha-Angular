@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as jwt_decode from 'jwt-decode';
+import {StorageService} from './storage.service';
 
 @Injectable({providedIn: 'root'})
 export class JWTTokenService {
@@ -7,13 +8,18 @@ export class JWTTokenService {
   jwtToken: string;
   decodedToken: { [key: string]: string };
 
-  constructor() {
+  constructor(private storageService: StorageService) {
   }
 
   setToken(token: string) {
     if (token) {
       this.jwtToken = token;
+      this.storageService.set('user', this.jwtToken);
     }
+  }
+
+  getToken() {
+    return this.jwtToken;
   }
 
   decodeToken() {
