@@ -138,6 +138,14 @@ export class ProfileService {
       return this.http.get('/api/interests');
   }
 
+  getProfilesByLikes(){
+      return this.http.get<any>('/api/profile/likes');
+  }
+  
+  getProfilesByMatches(){
+    return this.http.get<any>('/api/profile/match');
+  }
+
   // link to upload images in Angular https://www.techiediaries.com/angular-formdata/
 
 }

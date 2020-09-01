@@ -11,11 +11,11 @@ import { map } from 'rxjs/operators';
 
 export class ChatService {
 
-  headers : HttpHeaders;
+  
 
   constructor( public socket : Socket,private http: HttpClient, private tokenService : JWTTokenService) { 
-    // this.headers = new HttpHeaders().set("auth-token", tokenService.jwtToken);
-    this.headers = new HttpHeaders().set("auth-token", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjIzLCJpYXQiOjE1OTg1MjI1MzR9.tYa0OB9dm0gLwABXofuMRIW45e8G06GbW1IH0kBeCes');
+    
+    
   }
 
   joinChatroom(matchId){
@@ -28,7 +28,7 @@ export class ChatService {
         match_id : match_id,
         date : new Date(),
         content : message
-      }, {headers : this.headers});
+      });
     }
   }
 
@@ -38,18 +38,18 @@ export class ChatService {
       params = new HttpParams().set("match_id" , matchId);
       if (date && date != null)
         params.set("date", date);
-      return this.http.get<any>("/api/message/matchid", {params, headers : this.headers});
+      return this.http.get<any>("/api/message/matchid", {params});
     }
   }
 
   setRead(messageId){
     if (messageId && messageId != undefined){
-      return this.http.post("/api/message/read" ,{id : messageId}, {headers: this.headers});
+      return this.http.post("/api/message/read" ,{id : messageId});
     }
   }
 
   getCount(){
-    return this.http.get<any>("/message/count" , {headers : this.headers});
+    return this.http.get<any>("/message/count" );
   }
 
   getMessagesFromSocket = () => {
@@ -61,7 +61,7 @@ export class ChatService {
   deleteMessage(id){
     if (id && id != undefined){
       let params : HttpParams = new HttpParams().set('id', id);
-      return this.http.delete('/api/block', {params,headers : this.headers});
+      return this.http.delete('/api/block', {params});
     }
   }
 }
