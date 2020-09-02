@@ -13,10 +13,10 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ProfileModule} from './profile/profile.module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import {NgSelectModule} from '@ng-select/ng-select';
-import {environment} from '../environments/environment';
-import { HeaderComponent } from './shared/header/header.component';
+import {environment} from '../environments/environment';;
 import {SharedModule} from './shared/shared.module';
 import {InterceptorService} from './services/interceptor.service';
+import {JWT_OPTIONS, JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 
 // temporary for testing
 // tslint:disable-next-line:max-line-length
@@ -50,7 +50,11 @@ const config: SocketIoConfig = { url: environment.api.baseURL, options: {query :
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
       multi: true
-    }
+    },
+    {
+      provide: JWT_OPTIONS, useValue: JWT_OPTIONS,
+    },
+    JwtHelperService
   ],
   bootstrap: [AppComponent]
 })
