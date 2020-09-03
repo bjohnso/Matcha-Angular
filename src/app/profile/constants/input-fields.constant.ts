@@ -38,14 +38,14 @@ export const EDIT_PROFILE_FIELDS = {
     INPUT_ID: 'inputSexualPreference',
     LINK_ID: 'linkSexualPreference',
     ID_SUFFIX: 'SexualPreference',
-    PROP: 'sexualPreference',
+    PROP: 'sexual_preference',
     VALIDATION_ID: 'validationSexualPreference'
   },
   SEXUAL_ORIENTATION: {
     INPUT_ID: 'inputSexualOrientation',
     LINK_ID: 'linkSexualOrientation',
     ID_SUFFIX: 'SexualOrientation',
-    PROP: 'sexualOrientation',
+    PROP: 'sexual_orientation',
     VALIDATION_ID: 'validationSexualOrientation'
   },
   BIOGRAPHY: {

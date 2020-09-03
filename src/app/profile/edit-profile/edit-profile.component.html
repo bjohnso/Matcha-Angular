@@ -10,9 +10,8 @@
             <input
               type="text"
               id="{{EDIT_PROFILE_FIELDS.FIRST_NAME.INPUT_ID}}"
-              value="{{profile?.firstname}}"
+              [value]="profile.firstname"
               class="form-control"
-              ngModel
               name="firstname"
               required/>
           </div>
@@ -22,9 +21,8 @@
             <input
               type="text"
               id="{{EDIT_PROFILE_FIELDS.LAST_NAME.INPUT_ID}}"
-              value="{{profile?.lastname}}"
+              [value]="profile.lastname"
               class="form-control"
-              ngModel
               name="lastname"
               required/>
           </div>
@@ -34,9 +32,8 @@
             <input
               type="text"
               id="{{EDIT_PROFILE_FIELDS.USERNAME.INPUT_ID}}"
-              value="{{profile?.username}}"
+              [value]="profile.username"
               class="form-control"
-              ngModel
               name="username"
               required/>
           </div>
@@ -46,9 +43,8 @@
             <input
               type="email"
               id="{{EDIT_PROFILE_FIELDS.EMAIL.INPUT_ID}}"
-              value="{{profile?.email}}"
+              [value]="profile.email"
               class="form-control"
-              ngModel
               name="email"
               required
               email/>
@@ -70,7 +66,7 @@
                        placeholder="select gender"
                        class="form-control"
                        id="{{EDIT_PROFILE_FIELDS.GENDER.INPUT_ID}}"
-                       value="{{profile?.gender}}"
+                       [value]="profile.gender"
                        type="text"
                        readonly="readonly"
                        ngbDropdownAnchor
@@ -95,7 +91,7 @@
                        placeholder="select sexual preference"
                        class="form-control"
                        id="{{EDIT_PROFILE_FIELDS.SEXUAL_PREFERENCE.INPUT_ID}}"
-                       value="{{profile?.sexualPreference}}"
+                       [value]="profile.sexual_preference"
                        type="text"
                        readonly="readonly"
                        ngbDropdownAnchor
@@ -120,7 +116,7 @@
                        placeholder="select sexual orientation"
                        class="form-control"
                        id="{{EDIT_PROFILE_FIELDS.SEXUAL_ORIENTATION.INPUT_ID}}"
-                       value="{{profile?.sexualOrientation}}"
+                       [value]="profile.sexual_orientation"
                        type="text"
                        readonly="readonly"
                        ngbDropdownAnchor
@@ -134,9 +130,8 @@
             <textarea
               type="text"
               id="{{EDIT_PROFILE_FIELDS.BIOGRAPHY.INPUT_ID}}"
-              value="{{profile?.description}}"
+              [value]="profile.description"
               class="form-control"
-              ngModel
               name="biography"
               rows="3"></textarea>
           </div>

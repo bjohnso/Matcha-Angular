@@ -1,25 +1,10 @@
-export interface ProfileGetPayload {
-    id: number;
-    firstname: string;
-    lastname: string;
-    username: string;
-    email: string;
-    authenticated: boolean;
-    suspended: boolean;
-    gender: string;
-    sexualOrientation: string;
-    sexualPreference: string;
-    description: string;
-    interests: string [];
-    images: string []; // are links
-    profilePicture: string; // selected from images
-    location: number [] ; // [lat, long]
-    lastVisit: Date;
-    popularity: number;
-    birthdate: Date;
-}
-
-export interface ProfileUpdatePayload {
+export interface ProfileInterface {
+  id?: number;
+  authenticated?: boolean;
+  suspended?: boolean;
+  images?: string [];
+  profile_picture?: string;
+  location?: number [];
   firstname: string;
   lastname: string;
   username: string;
@@ -34,7 +19,8 @@ export interface ProfileUpdatePayload {
   birthdate: Date;
 }
 
-export class Profile implements ProfileGetPayload {
+export class Profile implements ProfileInterface {
+
   authenticated: boolean;
   birthdate: Date;
   description: string;
@@ -44,15 +30,21 @@ export class Profile implements ProfileGetPayload {
   id: number;
   images: string[];
   interests: string[];
-  lastVisit: Date;
+  last_visit: Date;
   lastname: string;
   location: number[];
   popularity: number;
-  profilePicture: string;
-  sexualOrientation: string;
-  sexualPreference: string;
+  profile_picture: string;
+  sexual_orientation: string;
+  sexual_preference: string;
   suspended: boolean;
   username: string;
 
-  constructor() {}
+  constructor(data?: ProfileInterface) {
+    Object.assign(this, data);
+  }
+
+  public static factory(data?: ProfileInterface): Profile {
+    return new Profile(data);
+  }
 }

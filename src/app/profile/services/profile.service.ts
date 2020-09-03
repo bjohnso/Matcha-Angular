@@ -1,6 +1,6 @@
 import { Injectable} from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import {Profile, ProfileGetPayload, ProfileUpdatePayload} from '../models/profile.model';
+import {Profile, ProfileInterface} from '../models/profile.model';
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +53,7 @@ export class ProfileService {
   }
 
   getProfile() {
-      return this.http.get<ProfileGetPayload>('/api/profile');
+      return this.http.get<any>('/api/profile');
   }
 
   getLocation() {
@@ -61,7 +61,7 @@ export class ProfileService {
   }
 
   updateProfile(profile: Profile) {
-        const updateProfile: ProfileUpdatePayload = {
+        const updateProfile: ProfileInterface = {
           username: profile?.username,
           firstname: profile?.firstname,
           lastname: profile?.lastname,
@@ -69,11 +69,11 @@ export class ProfileService {
           gender: profile?.gender,
           description: profile?.description,
           interests: profile?.interests,
-          last_visit: profile?.lastVisit,
+          last_visit: profile?.last_visit,
           popularity: profile?.popularity,
           birthdate: profile.birthdate,
-          sexual_preference: profile?.sexualPreference,
-          sexual_orientation: profile?.sexualOrientation,
+          sexual_preference: profile?.sexual_preference,
+          sexual_orientation: profile?.sexual_orientation,
         };
         return this.http.put('/api/profile', updateProfile);
   }

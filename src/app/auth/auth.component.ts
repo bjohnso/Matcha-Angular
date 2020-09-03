@@ -39,7 +39,8 @@ export class AuthComponent extends CoreComponent implements OnInit {
             this.jwtService.setToken(response.data.token);
             this.router.navigate(
               ['profile'],
-              {relativeTo: this.activatedRoute.parent}).then();
+              {relativeTo: this.activatedRoute.parent})
+              .then();
           }
         });
     }

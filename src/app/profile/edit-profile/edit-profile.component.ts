@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CoreComponent} from '../../core/core.component';
 import {SEXUAL_PREFERENCE, GENDER, SEXUAL_ORIENTATION} from '../../data/profile.data';
 import {EDIT_PROFILE_FIELDS} from '../constants/input-fields.constant';
 import {Profile} from '../models/profile.model';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
@@ -18,8 +19,8 @@ export class EditProfileComponent extends CoreComponent implements OnInit {
   EDIT_PROFILE_FIELDS = EDIT_PROFILE_FIELDS;
 
   // MODELS
-  profile: Profile = new Profile();
-  constructor() {
+  profile: Profile;
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     super();
   }
 
@@ -34,7 +35,9 @@ export class EditProfileComponent extends CoreComponent implements OnInit {
         .find(prop => id.includes(EDIT_PROFILE_FIELDS[prop].LINK_ID));
       if (fieldsProperty && item) {
         const profileProperty = EDIT_PROFILE_FIELDS[fieldsProperty].PROP;
-        this.profile[profileProperty] = item;
+        if (this.profile) {
+          this.profile[profileProperty] = item;
+        }
       }
     }
   }
@@ -44,6 +47,8 @@ export class EditProfileComponent extends CoreComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const data = history.state.profile || {};
+    this.profile = new Profile(data);
   }
 
 }

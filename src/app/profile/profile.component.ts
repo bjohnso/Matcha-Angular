@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile } from './models/profile.model';
 import { ProfileService } from './services/profile.service';
-import { take} from 'rxjs/operators';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -10,12 +10,20 @@ import { take} from 'rxjs/operators';
 })
 export class ProfileComponent implements OnInit {
 
-  profile: Profile = null;
-  constructor(private profileService: ProfileService) { }
+  constructor(private profileService: ProfileService, private router: Router,
+              private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.profileService.getProfile().pipe(take(1)).subscribe(result => {
+    this.profileService.getProfile()
+      .subscribe(result => {
         console.log(result);
+        this.router.navigate(
+          [{outlets: {profile : 'edit'}}],
+          {
+            relativeTo: this.activatedRoute,
+            state: {profile : result.data}
+          })
+          .then();
     });
   }
 
