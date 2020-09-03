@@ -1,4 +1,4 @@
-export interface Profile {
+export interface ProfileGetPayload {
     id: number;
     firstname: string;
     lastname: string;
@@ -16,12 +16,27 @@ export interface Profile {
     location: number [] ; // [lat, long]
     lastVisit: Date;
     popularity: number;
-    birthDate: Date;
+    birthdate: Date;
 }
 
-export class Profile implements Profile {
+export interface ProfileUpdatePayload {
+  firstname: string;
+  lastname: string;
+  username: string;
+  email: string;
+  gender: string;
+  sexual_orientation: string;
+  sexual_preference: string;
+  description: string;
+  interests: string [];
+  last_visit: Date;
+  popularity: number;
+  birthdate: Date;
+}
+
+export class Profile implements ProfileGetPayload {
   authenticated: boolean;
-  birthDate: Date;
+  birthdate: Date;
   description: string;
   email: string;
   firstname: string;
