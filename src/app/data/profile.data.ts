@@ -12,3 +12,13 @@ export const GENDER = {
     'female'
   ]
 };
+
+export const SEXUAL_ORIENTATION = {
+  OPTIONS : [
+    'hetero-sexual',
+    'homo-sexual',
+    'bi-sexual',
+    'a-sexual',
+    'pan-sexual',
+  ]
+};

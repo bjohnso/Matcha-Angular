@@ -1,124 +1,148 @@
-<div class="container m-5 edit-profile">
-  <div class="row">
-    <div class="col-6 offset-3 mt-3 mb-3">
-      <h4>Edit Profile</h4>
-      <br>
-      <form #authForm="ngForm">
-        <div class="form-group">
-          <label for="firstname">first name</label>
-          <input
-            type="text"
-            id="firstname"
-            class="form-control"
-            ngModel
-            name="firstname"
-            required/>
-        </div>
-
-        <div class="form-group">
-          <label for="lastname">last name</label>
-          <input
-            type="text"
-            id="lastname"
-            class="form-control"
-            ngModel
-            name="lastname"
-            required/>
-        </div>
-
-        <div class="form-group">
-          <label for="username">username</label>
-          <input
-            type="text"
-            id="username"
-            class="form-control"
-            ngModel
-            name="username"
-            required/>
-        </div>
-
-        <div class="form-group">
-          <label for="email">email</label>
-          <input
-            type="email"
-            id="email"
-            class="form-control"
-            ngModel
-            name="email"
-            required
-            email/>
-        </div>
-
-        <div class="form-group">
-          <label for="gender">gender</label>
-          <div id="gender" name="gender">
-            <label for="male">male</label>
+<div class="container-fluid">
+  <div class="ml-5 mr-5">
+    <div class="row edit-profile">
+      <div class="col-6 offset-3 pt-3 p-3">
+        <h4>Edit Profile</h4>
+        <br>
+        <form #authForm="ngForm">
+          <div class="form-group">
+            <label for="firstname">First Name</label>
             <input
-              type="checkbox"
-              id="male"
-              class="form-check-inline"
+              type="text"
+              id="firstname"
+              class="form-control"
               ngModel
-              name="male"/>
-
-            <label for="male">female</label>
-            <input
-              type="checkbox"
-              id="female"
-              class="form-check-inline"
-              ngModel
-              name="female"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-          <label for="gender">sexual preference</label>
-          <div id="sexualPreference" name="sexualPreference">
-            <label for="malePreference">male</label>
-            <input
-              type="checkbox"
-              id="malePreference"
-              class="form-check-inline"
-              ngModel
-              name="malePreference"/>
-
-            <label for="malePreference">female</label>
-            <input
-              type="checkbox"
-              id="femalePreference"
-              class="form-check-inline"
-              ngModel
-              name="femalePreference"/>
-
-            <label for="bothPreference">both</label>
-            <input
-              type="checkbox"
-              id="bothPreference"
-              class="form-check-inline"
-              ngModel
-              name="bothPreference"/>
+              name="firstname"
+              required/>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label for="firstname">biography</label>
-          <textarea
-            type="text"
-            id="biography"
-            class="form-control"
-            ngModel
-            name="biography"
-            rows="3"></textarea>
-        </div>
+          <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input
+              type="text"
+              id="lastname"
+              class="form-control"
+              ngModel
+              name="lastname"
+              required/>
+          </div>
 
-        <div>
-          <button
-            class="btn btn-primary"
-            type="submit"
-            [disabled]="!authForm.valid">
-            Save Info
-          </button>
-        </div>
-      </form>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              ngModel
+              name="username"
+              required/>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              ngModel
+              name="email"
+              required
+              email/>
+          </div>
+
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <div id="gender" name="gender">
+              <div #genderDrop="ngbDropdown" ngbDropdown autoClose="outside">
+                <div class="optionDD" ngbDropdownMenu #genderMenu aria-labelledby="genderDDToggle">
+                  <a *ngFor="let option of GENDER.OPTIONS; let i = index"
+                     class="text-truncate dropdown-item"
+                     id="linkGender-{{i}}"
+                     (click)="genderDrop.close()">
+                    {{option}}
+                  </a>
+                </div>
+                <input autocomplete="off"
+                       placeholder="select gender"
+                       class="form-control"
+                       id="inputGender"
+                       type="text"
+                       readonly="readonly"
+                       ngbDropdownAnchor
+                       (click)="genderDrop.open()"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="sexualPreference">Sexual Preference</label>
+            <div id="sexualPreference" name="sexualPreference">
+              <div #sexualPreferenceDrop="ngbDropdown" ngbDropdown autoClose="outside">
+                <div class="optionDD" ngbDropdownMenu #sexualPreferenceMenu aria-labelledby="sexualPreferenceDDToggle">
+                  <a *ngFor="let option of SEXUAL_PREFERENCE.OPTIONS; let i = index"
+                     class="text-truncate dropdown-item"
+                     id="linkSexualPreference-{{i}}"
+                     (click)="sexualPreferenceDrop.close()">
+                    {{option}}
+                  </a>
+                </div>
+                <input autocomplete="off"
+                       placeholder="select sexual preference"
+                       class="form-control"
+                       id="inputSexualPreference"
+                       type="text"
+                       readonly="readonly"
+                       ngbDropdownAnchor
+                       (click)="sexualPreferenceDrop.open()"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="gender">Sexual Orientation</label>
+            <div id="sexualOrientation" name="sexualOrientation">
+              <div #sexualOrientationDrop="ngbDropdown" ngbDropdown autoClose="outside">
+                <div class="optionDD" ngbDropdownMenu #sexualOrientationMenu aria-labelledby="sexualOrientationDDToggle">
+                  <a *ngFor="let option of SEXUAL_ORIENTATION.OPTIONS; let i = index"
+                     class="text-truncate dropdown-item"
+                     id="linkSexualOrientation-{{i}}"
+                     (click)="sexualOrientationDrop.close()">
+                    {{option}}
+                  </a>
+                </div>
+                <input autocomplete="off"
+                       placeholder="select sexual orientation"
+                       class="form-control"
+                       id="inputSexualOrientation"
+                       type="text"
+                       readonly="readonly"
+                       ngbDropdownAnchor
+                       (click)="sexualOrientationDrop.open()"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="firstname">Biography</label>
+            <textarea
+              type="text"
+              id="biography"
+              class="form-control"
+              ngModel
+              name="biography"
+              rows="3"></textarea>
+          </div>
+
+          <div>
+            <button
+              class="btn btn-primary"
+              type="submit"
+              [disabled]="!authForm.valid">
+              Save Info
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>

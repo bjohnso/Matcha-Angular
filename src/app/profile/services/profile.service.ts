@@ -1,7 +1,7 @@
 import { Injectable, ɵLocaleDataIndex } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { JWTTokenService } from './jwt-token.service';
+import { JWTTokenService } from '../../services/jwt-token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -141,7 +141,7 @@ export class ProfileService {
   getProfilesByLikes(){
       return this.http.get<any>('/api/profile/likes');
   }
-  
+
   getProfilesByMatches(){
     return this.http.get<any>('/api/profile/match');
   }

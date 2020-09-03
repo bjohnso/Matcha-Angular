@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ProfileService } from '../services/profile.service';
-import {Profile} from '../models/profile.model';
+import { ProfileService } from '../profile/services/profile.service';
+import {Profile} from '../profile/models/profile.model';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -31,14 +31,14 @@ export class ExploreComponent implements OnInit {
     this.formError = false;
     this.errorMessage = "";
   }
-  
+
 
 
   onSubmit(form : NgForm){
     console.log(form.value)
-    let sexual_preference, age: { min: any; max: any; }, 
+    let sexual_preference, age: { min: any; max: any; },
     popularity: { min: any; max: any; }, radius: number, interests = null;
-    
+
     if (form.value.sexual_preference && form.value.sexual_preference != '')
       sexual_preference = form.value.sexual_preference;
 
@@ -83,7 +83,7 @@ export class ExploreComponent implements OnInit {
            });
         });
       }
-     
+
       this.profiles = data;
       this.collectionSize = this.profiles.length;
       this.refreshProfiles();

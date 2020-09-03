@@ -30,14 +30,17 @@ const config: SocketIoConfig = { url: environment.api.baseURL, options: {query :
     ChatComponent,
   ],
   imports: [
-    NgbModule,
     NgSelectModule,
     FormsModule,
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+
+    // THIRD PARTY
     SocketIoModule.forRoot(config),
+    NgbModule,
+
     // CUSTOM
     CoreModule,
     SharedModule,
