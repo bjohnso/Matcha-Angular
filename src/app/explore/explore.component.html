@@ -76,28 +76,76 @@
         </div>
 
         <!-- filter results conainer -->
-        <!-- <div class="row filter-results-container">
+        <div class="row filter-results-container">
             <div class="col-sm-12 col-md-8 col-lg-6">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Interests</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let profile of profilesShown">
-                            <th scope="row">{{profile.id}}</th>
-                            <td class="overflow-hidden">
-                                <img [src]="profile.profile_picture" class="mr-2" style="width: 20px"> {{profile.username}} - {{profile.firstname}} {{profile.lastname}}
-                            </td>
-                            <td class="overflow-hidden">{{ profile.description}}</td>
-                            <td class="overflow-hidden">{{ profile.interests}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+
+                <div class="filter-results-profile">
+                    <!-- profile tray -->
+                    <div class="row profile-tray no-gutters" *ngFor="let profile of profilesShown">
+
+                        <!-- profile image -->
+                        <div class="col-sm-4 profile-image text-center">
+                            <img [src]="profile.profile_picture" alt="profile picture">
+                        </div>
+                        <div class="col-sm-4 profile-details align-items-center">
+
+                            <div class="profile-details-container">
+                                <h4 class="profile-name ">
+                                    {{profile.firstname}} {{profile.lastname}}
+                                </h4>
+                                <h6 class="profile-gender ">
+                                    {{profile.gender}}
+                                </h6>
+
+                                <h6 class="profile-interests ">
+                                    Interested in: {{profile.sexual_preference}}
+                                </h6>
+                            </div>
+                        </div>
+
+                        <div class=" col-sm-4 fame-rating text-center">
+                            <i class="material-icons">star_half</i>
+                            <div class="profile-rating">
+                                {{profile.popularity}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row profile-photos">
+
+                        <div class="profile-photos-container">
+
+                            <div class="" *ngFor="let picture of profile.images">
+                                <div>
+                                    <img class="profile-photos-image" src="picture" alt="">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row bio-interests-tray">
+                        <div class="col bio-container">
+
+                            <h4 class="bio-heading text-sm-center">Bio</h4>
+                            <p class="bio text-justify"> {{profile.description}} </p>
+                        </div>
+
+                        <div class="col interest-container">
+                            <h4 class="interests-heading text-sm-center">
+                                Interests
+                            </h4>
+                            <div class="interests">
+
+                                <ul class="interest-list" *ngFor="let interest of profile.interests">
+                                    <li class="interest">{{interest}}</li>
+                                </ul>
+                            </div>
+                            <button class="btn-primary add-interest-button text-sm-center">Like </button>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="d-flex justify-content-between p-2 col-9 offset-1">
                     <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshProfiles()">
@@ -109,17 +157,19 @@
                   <option [ngValue]="50">50 items per page</option>
                 </select>
                 </div>
+                <!-- </div> -->
             </div>
-        </div> -->
-
-    </div>
 
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+        </div>
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>
 
 </html>
