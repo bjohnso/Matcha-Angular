@@ -7,8 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="explore.component.css">
+
     <title>Matcha</title>
 </head>
 
@@ -19,7 +21,7 @@
         <!-- filter input container -->
         <div class="row explore-filter-container justify-content-center">
 
-            <div class="col-sm-12 col-md-8 col-lg-6">
+            <div class="col-sm-12 col-md-8 col-lg-6 search-form container">
                 <form #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm)">
                     <div class="form-group">
                         <label for="sexual_preference">Sexual Preference</label>
@@ -76,7 +78,7 @@
         </div>
 
         <!-- filter results conainer -->
-        <div class="row filter-results-container">
+        <div *ngIf="profiles && profilesShown.length > 0" class="row filter-results-container justify-content-center">
             <div class="col-sm-12 col-md-8 col-lg-6">
 
                 <div class="filter-results-profile">
@@ -109,40 +111,41 @@
                                 {{profile.popularity}}
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row profile-photos">
-
-                        <div class="profile-photos-container">
-
-                            <div class="" *ngFor="let picture of profile.images">
-                                <div>
-                                    <img class="profile-photos-image" src="picture" alt="">
+                        <div *ngIf="(profile.images && profile.images.length > 0)" class="row profile-photos">
+                            <div class="profile-photos-container">
+                                <div class="" *ngFor="let picture of profile.images">
+                                    <div>
+                                        <img class="profile-photos-image" src="picture" alt="profile photo">
+                                    </div>
                                 </div>
-
                             </div>
-
-                        </div>
-                    </div>
-
-                    <div class="row bio-interests-tray">
-                        <div class="col bio-container">
-
-                            <h4 class="bio-heading text-sm-center">Bio</h4>
-                            <p class="bio text-justify"> {{profile.description}} </p>
                         </div>
 
-                        <div class="col interest-container">
-                            <h4 class="interests-heading text-sm-center">
-                                Interests
-                            </h4>
-                            <div class="interests">
+                        <div class="row bio-interests-tray">
+                            <div class="col bio-container">
 
-                                <ul class="interest-list" *ngFor="let interest of profile.interests">
-                                    <li class="interest">{{interest}}</li>
-                                </ul>
+                                <h4 class="bio-heading text-sm-center">Bio</h4>
+                                <p class="bio text-justify"> {{profile.description}} </p>
                             </div>
-                            <button class="btn-primary add-interest-button text-sm-center">Like </button>
+
+                            <div class="col interest-container">
+                                <h4 class="interests-heading text-sm-center">
+                                    Interests
+                                </h4>
+                                <div class="interests">
+
+
+                                    <ul class="interest-list" *ngFor="let interest of profile.interests">
+                                        <li class="interest">{{interest}}</li>
+                                    </ul>
+                                </div>
+                                <button class="btn-primary add-interest-button text-sm-center" (click)="likeProfile(profile.id)" [disabled]="profile.like || profile.match">Like</button>
+
+                                <i *ngIf="profile.like" class="material-icons">thumb_up_alt</i>
+                                <i *ngIf="profile.match" class="material-icons">favorite_bord...</i>
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -157,19 +160,10 @@
                   <option [ngValue]="50">50 items per page</option>
                 </select>
                 </div>
-                <!-- </div> -->
             </div>
-
-
-
         </div>
 
-
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </div>
 </body>
 
 </html>

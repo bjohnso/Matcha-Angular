@@ -18,20 +18,20 @@ export class MatchService {
   getMatches(date = null){
     if (date != null && date != undefined){
       let params = new HttpParams().set('date', date);
-      return this.http.get<any>('/match', {params});
+      return this.http.get<any>('/api/match', {params});
     }else{
-      return this.http.get<any>('/match');
+      return this.http.get<any>('/api/match');
     }
   }
 
   getMatchesCount(){
-    return this.http.get<any>('/match/count');
+    return this.http.get<any>('/api/match/count');
   }
 
   deleteMatch(id){
     if (id && id != undefined){
       let params : HttpParams = new HttpParams().set('id', id);
-      return this.http.delete('/match', {params});
+      return this.http.delete('/api/match', {params});
     }
   }
 

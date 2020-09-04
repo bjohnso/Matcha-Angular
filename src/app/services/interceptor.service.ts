@@ -21,7 +21,7 @@ export class InterceptorService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!req.url.includes('/auth/login') && !req.url.includes('auth/register')) {
+    if (!req.url.includes('api/auth/login') && !req.url.includes('/api/auth/register')) {
       const authToken = this.jwtService.getToken();
       if (authToken != null) {
         const clone = req.clone({

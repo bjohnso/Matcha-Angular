@@ -3,6 +3,9 @@ import { NgForm } from '@angular/forms';
 import { ProfileService } from '../profile/services/profile.service';
 import {Profile} from '../profile/models/profile.model';
 import { take } from 'rxjs/operators';
+import { Match } from '../models/block.model';
+import { LikesService } from '../services/likes.service';
+import { MatchService } from '../services/match.service';
 
 @Component({
   selector: 'app-explore',
@@ -15,6 +18,8 @@ export class ExploreComponent implements OnInit {
   interests :string [] = [];
   profiles : Profile [] = null;
   profilesShown : Profile [] = [];
+  matches : Match [] = [];
+  likes : [] = [];
   sortable : string[] = ['age', 'location', 'popularity'];
   page = 1;
   pageSize = 10;
@@ -22,12 +27,17 @@ export class ExploreComponent implements OnInit {
   formError = false;
   errorMessage = "";
 
-  constructor(private profile : ProfileService) {}
+  constructor(private profileService : ProfileService, private like : LikesService, private match : MatchService) {}
 
   ngOnInit(): void {
-    this.profile.getInterests().pipe(take(1)).subscribe(data => {
+    this.like.getLikes().pipe(take(1)).subscribe( e => console.log(e));
+    console.log(this.likes);
+    this.match.getMatches().pipe(take(1)).subscribe(e => this.matches = e['data']);
+    this.profileService.getInterests().pipe(take(1)).subscribe(data => {
       this.interests = data["data"]['hobbies'];
     });
+
+    this
     this.formError = false;
     this.errorMessage = "";
   }
@@ -69,7 +79,7 @@ export class ExploreComponent implements OnInit {
     if (form.value.interests && form.value.interests.length > 0)
       interests = form.value.interests;
 
-    this.profile.getUserByFilter(radius, popularity,sexual_preference, interests, age).pipe(take(1)).subscribe((e) => {
+    this.profileService.getUserByFilter(radius, popularity,sexual_preference, interests, age).pipe(take(1)).subscribe((e) => {
       let data = e['data'];
       if (form.value.sortable){
          form.value['sortable'].forEach(element => {
@@ -87,14 +97,25 @@ export class ExploreComponent implements OnInit {
       this.profiles = data;
       this.collectionSize = this.profiles.length;
       this.refreshProfiles();
+      console.log(this.profilesShown);
     })
   }
 
   refreshProfiles() {
     this.profilesShown = this.profiles
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+    this.profilesShown.forEach(data => {
+      data['like'] = (this.likes.filter(e => {
+        return (e['liked_user'] == data.id || e['liking_user'] == data.id)}).length > 0);
+      data['match'] = (this.matches.filter(e => {
+        return (e['user1'] == data.id || e['user2'] == data.id)}).length > 0);
+    });
     this.formError = false;
     this.errorMessage = "";
+  }
+
+  likeProfile(liked_user){
+    this.like.postLike(liked_user).subscribe(e => console.log(e));
   }
 
   notificationError(error){

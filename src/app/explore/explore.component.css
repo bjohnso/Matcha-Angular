@@ -13,6 +13,10 @@ body {
     border: 2px solid olivedrab;
 }
 
+.search-form-container {
+    border: 2px solid aquamarine;
+}
+
 .filter-results-container {
     border: 2px solid salmon;
 }

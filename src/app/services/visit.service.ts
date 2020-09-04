@@ -18,19 +18,19 @@ export class VisitService {
   getVisits(date = null){
     if (date != null && date != undefined){
       let params = new HttpParams().set('date', date);
-      return this.http.get<any>('/visit', {params});
+      return this.http.get<any>('/api/visit', {params});
     }else{
-      return this.http.get<any>('/visit');
+      return this.http.get<any>('/api/visit');
     }
   }
 
   getVisitCount(){
-    return this.http.get<any>('/visit/count');
+    return this.http.get<any>('/api/visit/count');
   }
 
   postVisit(visited){
     if (visited && visited != undefined){
-      return this.http.post('/visit', {visited : visited , date : new Date()});
+      return this.http.post('/api/visit', {visited : visited , date : new Date()});
     }
   }
 }
