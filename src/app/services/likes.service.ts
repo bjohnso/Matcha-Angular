@@ -15,6 +15,10 @@ export class LikesService {
     
   }
 
+  getLiked(){
+    return this.http.get<any>('/api/liked');
+  }
+
   getLikes(date = null){
     if (date != null && date != undefined){
       let params = new HttpParams().set('date', date);

@@ -30,8 +30,7 @@ export class ExploreComponent implements OnInit {
   constructor(private profileService : ProfileService, private like : LikesService, private match : MatchService) {}
 
   ngOnInit(): void {
-    this.like.getLikes().pipe(take(1)).subscribe( e => console.log(e));
-    console.log(this.likes);
+    this.like.getLiked().pipe(take(1)).subscribe( e => {this.likes = e['data']; });
     this.match.getMatches().pipe(take(1)).subscribe(e => this.matches = e['data']);
     this.profileService.getInterests().pipe(take(1)).subscribe(data => {
       this.interests = data["data"]['hobbies'];
@@ -45,6 +44,7 @@ export class ExploreComponent implements OnInit {
 
 
   onSubmit(form : NgForm){
+    console.log(this.likes);
     console.log(form.value)
     let sexual_preference, age: { min: any; max: any; },
     popularity: { min: any; max: any; }, radius: number, interests = null;
@@ -115,7 +115,13 @@ export class ExploreComponent implements OnInit {
   }
 
   likeProfile(liked_user){
-    this.like.postLike(liked_user).subscribe(e => console.log(e));
+    this.like.postLike(liked_user).pipe(take(1)).subscribe(e =>{
+      if (e['success'] == true){
+        // this.likes.push({liked_user : 1, })
+      }
+    });
+    
+    
   }
 
   notificationError(error){

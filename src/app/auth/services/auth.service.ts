@@ -31,4 +31,10 @@ export class AuthService {
         data);
     }
   }
+
+  resetPassword(data){
+    if (data && data.email){
+      return this.httpClient.post('api/auth/resetPassword/',data);
+    }
+  }
 }
