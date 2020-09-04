@@ -13,3 +13,8 @@
 .interest-list {
   background-color: lightgrey;
 }
+
+.carousel-image {
+  height: 10vw;
+  width: 10vw;
+}

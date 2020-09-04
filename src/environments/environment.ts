@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   api: {
     baseURL: 'https://matcha-jronald.herokuapp.com/'
-  }
+  },
+  user_token_secret: 'ilovebarbarastreisand'
 };
 
 /*

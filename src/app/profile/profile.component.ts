@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
       .subscribe(result => {
         console.log(result);
         this.router.navigate(
-          [{outlets: {profile : 'edit'}}],
+          [{outlets: {profile : 'view'}}],
           {
             relativeTo: this.activatedRoute,
             state: {profile : result.data}
