@@ -1,5 +1,6 @@
 <app-login *ngIf="authMode === 'login'"
-           (authModeEvent)="setAuthMode($event)">
+           (authModeEvent)="setAuthMode($event)"
+           (loginEvent)="onSubmit($event)">
 </app-login>
 
 <app-register *ngIf="authMode === 'register'"

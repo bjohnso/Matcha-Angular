@@ -7,24 +7,24 @@ import { JWTTokenService } from './jwt-token.service';
 })
 export class MessageService {
 
-  headers : HttpHeaders;
+  
 
   constructor(private http : HttpClient, private tokenService : JWTTokenService) {
 
-    // this.headers = new HttpHeaders().set("auth-token", tokenService.jwtToken);
-    this.headers = new HttpHeaders().set("auth-token", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjIzLCJpYXQiOjE1OTg1MjI1MzR9.tYa0OB9dm0gLwABXofuMRIW45e8G06GbW1IH0kBeCes');
+    
+    
   }
 
   getMessages(date = null){
     if (date != null && date != undefined){
       let params = new HttpParams().set('date', date);
-      return this.http.get<any>('/api/message', {params, headers : this.headers});
+      return this.http.get<any>('/api/message', {params});
     }else{
-      return this.http.get<any>('/api/message', {headers : this.headers});
+      return this.http.get<any>('/api/message');
     }
   }
 
   getMessagesCount(){
-    return this.http.get<any>('/api/message/count', {headers : this.headers});
+    return this.http.get<any>('/api/message/count');
   }
 }

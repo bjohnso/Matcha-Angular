@@ -7,31 +7,31 @@ import { JWTTokenService } from './jwt-token.service';
 })
 export class MatchService {
 
-  headers : HttpHeaders;
+  
 
   constructor(private http : HttpClient, private tokenService : JWTTokenService) {
 
-    // this.headers = new HttpHeaders().set("auth-token", tokenService.jwtToken);
-    this.headers = new HttpHeaders().set("auth-token", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjIzLCJpYXQiOjE1OTg1MjI1MzR9.tYa0OB9dm0gLwABXofuMRIW45e8G06GbW1IH0kBeCes');
+    
+    
   }
 
   getMatches(date = null){
     if (date != null && date != undefined){
       let params = new HttpParams().set('date', date);
-      return this.http.get<any>('/match', {params, headers : this.headers});
+      return this.http.get<any>('/match', {params});
     }else{
-      return this.http.get<any>('/match', {headers : this.headers});
+      return this.http.get<any>('/match');
     }
   }
 
   getMatchesCount(){
-    return this.http.get<any>('/match/count',{headers : this.headers});
+    return this.http.get<any>('/match/count');
   }
 
   deleteMatch(id){
     if (id && id != undefined){
       let params : HttpParams = new HttpParams().set('id', id);
-      return this.http.delete('/match', {params,headers : this.headers});
+      return this.http.delete('/match', {params});
     }
   }
 

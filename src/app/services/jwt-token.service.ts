@@ -1,52 +1,28 @@
 import { Injectable } from '@angular/core';
-import * as jwt_decode from 'jwt-decode';
+import {StorageService} from './storage.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({providedIn: 'root'})
 export class JWTTokenService {
 
-  jwtToken: string;
-  decodedToken: { [key: string]: string };
-
-  constructor() {
-  }
+  constructor(private jwtHelperService: JwtHelperService,
+              private storageService: StorageService) {}
 
   setToken(token: string) {
     if (token) {
-      this.jwtToken = token;
+      this.storageService.set('user', token);
     }
   }
 
-  decodeToken() {
-    if (this.jwtToken) {
-      this.decodedToken = jwt_decode(this.jwtToken);
-    }
-  }
-
-  getDecodeToken() {
-    return jwt_decode(this.jwtToken);
-  }
-
-  getUser() {
-    this.decodeToken();
-    return this.decodedToken ? this.decodedToken.displayname : null;
-  }
-
-  getEmailId() {
-    this.decodeToken();
-    return this.decodedToken ? this.decodedToken.email : null;
-  }
-
-  getExpiryTime() {
-    this.decodeToken();
-    return this.decodedToken ? this.decodedToken.exp : null;
+  getToken() {
+    return this.storageService.get('user');
   }
 
   isTokenExpired(): boolean {
-    const expiryTime: number = this.getExpiryTime() as unknown as number;
-    if (expiryTime) {
-      return ((1000 * expiryTime) - (new Date()).getTime()) < 5000;
-    } else {
-      return false;
+    const token = this.storageService.get('user');
+    if (token) {
+      return this.jwtHelperService.isTokenExpired(token);
     }
+    return true;
   }
 }
