@@ -21,8 +21,8 @@
         <!-- filter input container -->
         <div class="row explore-filter-container justify-content-center">
 
-            <div class="col-sm-12 col-md-8 col-lg-6 search-form container">
-                <form #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm)">
+            <div class="col-sm-12 col-md-8 col-lg-6 search-form-container text-center">
+                <form id="searchFormDiv" [ngbCollapse]="isCollapsed" #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm)" class="searchform">
                     <div class="form-group">
                         <label for="sexual_preference">Sexual Preference</label>
                         <select id="sexual_preference" class="form-control" ngModel name="sexual_preference">
@@ -62,17 +62,25 @@
                         </ng-select>
                     </div>
 
-                    <button class="btn btn-primary" type="submit">Search Profiles </button>
+                    <div class="search-profiles-button-container text-center">
+                        <button class="btn btn-primary " type="submit">Search Profiles </button>
+                    </div>
                 </form>
 
                 <div class="py-3" *ngIf="formError">
                     <h6 class="text-danger">{{errorMessage}}</h6>
                 </div>
 
+                <button class="btn btn-primary blue-button text-center" role="button" aria-controls="searchFormDiv" (click)="changeText();isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed">
+                    {{hideFilter}}
+                </button>
+
             </div>
+
         </div>
 
         <!-- filter results conainer -->
+        <a #profiletop name="profile-top" id="profile-top"></a>
         <div *ngIf="profiles && profilesShown.length > 0" class="row filter-results-container justify-content-center">
             <div class="col-sm-12 col-md-8 col-lg-6">
 
@@ -110,7 +118,7 @@
 
                     <!-- profile images row -->
                     <div *ngIf="(profile.images && profile.images.length > 0)" class="row profile-photos">
-                        <div class="profile-photos-container">
+                        <div class="profile-photos-container text-center">
                             <div class="profile-photos-image-container" *ngFor="let picture of profile.images">
                                 <img class="profile-photos-image" [src]="picture" alt="profile photo">
                             </div>
@@ -122,7 +130,7 @@
                         <div class="col bio-container">
 
                             <h4 class="bio-heading text-sm-center">Bio</h4>
-                            <p class="bio text-justify"> {{profile.description}} </p>
+                            <p class="bio-text text-justify"> {{profile.description}} </p>
                         </div>
 
                         <div class="col interest-container">
@@ -135,12 +143,15 @@
                                     <li class="interest">{{interest}}</li>
                                 </ul>
                             </div>
-                            <button *ngIf="!(profile.like||profile.match)" class="btn-primary add-interest-button text-sm-center" (click)="likeProfile(profile.id)">Like</button>
-                            <button *ngIf="profile.like" class="btn-primary add-interest-button text-sm-center" (click)="unlikeProfile(profile.id)">Unlike</button>
 
-                            <i *ngIf="profile.match" class="material-icons">favorite_bord...</i>
-                            <button *ngIf="profile.match" class="btn-primary add-interest-button text-sm-center" (click)="unlikeProfile(profile.id)">Message</button>
+                            <div class="button-container text-center">
 
+                                <button *ngIf="!(profile.like||profile.match)" class="btn-primary blue-button text-sm-center" (click)="likeProfile(profile.id)">Like</button>
+                                <button *ngIf="profile.like" class="btn-primary blue-button text-sm-center" (click)="unlikeProfile(profile.id)">Unlike</button>
+
+                                <!-- <i *ngIf="profile.match" class="material-icons">favorite_bord...</i> -->
+                                <button *ngIf="profile.match" class="btn-primary blue-button text-sm-center" (click)="unlikeProfile(profile.id)">Message</button>
+                            </div>
 
                         </div>
                     </div>
@@ -149,10 +160,10 @@
                 </div>
 
                 <div class=" pagination-container  d-flex justify-content-center p-2 hidden-xs">
-                    <ngb-pagination class="pagination-responsive" [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshProfiles()" [maxSize]="4" [rotate]="true" [ellipses]="false" [boundaryLinks]="false">
+                    <ngb-pagination class="pagination-responsive" [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="scrollToTop(profiletop);refreshProfiles()" [maxSize]="4" [rotate]="true" [ellipses]="false" [boundaryLinks]="false">
                     </ngb-pagination>
 
-                    <select class="custom-select" [(ngModel)]="pageSize" (ngModelChange)="refreshProfiles()">
+                    <select class="custom-select" [(ngModel)]="pageSize" (ngModelChange)="scrollToTop(profiletop);refreshProfiles()">
                   <option [ngValue]="10">10 items per page</option>
                   <option [ngValue]="25">25 items per page</option>
                   <option [ngValue]="50">50 items per page</option>

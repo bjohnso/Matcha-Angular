@@ -14,7 +14,14 @@ body {
 }
 
 .search-form-container {
-    /* border: 2px solid aquamarine; */
+    border: 2px solid blue;
+    /* white-space: nowrap; */
+}
+
+.searchform {
+    width: auto;
+    padding: 10px 10px;
+    /* border: 2px solid yellow; */
 }
 
 .filter-results-container {
@@ -155,6 +162,10 @@ body {
     /* border: 2px solid indianred; */
 }
 
+.bio-heading {
+    padding-top: 10px;
+}
+
 .bio-container {
     min-width: 180px;
     background: #eee;
@@ -162,7 +173,12 @@ body {
     /* border: 2px solid darkred; */
 }
 
-.bio-heading {
+.bio-text {
+    max-height: 400px;
+    overflow-x: auto;
+}
+
+.interests-heading {
     padding-top: 10px;
 }
 
@@ -173,12 +189,10 @@ body {
     /* border: 2px solid salmon; */
 }
 
-.interests-heading {
-    padding-top: 10px;
-}
-
 .interests {
     background: #eee;
+    max-height: 380px;
+    overflow-x: auto;
 }
 
 .interest-list {
@@ -192,13 +206,11 @@ body {
     max-width: 90%;
 }
 
-.interest-input-field {
-    margin: 10px;
-    width: 70%;
-    border-radius: 7px;
+.button-container {
+    /* border: 2px solid aquamarine; */
 }
 
-.add-interest-button {
+.blue-button {
     margin: 10px;
     width: 20%;
     min-width: 100px;

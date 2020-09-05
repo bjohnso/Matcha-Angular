@@ -26,6 +26,8 @@ export class ExploreComponent implements OnInit {
   collectionSize = 0;
   formError = false;
   errorMessage = "";
+  isCollapsed = false;
+  hideFilter = "Hide Filter";
 
   constructor(private profileService : ProfileService, private like : LikesService, private match : MatchService) {}
 
@@ -144,4 +146,17 @@ export class ExploreComponent implements OnInit {
     this.errorMessage = error;
     this.formError = true;
   }
+
+  scrollToTop(top:HTMLElement) {
+    top.scrollIntoView();
+}
+
+changeText() {
+  if(this.hideFilter === 'Show Fiter') { 
+    this.hideFilter = 'Hide Filter'
+  } else {
+    this.hideFilter = 'Show Fiter'
+  }
+}
+
 }
