@@ -9,11 +9,7 @@ export class LikesService {
 
   
 
-  constructor(private http : HttpClient, private tokenService : JWTTokenService) {
-
-    
-    
-  }
+  constructor(private http : HttpClient, private tokenService : JWTTokenService) {}
 
   getLiked(){
     return this.http.get<any>('/api/liked');

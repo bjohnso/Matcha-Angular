@@ -17,6 +17,7 @@ import {environment} from '../environments/environment';;
 import {SharedModule} from './shared/shared.module';
 import {InterceptorService} from './services/interceptor.service';
 import {JWT_OPTIONS, JwtHelperService, JwtModule} from '@auth0/angular-jwt';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 // temporary for testing
 // tslint:disable-next-line:max-line-length
@@ -28,6 +29,7 @@ const config: SocketIoConfig = { url: environment.api.baseURL, options: {query :
     // TODO: CREATE MODULES AND ROUTING FLOWS FOR THESE ROGUE COMPONENTS
     ExploreComponent,
     ChatComponent,
+    NotificationsComponent,
   ],
   imports: [
     NgSelectModule,
