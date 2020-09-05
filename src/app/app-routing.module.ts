@@ -4,6 +4,7 @@ import {AuthComponent} from './auth/auth.component';
 import {ChatComponent} from './chat/chat.component'
 import { ExploreComponent } from './explore/explore.component';
 import {AuthGuardService} from './services/auth-guard.service';
+import {ViewComponent} from './view/view.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'auth', pathMatch: 'full'},
@@ -27,6 +28,12 @@ const routes: Routes = [
   {
     path: 'explore',
     component : ExploreComponent,
+    canActivate : [AuthGuardService],
+    canLoad : [AuthGuardService]
+  },
+  {
+    path: 'view',
+    component : ViewComponent,
     canActivate : [AuthGuardService],
     canLoad : [AuthGuardService]
   }

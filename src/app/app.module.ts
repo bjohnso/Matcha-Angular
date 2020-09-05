@@ -18,6 +18,7 @@ import {SharedModule} from './shared/shared.module';
 import {InterceptorService} from './services/interceptor.service';
 import {JWT_OPTIONS, JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 import { NotificationsComponent } from './notifications/notifications.component';
+import {ViewComponent} from './view/view.component';
 
 // temporary for testing
 // tslint:disable-next-line:max-line-length
@@ -30,6 +31,7 @@ const config: SocketIoConfig = { url: environment.api.baseURL, options: {query :
     ExploreComponent,
     ChatComponent,
     NotificationsComponent,
+    ViewComponent,
   ],
   imports: [
     NgSelectModule,

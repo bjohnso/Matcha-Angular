@@ -8,14 +8,14 @@ import { NotificationsService } from '../services/notifications.service';
 })
 export class NotificationsComponent implements OnInit {
 
-  notiifications : Notification [] = [];
+  notifications : Notification [] = [];
   notificationCounter = {likes : 0, messages : 0, visits : 0, matches : 0};
 
   constructor(private notificationService : NotificationsService) { }
 
   ngOnInit(): void {
     this.notificationService.getNotificationsFromSocket().subscribe((notification : Notification) => {
-      this.notiifications.push(notification);
+      this.notifications.push(notification);
       switch(notification['type']){
         case 'like' : {
           this.notificationCounter.likes++;

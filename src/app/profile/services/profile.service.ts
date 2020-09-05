@@ -105,6 +105,10 @@ export class ProfileService {
     return this.http.get<any>('/api/profile/match');
   }
 
+  getProfilesByVisits() {
+    return this.http.get<any>('/api/profile/visits');
+  }
+
   // link to upload images in Angular https://www.techiediaries.com/angular-formdata/
 
   uploadImage(imageForm: FormData) {
