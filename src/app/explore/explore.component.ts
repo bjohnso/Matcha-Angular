@@ -97,11 +97,12 @@ export class ExploreComponent implements OnInit {
       this.profiles = data;
       this.collectionSize = this.profiles.length;
       this.refreshProfiles();
-      console.log(this.profilesShown);
     })
   }
 
   refreshProfiles() {
+    this.like.getLiked().pipe(take(1)).subscribe( e => {this.likes = e['data']; });
+    this.match.getMatches().pipe(take(1)).subscribe(e => this.matches = e['data']);
     this.profilesShown = this.profiles
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
     this.profilesShown.forEach(data => {
@@ -115,6 +116,7 @@ export class ExploreComponent implements OnInit {
   }
 
   likeProfile(liked_user){
+    this.like.getLiked().pipe(take(1)).subscribe( e => {this.likes = e['data']; });
     this.like.postLike(liked_user).pipe(take(1)).subscribe(e =>{
       if (e['success'] == true){
         this.profilesShown.forEach(element => {
@@ -123,8 +125,19 @@ export class ExploreComponent implements OnInit {
         });
       }
     });
-    
-    
+  }
+
+  async unlikeProfile(liked_user){
+    this.like.getLiked().pipe(take(1)).subscribe( e => {this.likes = e['data']; });
+    this.like.deleteLike(this.likes.find(e => e['liked_user'] == liked_user)['id']).
+      pipe(take(1)).subscribe(e =>{
+      if (e['success'] == true){
+        this.profilesShown.forEach(element => {
+          if (element.id == liked_user)
+            element['like'] = false;
+        });
+      }
+    });
   }
 
   notificationError(error){

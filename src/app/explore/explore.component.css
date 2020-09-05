@@ -6,26 +6,26 @@ body {
 }
 
 .explore-container {
-    border: 2px solid brown;
+    /* border: 2px solid brown; */
 }
 
 .explore-filter-container {
-    border: 2px solid olivedrab;
+    /* border: 2px solid olivedrab; */
 }
 
 .search-form-container {
-    border: 2px solid aquamarine;
+    /* border: 2px solid aquamarine; */
 }
 
 .filter-results-container {
-    border: 2px solid salmon;
+    /* border: 2px solid salmon; */
 }
 
 
 /* explore filter results profile view css */
 
 body {
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -37,7 +37,7 @@ body {
 .profile-tray {
     margin-top: 15px;
     margin-bottom: 15px;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     background: #eee;
     padding: 10px 15px;
     border-radius: 7px;
@@ -45,7 +45,7 @@ body {
 
 .profile-image {
     min-width: 150px;
-    border: 2px solid yellow;
+    /* border: 2px solid yellow; */
 }
 
 .profile-image img {
@@ -61,17 +61,17 @@ body {
 .profile-details {
     max-height: 150px;
     padding: 10px 10px;
-    border: 2px solid green;
+    /* border: 2px solid green; */
     overflow: hidden;
 }
 
 .profile-details-container {
     vertical-align: middle;
-    border: 2px solid hotpink;
+    /* border: 2px solid hotpink; */
 }
 
 .profile-name {
-    border: 2px solid palevioletred;
+    /* border: 2px solid palevioletred; */
     margin-left: 10px;
     margin-right: 10px;
     /* margin-bottom: 0px; */
@@ -81,7 +81,7 @@ body {
 }
 
 .profile-gender {
-    border: 2px solid palevioletred;
+    /* border: 2px solid palevioletred; */
     margin-left: 10px;
     margin-right: 10px;
     /* margin-bottom: 0px; */
@@ -94,7 +94,7 @@ body {
 }
 
 .profile-interests {
-    border: 2px solid palevioletred;
+    /* border: 2px solid palevioletred; */
     margin-left: 10px;
     margin-right: 10px;
     /* margin-bottom: 0px; */
@@ -104,7 +104,7 @@ body {
 }
 
 .fame-rating {
-    border: 2px solid purple;
+    /* border: 2px solid purple; */
 }
 
 .fame-rating i {
@@ -115,7 +115,7 @@ body {
 .profile-rating {
     /* color: gold; */
     font-weight: bold;
-    border: 2px solid cyan;
+    /* border: 2px solid cyan; */
 }
 
 
@@ -127,15 +127,15 @@ body {
     margin-bottom: 15px;
     margin-left: 15px;
     margin-right: 15px;
-    border: 2px solid crimson;
+    /* border: 2px solid crimson; */
     height: 100%;
+    width: 100%;
     white-space: nowrap;
     overflow-x: auto;
 }
 
 .profile-photos-image-container {
-    border: 10px solid royalblue;
-    height: 180px;
+    display: inline;
 }
 
 .profile-photos-image {
@@ -152,14 +152,14 @@ body {
 /*  */
 
 .bio-interests-tray {
-    border: 2px solid indianred;
+    /* border: 2px solid indianred; */
 }
 
 .bio-container {
     min-width: 180px;
     background: #eee;
     margin: 10px;
-    border: 2px solid darkred;
+    /* border: 2px solid darkred; */
 }
 
 .bio-heading {
@@ -170,7 +170,7 @@ body {
     min-width: 180px;
     background: #eee;
     margin: 10px;
-    border: 2px solid salmon;
+    /* border: 2px solid salmon; */
 }
 
 .interests-heading {
@@ -203,4 +203,9 @@ body {
     width: 20%;
     min-width: 100px;
     border-radius: 7px;
+}
+
+.pagination-container {
+    /* border: 2px solid violet; */
+    margin: 10px 10px;
 }

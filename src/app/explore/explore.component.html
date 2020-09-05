@@ -81,9 +81,9 @@
         <div *ngIf="profiles && profilesShown.length > 0" class="row filter-results-container justify-content-center">
             <div class="col-sm-12 col-md-8 col-lg-6">
 
-                <div class="filter-results-profile">
+                <div class="filter-results-profile" *ngFor="let profile of profilesShown">
                     <!-- profile tray -->
-                    <div class="row profile-tray no-gutters" *ngFor="let profile of profilesShown">
+                    <div class="row profile-tray no-gutters justify-content-center">
 
                         <!-- profile image -->
                         <div class="col-sm-4 profile-image text-center">
@@ -111,50 +111,51 @@
                                 {{profile.popularity}}
                             </div>
                         </div>
+                    </div>
 
-                        <div *ngIf="(profile.images && profile.images.length > 0)" class="row profile-photos">
-                            <div class="profile-photos-container">
-                                <div class="" *ngFor="let picture of profile.images">
-                                    <div>
-                                        <img class="profile-photos-image" src="picture" alt="profile photo">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row bio-interests-tray">
-                            <div class="col bio-container">
-
-                                <h4 class="bio-heading text-sm-center">Bio</h4>
-                                <p class="bio text-justify"> {{profile.description}} </p>
-                            </div>
-
-                            <div class="col interest-container">
-                                <h4 class="interests-heading text-sm-center">
-                                    Interests
-                                </h4>
-                                <div class="interests">
-
-
-                                    <ul class="interest-list" *ngFor="let interest of profile.interests">
-                                        <li class="interest">{{interest}}</li>
-                                    </ul>
-                                </div>
-                                <button class="btn-primary add-interest-button text-sm-center" (click)="likeProfile(profile.id)" [disabled]="profile.like || profile.match">Like</button>
-
-                                <i *ngIf="profile.like" class="material-icons">thumb_up_alt</i>
-                                <i *ngIf="profile.match" class="material-icons">favorite_bord...</i>
-
+                    <!-- profile images row -->
+                    <div *ngIf="(profile.images && profile.images.length > 0)" class="row profile-photos">
+                        <div class="profile-photos-container">
+                            <div class="profile-photos-image-container" *ngFor="let picture of profile.images">
+                                <img class="profile-photos-image" [src]="picture" alt="profile photo">
                             </div>
                         </div>
                     </div>
+
+                    <!-- profile info row -->
+                    <div class="row bio-interests-tray">
+                        <div class="col bio-container">
+
+                            <h4 class="bio-heading text-sm-center">Bio</h4>
+                            <p class="bio text-justify"> {{profile.description}} </p>
+                        </div>
+
+                        <div class="col interest-container">
+                            <h4 class="interests-heading text-sm-center">
+                                Interests
+                            </h4>
+                            <div class="interests">
+
+                                <ul class="interest-list" *ngFor="let interest of profile.interests">
+                                    <li class="interest">{{interest}}</li>
+                                </ul>
+                            </div>
+                            <button *ngIf="!(profile.like||profile.match)" class="btn-primary add-interest-button text-sm-center" (click)="likeProfile(profile.id)" [disabled]="profile.like || profile.match">Like</button>
+                            <button *ngIf="profile.like" class="btn-primary add-interest-button text-sm-center" (click)="unlikeProfile(profile.id)" [disabled]="!(profile.like || profile.match)">Unlike</button>
+
+                            <i *ngIf="profile.match" class="material-icons">favorite_bord...</i>
+
+                        </div>
+                    </div>
+
+                    <!-- profile closing div -->
                 </div>
 
-                <div class="d-flex justify-content-between p-2 col-9 offset-1">
-                    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshProfiles()">
+                <div class=" pagination-container  d-flex justify-content-center p-2 hidden-xs">
+                    <ngb-pagination class="pagination-responsive" [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshProfiles()" [maxSize]="4" [rotate]="true" [ellipses]="false" [boundaryLinks]="false">
                     </ngb-pagination>
 
-                    <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshProfiles()">
+                    <select class="custom-select" [(ngModel)]="pageSize" (ngModelChange)="refreshProfiles()">
                   <option [ngValue]="10">10 items per page</option>
                   <option [ngValue]="25">25 items per page</option>
                   <option [ngValue]="50">50 items per page</option>
@@ -162,7 +163,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </body>
 
