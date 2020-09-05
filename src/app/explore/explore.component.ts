@@ -36,7 +36,6 @@ export class ExploreComponent implements OnInit {
       this.interests = data["data"]['hobbies'];
     });
 
-    this
     this.formError = false;
     this.errorMessage = "";
   }
@@ -44,7 +43,8 @@ export class ExploreComponent implements OnInit {
 
 
   onSubmit(form : NgForm){
-    console.log(this.likes);
+    this.like.getLiked().pipe(take(1)).subscribe( e => {this.likes = e['data']; });
+    this.match.getMatches().pipe(take(1)).subscribe(e => this.matches = e['data']);
     console.log(form.value)
     let sexual_preference, age: { min: any; max: any; },
     popularity: { min: any; max: any; }, radius: number, interests = null;
@@ -117,7 +117,10 @@ export class ExploreComponent implements OnInit {
   likeProfile(liked_user){
     this.like.postLike(liked_user).pipe(take(1)).subscribe(e =>{
       if (e['success'] == true){
-        // this.likes.push({liked_user : 1, })
+        this.profilesShown.forEach(element => {
+          if (element.id == liked_user)
+            element['like'] = true;
+        });
       }
     });
     
