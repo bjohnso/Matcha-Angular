@@ -62,12 +62,7 @@
                         </ng-select>
                     </div>
 
-
-                    <div>
-                        <button class="btn btn-primary" type="submit">
-                Search
-              </button>
-                    </div>
+                    <button class="btn btn-primary" type="submit">Search Profiles </button>
                 </form>
 
                 <div class="py-3" *ngIf="formError">
@@ -140,10 +135,12 @@
                                     <li class="interest">{{interest}}</li>
                                 </ul>
                             </div>
-                            <button *ngIf="!(profile.like||profile.match)" class="btn-primary add-interest-button text-sm-center" (click)="likeProfile(profile.id)" [disabled]="profile.like || profile.match">Like</button>
-                            <button *ngIf="profile.like" class="btn-primary add-interest-button text-sm-center" (click)="unlikeProfile(profile.id)" [disabled]="!(profile.like || profile.match)">Unlike</button>
+                            <button *ngIf="!(profile.like||profile.match)" class="btn-primary add-interest-button text-sm-center" (click)="likeProfile(profile.id)">Like</button>
+                            <button *ngIf="profile.like" class="btn-primary add-interest-button text-sm-center" (click)="unlikeProfile(profile.id)">Unlike</button>
 
                             <i *ngIf="profile.match" class="material-icons">favorite_bord...</i>
+                            <button *ngIf="profile.match" class="btn-primary add-interest-button text-sm-center" (click)="unlikeProfile(profile.id)">Message</button>
+
 
                         </div>
                     </div>
