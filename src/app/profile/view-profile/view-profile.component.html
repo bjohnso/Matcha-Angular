@@ -23,7 +23,11 @@
             <h3>Photos</h3>
           </div>
           <div class="col-3 offset-6 h-100 my-auto">
-            <button class="float-right my-auto" [ngClass]="selectedCarouselImage ? 'btn-danger' : 'btn-primary'">
+            <button class="float-right my-auto"
+                    id="carouselButton"
+                    (mousedown)="onCarouselButtonEvent($event)"
+                    (click)="onCarouselButtonEvent($event)"
+                    [ngClass]="selectedCarouselImage ? 'btn-danger' : 'btn-primary'">
               {{selectedCarouselImage ? 'Remove' : 'Add'}}
             </button>
           </div>
@@ -42,7 +46,7 @@
       <div class="profile-details col-6 mt-3 p-4">
         <h3>Bio</h3>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        <p class="text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Pellentesque ac neque ligula. Mauris molestie tristique augue,
           id congue enim euismod sit amet. Proin vitae justo ut ligula scelerisque
           mattis. Integer at ligula bibendum, ornare mauris quis, tempor lorem.

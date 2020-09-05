@@ -107,8 +107,12 @@ export class ProfileService {
 
   // link to upload images in Angular https://www.techiediaries.com/angular-formdata/
 
-  uploadImage(imageForm : FormData){
+  uploadImage(imageForm: FormData) {
       return this.http.post('/api/profile/image', {imageForm});
+  }
+
+  deleteImage(image: string) {
+    return this.http.request('delete', '/api/profile/image', {body : image});
   }
 
 }
