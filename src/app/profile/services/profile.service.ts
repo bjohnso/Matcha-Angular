@@ -116,7 +116,7 @@ export class ProfileService {
   uploadImage(image: File) {
     console.log('FILE BEFORE COMPRESSION');
     console.log(image);
-    return this.imageCompressService.compressImage(image)
+    return this.imageCompressService.compressImage(image, 200000)
       .then((result) => {
         const imageCompressed: File = result as File;
         console.log('FILE AFTER COMPRESSION');

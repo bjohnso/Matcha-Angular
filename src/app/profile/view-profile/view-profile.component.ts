@@ -58,6 +58,23 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
     }
   }
 
+  onImageSelected(event: Event) {
+    const imageUpload: HTMLInputElement = event.target as HTMLInputElement;
+    if (imageUpload.files && imageUpload.files.length === 1) {
+      this.profileService.uploadImage(imageUpload.files[0]).then(request => {
+        request.subscribe(result => {
+          const {error, success} = result as any;
+          if (success) {
+            this.router.navigate(['profile'])
+              .then();
+          } else {
+            console.log(error);
+          }
+        });
+      });
+    }
+  }
+
   @HostListener('document:mouseup', ['$event'])
   onDocumentMouseUp(event: Event) {
     if (this.carouselButtonEvent) {

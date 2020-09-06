@@ -5,31 +5,37 @@ import {NgxImageCompressService} from 'ngx-image-compress';
 export class ImageCompressService {
   constructor(@Inject(forwardRef(() => NgxImageCompressService)) private imageCompress: NgxImageCompressService) {}
 
-  compressImage(image: File, maxSize?: number) {
+  compressImage(image: File, maxSize: number) {
     return new Promise((resolve, reject) => {
       const imageName = image.name;
       const imageType = image.type;
-      let localPath;
-      let localCompressedPath;
 
       const reader = new FileReader();
       reader.onload = (event: any) => {
-          localPath = event.target.result;
-          const orientation = 1;
-          const sizeOfOriginalImage = this.imageCompress.byteCount(localPath) / (1024 * 1024);
-          console.warn('Size in bytes is now:', sizeOfOriginalImage);
-          this.imageCompress.compressFile(localPath, orientation, 50, 50).then(
-            result => {
-              localCompressedPath = result;
-              console.log(localCompressedPath);
-              const sizeOfCompressedImage = this.imageCompress.byteCount(result) / (1024 * 1024);
-              console.warn('Size in bytes after compression:', sizeOfCompressedImage);
-              const blob = this.dataURItoBlob(localCompressedPath.split(',')[1], imageType);
-              const imageCompressed = new File([blob], imageName, {type: imageType});
-              resolve(imageCompressed);
-            }).catch(() => {
+          const localOriginalPath = event.target.result;
+          const sizeOfOriginalImage = this.imageCompress.byteCount(localOriginalPath);
+          if (sizeOfOriginalImage > maxSize) {
+            console.log(`Image size is: ${sizeOfOriginalImage} bytes - Compressing...`);
+            this.imageCompress.compressFile(localOriginalPath, 1, 50, 50).then(
+              result => {
+                const localCompressedPath = result;
+                const sizeOfCompressedImage = this.imageCompress.byteCount(result);
+                const blob = this.dataURItoBlob(localCompressedPath.split(',')[1], imageType);
+                const imageCompressed = new File([blob], imageName, {type: imageType});
+                if (sizeOfCompressedImage > maxSize) {
+                  console.log(`Image Size is: ${sizeOfCompressedImage} bytes - Compression insufficient - Recompressing...`);
+                  reader.readAsDataURL(imageCompressed);
+                } else {
+                  console.log(`Image Size is: ${sizeOfCompressedImage} bytes - Compression Complete.`);
+                  resolve(imageCompressed);
+                }
+              }).catch(() => {
               reject(null);
-          });
+            });
+          } else {
+            console.log(`Image Size is: ${sizeOfOriginalImage} bytes - No Compression is needed..`);
+            resolve(image);
+          }
       };
       reader.readAsDataURL(image);
     });
