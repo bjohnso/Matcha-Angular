@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {Component, HostListener, OnInit} from '@angular/core';
 import {CoreComponent} from '../../core/core.component';
 import {Profile, ProfileInterface} from '../models/profile.model';
