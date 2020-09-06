@@ -6,6 +6,7 @@ import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
+import {NgxImageCompressService} from 'ngx-image-compress';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,9 @@ import { ViewProfileComponent } from './view-profile/view-profile.component';
         RouterModule,
         NgbDropdownModule
     ],
-  exports: [ProfileComponent, EditProfileComponent]
+  exports: [ProfileComponent, EditProfileComponent],
+  providers: [
+    NgxImageCompressService
+  ]
 })
 export class ProfileModule {}

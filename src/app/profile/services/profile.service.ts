@@ -1,6 +1,8 @@
-import { Injectable} from '@angular/core';
+import {forwardRef, Inject, Injectable} from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {Profile, ProfileInterface} from '../models/profile.model';
+import {ImageCompressService} from './image-compress.service';
+import {NgxImageCompressService} from 'ngx-image-compress';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,7 @@ import {Profile, ProfileInterface} from '../models/profile.model';
 
 export class ProfileService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private imageCompressService: ImageCompressService) {
   }
 
   getUserById(userId) {
@@ -111,12 +113,24 @@ export class ProfileService {
 
   // link to upload images in Angular https://www.techiediaries.com/angular-formdata/
 
-  uploadImage(imageForm: FormData) {
-      return this.http.post('/api/profile/image', {imageForm});
+  uploadImage(image: File) {
+    console.log('FILE BEFORE COMPRESSION');
+    console.log(image);
+    return this.imageCompressService.compressImage(image)
+      .then((result) => {
+        const imageCompressed: File = result as File;
+        console.log('FILE AFTER COMPRESSION');
+        console.log(imageCompressed);
+        const formData: FormData = new FormData();
+        formData.append('image', imageCompressed);
+        return this.http.post('/api/profile/image', formData);
+      }
+    );
   }
 
   deleteImage(image: string) {
-    return this.http.request('delete', '/api/profile/image', {body : image});
+    return this.http
+      .request('delete', '/api/profile/image', {params: {image}});
   }
 
 }
