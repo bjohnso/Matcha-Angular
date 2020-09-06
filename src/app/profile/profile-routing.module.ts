@@ -22,7 +22,7 @@ const routes: Routes = [
       {
         path: '',
         component: ViewProfileComponent,
-        resolve: {profile: ProfileResolverService},
+        resolve: {profileData: ProfileResolverService},
         canActivate : [AuthGuardService],
         canLoad : [AuthGuardService],
         runGuardsAndResolvers: 'always',
@@ -30,7 +30,7 @@ const routes: Routes = [
       {
         path: 'edit',
         component: EditProfileComponent,
-        resolve: {profile: ProfileResolverService},
+        resolve: {profileData: ProfileResolverService},
         canActivate : [AuthGuardService],
         canLoad : [AuthGuardService],
         runGuardsAndResolvers: 'always',

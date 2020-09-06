@@ -8,6 +8,7 @@ import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
 import {NgxImageCompressService} from 'ngx-image-compress';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {NgSelectModule} from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     CommonModule,
     RouterModule,
     NgbDropdownModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgSelectModule
   ],
   exports: [ProfileComponent, ViewProfileComponent, EditProfileComponent],
   providers: [

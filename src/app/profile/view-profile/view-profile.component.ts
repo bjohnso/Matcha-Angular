@@ -3,6 +3,7 @@ import {CoreComponent} from '../../core/core.component';
 import {Profile, ProfileInterface} from '../models/profile.model';
 import {ProfileService} from '../services/profile.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {faPen} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-view-profile',
@@ -13,15 +14,23 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
 
   @ViewChild('inputImageUpload', {static: true}) inputImageRef: ElementRef;
   profile: Profile;
+  interests: string[];
   selectedCarouselImage: string;
   carouselButtonEvent = false;
   inputImageUpload: HTMLInputElement;
+  editMode = false;
+  visitorMode = false;
+
+  faPen = faPen;
   constructor(private profileService: ProfileService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
     super();
     this.activatedRoute.data.subscribe(data => {
-      this.profile = new Profile(data.profile.data as ProfileInterface);
+      console.log(data);
+      const profileData = data.profileData;
+      this.profile = new Profile(profileData.profile.data as ProfileInterface);
+      this.interests = profileData.interests.data.hobbies;
     });
   }
 
