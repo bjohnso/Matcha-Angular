@@ -8,8 +8,9 @@
     
 
     <div *ngFor = "let notification of notifications">
-        
-
+        <ngb-alert [type]="getType(notification.type)" (click)="routePage(notification);"  (close)="removeNotification(notification);">
+            {{notification.content}}
+        </ngb-alert>
     </div>
 </div>
 
