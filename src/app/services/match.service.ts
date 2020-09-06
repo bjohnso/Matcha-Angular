@@ -35,4 +35,11 @@ export class MatchService {
     }
   }
 
+  getLikeMatch(liked_user){
+    if (liked_user && liked_user != undefined){
+      let params : HttpParams = new HttpParams().set('liked_user', liked_user);
+      return this.http.get<any>('/api/likeMatch', {params});
+    }
+  }
+
 }

@@ -91,4 +91,58 @@ export class ViewComponent implements OnInit {
       }});
   }
 
+  unlikeUser(profile){
+    return this.likeService.deleteLike(profile.id).pipe(take(1)).subscribe(e=> {
+      if (e['success']){
+        profile['like_id'] = 0;
+        this.profiles.filter(a => a.id != profile.id);
+      }
+    });
+  }
+
+  unmatchUser(profile){
+    return this.matchService.deleteMatch(profile.id).pipe(take(1)).subscribe(e=> {
+      if (e['success']){
+        this.profiles.filter(a => a.id != profile.id);
+        profile['match_id'] = 0;
+        profile['like_id'] = 0;
+      }
+    });
+  }
+
+  likeUser(profile){
+    return this.likeService.postLike(profile.id).pipe(take(1)).subscribe(e => {
+      if (e['success']){
+        profile['like'] = e['data']['like_id'];
+        profile['match_id'] = e['data']['match_id'];
+        profile['date'] = new Date();
+      }
+    })
+  }
+
+  showProfile(profile){
+    this.matchService.getLikeMatch(profile.id).pipe(take(1)).subscribe(e =>{
+      if (e.success){
+        if ('date' in e.data && e.data['date'])
+          profile['date'] = e.data['date'];
+        else
+          profile['date'] = null;
+
+        if ('like_id' in e.data && e.data['like_id'])
+          profile['like_id'] = e.data['like_id'];
+        else
+          profile['like_id'] = null;
+
+        if ('match_id' in e.data && e.data['match_id'])
+          profile['match_id'] = e.data['match_id'];
+        else
+          profile['match_id'] = null;
+      }
+    })
+  }
+
+  
+
+
+
 }
