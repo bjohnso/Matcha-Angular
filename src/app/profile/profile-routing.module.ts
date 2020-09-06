@@ -12,20 +12,23 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate : [AuthGuardService],
     canLoad : [AuthGuardService],
+    runGuardsAndResolvers: 'always',
     children: [
       {
         path: 'view',
         component: ViewProfileComponent,
         resolve: {profile: ProfileResolverService},
         canActivate : [AuthGuardService],
-        canLoad : [AuthGuardService]
+        canLoad : [AuthGuardService],
+        runGuardsAndResolvers: 'always',
       },
       {
         path: 'edit',
         component: EditProfileComponent,
         resolve: {profile: ProfileResolverService},
         canActivate : [AuthGuardService],
-        canLoad : [AuthGuardService]
+        canLoad : [AuthGuardService],
+        runGuardsAndResolvers: 'always',
       }
     ]
   }

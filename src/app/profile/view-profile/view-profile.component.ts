@@ -1,13 +1,9 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {CoreComponent} from '../../core/core.component';
 import {Profile, ProfileInterface} from '../models/profile.model';
-
-import {Component, HostListener, OnInit} from '@angular/core';
-import {CoreComponent} from '../../core/core.component';
-import {Profile} from '../models/profile.model';
-
 import {ProfileService} from '../services/profile.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { faUserCircle, faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-view-profile',
@@ -16,9 +12,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ViewProfileComponent extends CoreComponent implements OnInit {
 
+  @ViewChild('inputImageUpload', {static: true}) inputImageRef: ElementRef;
   profile: Profile;
   selectedCarouselImage: string;
   carouselButtonEvent = false;
+  inputImageUpload: HTMLInputElement;
   constructor(private profileService: ProfileService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
@@ -26,7 +24,6 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
     this.activatedRoute.data.subscribe(data => {
       this.profile = new Profile(data.profile.data as ProfileInterface);
     });
-
   }
 
   onCarouselImageEvent(event: Event, item: string) {
@@ -39,29 +36,26 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
 
   onCarouselButtonEvent(event: Event) {
     if (event.type === 'mousedown') {
-      console.log('MOUSE CLICK IN PROGRESS');
       this.carouselButtonEvent = true;
     } else if (event.type === 'click') {
       if (this.selectedCarouselImage) {
         // REMOVE IMAGE
-        console.log('REMOVE - ' + this.selectedCarouselImage);
-        // this.profileService.deleteImage(this.selectedCarouselImage)
-        //   .subscribe(result => {
-        //     const {error, success} = result as any;
-        //     if (success) {
-        //       this.router.navigate(['profile'],
-        //         {
-        //           relativeTo: this.activatedRoute.parent
-        //         }).then();
-        //     } else {
-        //       console.log(error);
-        //     }
-        //   });
+        this.profileService.deleteImage(this.selectedCarouselImage)
+          .subscribe(result => {
+            const {Error, success} = result as any;
+            if (success) {
+              this.router.navigate([], {
+                skipLocationChange: true,
+                queryParamsHandling: 'merge'
+              }).then();
+            } else {
+              console.log(Error);
+            }
+          });
       } else {
-        // ADD UPLOAD IMAGE
-        console.log('ADD');
+        // OPEN FILE CHOOSER
+        this.inputImageUpload.click();
       }
-      console.log('MOUSE CLICK COMPLETE - CLICK');
       this.carouselButtonEvent = false;
       this.selectedCarouselImage = null;
     }
@@ -74,8 +68,10 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
         request.subscribe(result => {
           const {error, success} = result as any;
           if (success) {
-            this.router.navigate(['profile'])
-              .then();
+            this.router.navigate([], {
+              skipLocationChange: true,
+              queryParamsHandling: 'merge'
+            }).then();
           } else {
             console.log(error);
           }
@@ -96,14 +92,9 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const data = history.state.profile || {};
-    this.profile = new Profile(data);
-    //this.inputImageUpload = this.inputImageRef.nativeElement as HTMLInputElement;
+    this.inputImageUpload = this.inputImageRef.nativeElement as HTMLInputElement;
     // const data = history.state.profile || {};
     // this.profile = new Profile(data);
-
   }
-
-  profileAvatar:string = "http://dummyimage.com/241x205.png/5fa2dd/ffffff";
 
 }

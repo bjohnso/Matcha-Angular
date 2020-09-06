@@ -10,5 +10,6 @@ export class AppComponent {
   title = 'matcha';
   constructor(private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
   }
 }

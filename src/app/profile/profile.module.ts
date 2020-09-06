@@ -7,6 +7,7 @@ import {RouterModule} from '@angular/router';
 import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
 import {NgxImageCompressService} from 'ngx-image-compress';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -14,13 +15,14 @@ import {NgxImageCompressService} from 'ngx-image-compress';
     EditProfileComponent,
     ViewProfileComponent,
   ],
-    imports: [
-        FormsModule,
-        CommonModule,
-        RouterModule,
-        NgbDropdownModule
-    ],
-  exports: [ProfileComponent, EditProfileComponent],
+  imports: [
+    FormsModule,
+    CommonModule,
+    RouterModule,
+    NgbDropdownModule,
+    FontAwesomeModule
+  ],
+  exports: [ProfileComponent, ViewProfileComponent, EditProfileComponent],
   providers: [
     NgxImageCompressService
   ]

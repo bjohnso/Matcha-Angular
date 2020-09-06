@@ -20,6 +20,7 @@ import {InterceptorService} from './services/interceptor.service';
 import {JWT_OPTIONS, JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 import { NotificationsComponent } from './notifications/notifications.component';
 import {ViewComponent} from './view/view.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // temporary for testing
 // tslint:disable-next-line:max-line-length
@@ -51,6 +52,7 @@ const config: SocketIoConfig = { url: environment.api.baseURL, options: {query :
     SharedModule,
     AuthModule,
     ProfileModule,
+    FontAwesomeModule,
   ],
   providers: [
     // THE INTERCEPTOR WILL CATCH ALL HTTP REQUESTS AND ADD AN AUTH TOKEN WHERE APPLICABLE

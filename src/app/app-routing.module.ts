@@ -24,25 +24,29 @@ const routes: Routes = [
     path: 'chat',
     component : ChatComponent,
     canActivate : [AuthGuardService],
-    canLoad : [AuthGuardService]
+    canLoad : [AuthGuardService],
+    runGuardsAndResolvers: 'always',
   },
   {
     path: 'explore',
     component : ExploreComponent,
     canActivate : [AuthGuardService],
-    canLoad : [AuthGuardService]
+    canLoad : [AuthGuardService],
+    runGuardsAndResolvers: 'always',
   },
   {
     path: 'view',
     component : ViewComponent,
     canActivate : [AuthGuardService],
-    canLoad : [AuthGuardService]
+    canLoad : [AuthGuardService],
+    runGuardsAndResolvers: 'always',
   },
   {
     path: 'notification',
     component : NotificationsComponent,
     canActivate : [AuthGuardService],
-    canLoad : [AuthGuardService]
+    canLoad : [AuthGuardService],
+    runGuardsAndResolvers: 'always',
   }
 ];
 
