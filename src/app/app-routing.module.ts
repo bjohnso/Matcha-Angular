@@ -5,6 +5,7 @@ import {ChatComponent} from './chat/chat.component'
 import { ExploreComponent } from './explore/explore.component';
 import {AuthGuardService} from './services/auth-guard.service';
 import {ViewComponent} from './view/view.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'auth', pathMatch: 'full'},
@@ -34,6 +35,12 @@ const routes: Routes = [
   {
     path: 'view',
     component : ViewComponent,
+    canActivate : [AuthGuardService],
+    canLoad : [AuthGuardService]
+  },
+  {
+    path: 'notification',
+    component : NotificationsComponent,
     canActivate : [AuthGuardService],
     canLoad : [AuthGuardService]
   }

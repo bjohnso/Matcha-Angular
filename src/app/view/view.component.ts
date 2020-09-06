@@ -4,6 +4,7 @@ import { LikesService } from '../services/likes.service';
 import { VisitService } from '../services/visit.service';
 import { MatchService } from '../services/match.service';
 import { Profile } from '../profile/models/profile.model';
+import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -14,30 +15,26 @@ import { take } from 'rxjs/operators';
 export class ViewComponent implements OnInit {
 
   profiles : Profile [] = [];
-  tabSelection : string = 'match';
+  tabSelection : string;
   profileSelect :Profile;
-  profileId : number;
 
   constructor(private profileService : ProfileService, private likeService : LikesService,
-              private visitService : VisitService, private matchService : MatchService) { }
+              private visitService : VisitService, private matchService : MatchService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    switch(this.tabSelection){
-      case 'match' :{
-        this.getMatchData();
-        break;
+    
+    this.route.queryParams.pipe(take(1)).subscribe(
+      async params => {
+        this.profileService.getUserById(params.profile).pipe(take(1)).subscribe(
+          e => {
+            if (e['success'])
+              this.profileSelect = e['data'][0];
+          })
       }
-      case 'visit' :{
-        this.getVisitData();
-        break;
-      }
-      case 'like' :{
-        this.getLikesData();
-        break;
-      }
-    }
-    this.profileSelect = this.profiles.find(e => e.id == this.profileId);
+    )
 
+    this.tabSelection = 'match';
+    this.tabSelect();
   }
 
   getVisitData(){
@@ -141,6 +138,22 @@ export class ViewComponent implements OnInit {
     })
   }
 
+  tabSelect(){
+    switch(this.tabSelection){
+      case 'match' :{
+        this.getMatchData();
+        break;
+      }
+      case 'visit' :{
+        this.getVisitData();
+        break;
+      }
+      case 'like' :{
+        this.getLikesData();
+        break;
+      }
+    }
+  }
   
 
 
