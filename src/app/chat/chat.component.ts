@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewChild, ElementRef} from '@angular/core';
 import { ChatService } from '../services/chat.service';
 import {Message} from '../models/message.model';
 import { take } from 'rxjs/operators';
@@ -20,6 +20,8 @@ export class ChatComponent extends CoreComponent implements OnInit {
     super();
   }
 
+@ViewChild('messageBottom', {static : true}) messageBottom: ElementRef;
+
   ngOnInit(): void {
 
     this.chat.joinChatroom(this.match_id);
@@ -33,6 +35,7 @@ export class ChatComponent extends CoreComponent implements OnInit {
         this.messageList.push(message);
     });
 
+    this.messageBottom.nativeElement.scrollIntoView();
   }
 
   sendMessage(){
@@ -41,5 +44,6 @@ export class ChatComponent extends CoreComponent implements OnInit {
     this.message = "";
   }
 
+  profileAvatar:string = "http://dummyimage.com/241x205.png/5fa2dd/ffffff";
 
 }
