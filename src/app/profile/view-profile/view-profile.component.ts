@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {CoreComponent} from '../../core/core.component';
-import {Profile} from '../models/profile.model';
+import {Profile, ProfileInterface} from '../models/profile.model';
 import {ProfileService} from '../services/profile.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -18,6 +18,9 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute) {
     super();
+    this.activatedRoute.data.subscribe(data => {
+      this.profile = new Profile(data.profile.data as ProfileInterface);
+    });
   }
 
   onCarouselImageEvent(event: Event, item: string) {
@@ -89,6 +92,10 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
   ngOnInit(): void {
     const data = history.state.profile || {};
     this.profile = new Profile(data);
+    //this.inputImageUpload = this.inputImageRef.nativeElement as HTMLInputElement;
+    // const data = history.state.profile || {};
+    // this.profile = new Profile(data);
+
   }
 
   profileAvatar:string = "http://dummyimage.com/241x205.png/5fa2dd/ffffff";

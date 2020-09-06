@@ -4,15 +4,11 @@ import {NgModule} from '@angular/core';
 import {ProfileComponent} from './profile.component';
 import {AuthGuardService} from '../services/auth-guard.service';
 import {ViewProfileComponent} from './view-profile/view-profile.component';
+import {ProfileResolverService} from '../services/profile-resolver.service';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'default',
-    pathMatch: 'full',
-  },
-  {
-    path: 'default',
     component: ProfileComponent,
     canActivate : [AuthGuardService],
     canLoad : [AuthGuardService],
@@ -20,14 +16,14 @@ const routes: Routes = [
       {
         path: 'view',
         component: ViewProfileComponent,
-        outlet: 'profile',
+        resolve: {profile: ProfileResolverService},
         canActivate : [AuthGuardService],
         canLoad : [AuthGuardService]
       },
       {
         path: 'edit',
         component: EditProfileComponent,
-        outlet: 'profile',
+        resolve: {profile: ProfileResolverService},
         canActivate : [AuthGuardService],
         canLoad : [AuthGuardService]
       }

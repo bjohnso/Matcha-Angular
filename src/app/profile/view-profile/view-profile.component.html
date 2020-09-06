@@ -6,6 +6,42 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <div class="row h-100">
+      <input type="file"
+             accept="image/*"
+             style="visibility: collapse"
+             #inputImageUpload
+             id="inputImageUpload"
+             (change)="onImageSelected($event)"/>
+      <div class="col-12 mt-3 profile-photos h-100">
+        <div class="row h-100">
+          <div class="col-3">
+            <h3>Photos</h3>
+          </div>
+          <div class="col-3 offset-6 h-100 my-auto">
+            <button *ngIf="profile.images.length < 5 || selectedCarouselImage"
+                    class="float-right my-auto"
+                    id="carouselButton"
+                    (mousedown)="onCarouselButtonEvent($event)"
+                    (click)="onCarouselButtonEvent($event)"
+                    [ngClass]="selectedCarouselImage ? 'btn-danger' : 'btn-primary'">
+              {{selectedCarouselImage ? 'Remove' : 'Add'}}
+            </button>
+          </div>
+        </div>
+        <div class="row ml-1 mb-3">
+          <img *ngFor="let image of profile?.images"
+               [ngClass]="selectedCarouselImage === image ? 'border border-info' : ''"
+               class="mr-2 carousel-image"
+               [src]="image"
+               [tabIndex]="0"
+               (focusout)="onCarouselImageEvent($event, image)"
+               (mousedown)="onCarouselImageEvent($event, image)">
+        </div>
+      </div>
+    </div>
+
+
     <!-- Bootstrap CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="view-profile.component.css">
