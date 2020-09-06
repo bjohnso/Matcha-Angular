@@ -1,7 +1,11 @@
-<<<<<<< HEAD
 import {Component, HostListener, OnInit} from '@angular/core';
 import {CoreComponent} from '../../core/core.component';
 import {Profile, ProfileInterface} from '../models/profile.model';
+
+import {Component, HostListener, OnInit} from '@angular/core';
+import {CoreComponent} from '../../core/core.component';
+import {Profile} from '../models/profile.model';
+
 import {ProfileService} from '../services/profile.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -22,6 +26,7 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
     this.activatedRoute.data.subscribe(data => {
       this.profile = new Profile(data.profile.data as ProfileInterface);
     });
+
   }
 
   onCarouselImageEvent(event: Event, item: string) {
