@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {CoreComponent} from '../../core/core.component';
 import {Profile} from '../models/profile.model';
 import {ProfileService} from '../services/profile.service';
@@ -11,9 +11,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ViewProfileComponent extends CoreComponent implements OnInit {
 
+  @ViewChild('inputImageUpload', {static: true}) inputImageRef: ElementRef;
   profile: Profile;
   selectedCarouselImage: string;
   carouselButtonEvent = false;
+  inputImageUpload: HTMLInputElement;
   constructor(private profileService: ProfileService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
@@ -30,31 +32,43 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
 
   onCarouselButtonEvent(event: Event) {
     if (event.type === 'mousedown') {
-      console.log('MOUSE CLICK IN PROGRESS');
       this.carouselButtonEvent = true;
     } else if (event.type === 'click') {
       if (this.selectedCarouselImage) {
         // REMOVE IMAGE
-        console.log('REMOVE - ' + this.selectedCarouselImage);
-        // this.profileService.deleteImage(this.selectedCarouselImage)
-        //   .subscribe(result => {
-        //     const {error, success} = result as any;
-        //     if (success) {
-        //       this.router.navigate(['profile'],
-        //         {
-        //           relativeTo: this.activatedRoute.parent
-        //         }).then();
-        //     } else {
-        //       console.log(error);
-        //     }
-        //   });
+        this.profileService.deleteImage(this.selectedCarouselImage)
+          .subscribe(result => {
+            const {Error, success} = result as any;
+            if (success) {
+              this.router.navigate(['profile'])
+                .then();
+            } else {
+              console.log(Error);
+            }
+          });
       } else {
-        // ADD UPLOAD IMAGE
-        console.log('ADD');
+        // OPEN FILE CHOOSER
+        this.inputImageUpload.click();
       }
-      console.log('MOUSE CLICK COMPLETE - CLICK');
       this.carouselButtonEvent = false;
       this.selectedCarouselImage = null;
+    }
+  }
+
+  onImageSelected(event: Event) {
+    const imageUpload: HTMLInputElement = event.target as HTMLInputElement;
+    if (imageUpload.files && imageUpload.files.length === 1) {
+      this.profileService.uploadImage(imageUpload.files[0]).then(request => {
+        request.subscribe(result => {
+          const {Error, success} = result as any;
+          if (success) {
+            this.router.navigate(['profile'])
+              .then();
+          } else {
+            console.log(Error);
+          }
+        });
+      });
     }
   }
 
@@ -70,6 +84,7 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.inputImageUpload = this.inputImageRef.nativeElement as HTMLInputElement;
     const data = history.state.profile || {};
     this.profile = new Profile(data);
   }

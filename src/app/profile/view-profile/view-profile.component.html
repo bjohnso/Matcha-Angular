@@ -17,6 +17,12 @@
     </div>
 
     <div class="row h-100">
+      <input type="file"
+             accept="image/*"
+             style="visibility: collapse"
+             #inputImageUpload
+             id="inputImageUpload"
+             (change)="onImageSelected($event)"/>
       <div class="col-12 mt-3 profile-photos h-100">
         <div class="row h-100">
           <div class="col-3">
@@ -32,13 +38,15 @@
             </button>
           </div>
         </div>
-        <img *ngFor="let image of profile?.images"
-             [ngClass]="selectedCarouselImage === image ? 'border border-info' : ''"
-             class="mr-2 carousel-image"
-             [src]="image"
-             [tabIndex]="0"
-             (focusout)="onCarouselImageEvent($event, image)"
-             (mousedown)="onCarouselImageEvent($event, image)">
+        <div class="row ml-1 mb-3">
+          <img *ngFor="let image of profile?.images"
+               [ngClass]="selectedCarouselImage === image ? 'border border-info' : ''"
+               class="mr-2 carousel-image"
+               [src]="image"
+               [tabIndex]="0"
+               (focusout)="onCarouselImageEvent($event, image)"
+               (mousedown)="onCarouselImageEvent($event, image)">
+        </div>
       </div>
     </div>
 
@@ -46,7 +54,7 @@
       <div class="profile-details col-6 mt-3 p-4">
         <h3>Bio</h3>
 
-        <p class="text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Pellentesque ac neque ligula. Mauris molestie tristique augue,
           id congue enim euismod sit amet. Proin vitae justo ut ligula scelerisque
           mattis. Integer at ligula bibendum, ornare mauris quis, tempor lorem.

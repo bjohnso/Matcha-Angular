@@ -29,9 +29,6 @@ export class InterceptorService implements HttpInterceptor {
         });
         return next.handle(clone).pipe(map(event => {
           return event;
-        }), catchError((error: HttpErrorResponse) => {
-          console.log('REQUEST WITH AUTH FAILED');
-          return of(new HttpResponse(error));
         }));
       } else {
         // No Auth Token - Please Login
