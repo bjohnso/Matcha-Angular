@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { NgxImageCompressService } from 'ngx-image-compress';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ExploreComponent } from './explore/explore.component';
@@ -61,7 +62,8 @@ const config: SocketIoConfig = { url: environment.api.baseURL, options: {query :
     {
       provide: JWT_OPTIONS, useValue: JWT_OPTIONS,
     },
-    JwtHelperService
+    JwtHelperService,
+    NgxImageCompressService,
   ],
   bootstrap: [AppComponent]
 })
