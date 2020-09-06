@@ -74,4 +74,6 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
     this.profile = new Profile(data);
   }
 
+  profileAvatar:string = "http://dummyimage.com/241x205.png/5fa2dd/ffffff";
+
 }
