@@ -13,11 +13,13 @@ import {faPen} from '@fortawesome/free-solid-svg-icons';
 export class ViewProfileComponent extends CoreComponent implements OnInit {
 
   @ViewChild('inputImageUpload', {static: true}) inputImageRef: ElementRef;
+  @ViewChild('inputBioUpdate', {static: true}) inputBioUpdateRef: ElementRef;
   profile: Profile;
   interests: string[];
   selectedCarouselImage: string;
   carouselButtonEvent = false;
   inputImageUpload: HTMLInputElement;
+  inputBioUpdate: HTMLTextAreaElement;
   editMode = false;
   visitorMode = false;
 
@@ -87,6 +89,24 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
     }
   }
 
+  onUpdateProfileEventEvent(event: Event) {
+    if (this.editMode) {
+      this.profile.description = this.inputBioUpdate.value.toString();
+      this.profileService.updateProfile(this.profile)
+       .subscribe(result => {
+         const {error, success} = result as any;
+         if (success) {
+           this.router.navigate([], {
+             skipLocationChange: true,
+             queryParamsHandling: 'merge'
+           }).then();
+         } else {
+           console.log(error);
+         }
+       });
+    }
+  }
+
   onImageSelected(event: Event) {
     const imageUpload: HTMLInputElement = event.target as HTMLInputElement;
     if (imageUpload.files && imageUpload.files.length === 1) {
@@ -120,6 +140,7 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
 
   ngOnInit(): void {
     this.inputImageUpload = this.inputImageRef.nativeElement as HTMLInputElement;
+    this.inputBioUpdate = this.inputBioUpdateRef.nativeElement as HTMLTextAreaElement;
     // const data = history.state.profile || {};
     // this.profile = new Profile(data);
   }

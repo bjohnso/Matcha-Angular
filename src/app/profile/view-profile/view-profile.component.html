@@ -35,7 +35,7 @@
         <button *ngIf="!editMode" (click)="editMode = true" class="btn-warning">
          Edit Profile <fa-icon [icon]="faPen"></fa-icon>
         </button>
-        <button *ngIf="editMode" (click)="editMode = false" class="btn-primary mr-1">
+        <button *ngIf="editMode" (click)="onUpdateProfileEventEvent($event)" class="btn-primary mr-1">
           Save Profile <fa-icon [icon]="faPen"></fa-icon>
         </button>
         <button *ngIf="editMode" (click)="editMode = false" class="btn-secondary">
@@ -97,14 +97,14 @@
       <h4 class="bio-heading text-sm-center">Bio</h4>
       <p *ngIf="!editMode" class="bio text-justify"> {{profile.description}} </p>
 
-      <div *ngIf="editMode" class="form-group">
-        <label for="editBio">Biography</label>
+      <div class="form-group">
         <textarea
+          [style.visibility]="editMode ? 'visible' : 'collapse'"
+          #inputBioUpdate
           type="text"
           id="editBio"
           [value]="profile.description"
           class="form-control"
-          name="biography"
           rows="3"></textarea>
       </div>
 
@@ -115,13 +115,17 @@
         Interests
       </h4>
       <div class="interests">
-        <div>
+        <div *ngIf="editMode && !visitorMode">
           <ng-select [items]="interests" bindLabel="name" placeholder="Select interests" appendTo="body" multiple="true" id="interests"
-                     [ngModel]="profile?.interests" name="interests">
+                     [(ngModel)]="profile.interests" name="interests">
           </ng-select>
         </div>
+        <ul *ngIf="!editMode || visitorMode">
+          <li *ngFor="let interest of profile?.interests">
+            {{interest}}
+          </li>
+        </ul>
       </div>
-
     </div>
   </div>
 </div>

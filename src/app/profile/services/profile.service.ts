@@ -73,11 +73,17 @@ export class ProfileService {
           interests: profile?.interests,
           last_visit: profile?.last_visit,
           popularity: profile?.popularity,
-          birthdate: profile.birthdate,
+          birthdate: profile?.birthdate,
           sexual_preference: profile?.sexual_preference,
           sexual_orientation: profile?.sexual_orientation,
         };
-        return this.http.put('/api/profile', updateProfile);
+        Object.keys(updateProfile).forEach(key => {
+          if (!updateProfile[key]) {
+            delete updateProfile[key];
+          }
+        });
+        console.log(updateProfile);
+        return this.http.put('/api/profile', Object.assign({}, updateProfile));
   }
 
   updateLastOnline() {
