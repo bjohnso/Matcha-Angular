@@ -84,9 +84,10 @@ export class ProfileService {
     return this.http.put('/api/profile', {last_online : new Date()});
   }
 
-  updateProfileImage(url){
-    if (url && url !== undefined)
+  updateProfileImage(url) {
+    if (url != null) {
       return this.http.put('/api/profile', {profile_picture : url});
+    }
   }
 
   getAllProfile() {

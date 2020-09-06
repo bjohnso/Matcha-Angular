@@ -5,7 +5,8 @@
 
     <!-- profile image -->
     <div class="col-sm-4 text-center">
-      <img class="profile-image" src="assets/user-circle-solid.svg">
+      <img class="profile-image"
+           [src]="profile?.profile_picture || 'assets/user-circle-solid.svg'">
     </div>
     <div class="col-sm-4 profile-details align-items-center">
 
@@ -45,20 +46,21 @@
         <div class="col-3">
           <h3>Photos</h3>
         </div>
-        <div class="offset-3 col-3 h-100 my-auto">
-          <button *ngIf="selectedCarouselImage"
-                  class="btn-secondary float-right my-auto">
-            Make Profile Picture
-          </button>
-        </div>
-        <div class="col-3 h-100 my-auto">
+        <div class="col-9 h-100 my-auto">
           <button *ngIf="profile.images.length < 5 || selectedCarouselImage"
                   class="float-right my-auto"
-                  id="carouselButton"
+                  id="carouselUpdateImageButton"
                   (mousedown)="onCarouselButtonEvent($event)"
                   (click)="onCarouselButtonEvent($event)"
                   [ngClass]="selectedCarouselImage ? 'btn-danger' : 'btn-primary'">
             {{selectedCarouselImage ? 'Remove' : 'Add'}}
+          </button>
+          <button *ngIf="selectedCarouselImage"
+                  id="carouselProfileImageButton"
+                  (mousedown)="onCarouselButtonEvent($event)"
+                  (click)="onCarouselButtonEvent($event)"
+                  class="btn-secondary float-right my-auto mr-3">
+            Make Profile Picture
           </button>
         </div>
       </div>

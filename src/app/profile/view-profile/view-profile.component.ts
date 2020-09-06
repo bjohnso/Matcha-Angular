@@ -38,23 +38,41 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
     if (event.type === 'mousedown') {
       this.carouselButtonEvent = true;
     } else if (event.type === 'click') {
-      if (this.selectedCarouselImage) {
-        // REMOVE IMAGE
-        this.profileService.deleteImage(this.selectedCarouselImage)
+      const button = event.target as HTMLButtonElement;
+      const id = button.id;
+      if (id === 'carouselUpdateImageButton') {
+        if (this.selectedCarouselImage) {
+          // REMOVE IMAGE
+          this.profileService.deleteImage(this.selectedCarouselImage)
+            .subscribe(result => {
+              const {error, success} = result as any;
+              if (success) {
+                this.router.navigate([], {
+                  skipLocationChange: true,
+                  queryParamsHandling: 'merge'
+                }).then();
+              } else {
+                console.log(error);
+              }
+            });
+        } else {
+          // OPEN FILE CHOOSER
+          this.inputImageUpload.click();
+        }
+      } else if (id === 'carouselProfileImageButton' && this.selectedCarouselImage) {
+        // MAKE PROFILE IMAGE
+        this.profileService.updateProfileImage(this.selectedCarouselImage)
           .subscribe(result => {
-            const {Error, success} = result as any;
+            const {error, success} = result as any;
             if (success) {
               this.router.navigate([], {
                 skipLocationChange: true,
                 queryParamsHandling: 'merge'
               }).then();
             } else {
-              console.log(Error);
+              console.log(error);
             }
           });
-      } else {
-        // OPEN FILE CHOOSER
-        this.inputImageUpload.click();
       }
       this.carouselButtonEvent = false;
       this.selectedCarouselImage = null;
@@ -84,7 +102,8 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
   onDocumentMouseUp(event: Event) {
     if (this.carouselButtonEvent) {
       const elem = event.target as HTMLElement;
-      if (elem.id !== 'carouselButton') {
+      if (elem.id !== 'carouselUpdateImageButton' &&
+        elem.id !== 'carouselProfileImageButton') {
         this.selectedCarouselImage = null;
         this.carouselButtonEvent = false;
       }
