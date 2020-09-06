@@ -9,13 +9,18 @@ import {ProfileResolverService} from '../services/profile-resolver.service';
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'view',
+    pathMatch: 'full'
+  },
+  {
+    path: 'view',
     component: ProfileComponent,
     canActivate : [AuthGuardService],
     canLoad : [AuthGuardService],
     runGuardsAndResolvers: 'always',
     children: [
       {
-        path: 'view',
+        path: '',
         component: ViewProfileComponent,
         resolve: {profile: ProfileResolverService},
         canActivate : [AuthGuardService],

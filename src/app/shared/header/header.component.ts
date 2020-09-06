@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-shared-header',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  @Input() currentRoute;
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+
+  navigate(event: Event, route: string) {
+    this.router.navigate([route])
+      .then();
+  }
 
   ngOnInit(): void {
+    console.log(this.currentRoute);
   }
 
 }

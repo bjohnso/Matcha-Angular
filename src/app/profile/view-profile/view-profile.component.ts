@@ -3,7 +3,6 @@ import {CoreComponent} from '../../core/core.component';
 import {Profile, ProfileInterface} from '../models/profile.model';
 import {ProfileService} from '../services/profile.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import { faUserCircle, faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-view-profile',
