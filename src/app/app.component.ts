@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router, RouterEvent} from '@angular/router';
 import {CoreComponent} from './core/core.component';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import {CoreComponent} from './core/core.component';
 export class AppComponent extends CoreComponent implements OnInit {
   title = 'matcha';
   currentRoute;
-  constructor(private router: Router) {
+  constructor(private router: Router, private socket : Socket) {
     super();
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';

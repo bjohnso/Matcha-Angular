@@ -3,6 +3,9 @@ import { ChatService } from '../services/chat.service';
 import {Message} from '../models/message.model';
 import { take } from 'rxjs/operators';
 import {CoreComponent} from '../core/core.component';
+import { ActivatedRoute } from '@angular/router';
+import { ProfileService } from '../profile/services/profile.service';
+import { Profile } from '../profile/models/profile.model';
 
 @Component({
   selector: 'app-chat',
@@ -11,12 +14,13 @@ import {CoreComponent} from '../core/core.component';
 })
 export class ChatComponent extends CoreComponent implements OnInit {
 
-  match_id :number = 1; //need to get from service
+  match_id :number;
   messageList : Message[];
   message : string;
-  id : number = 23; //temo not needed when login
+  id : number; 
+  username : string;
 
-  constructor(private chat: ChatService) {
+  constructor(private chat: ChatService, private actRoute : ActivatedRoute, private profileService : ProfileService) {
     super();
   }
 
@@ -24,11 +28,29 @@ export class ChatComponent extends CoreComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.chat.joinChatroom(this.match_id);
+    if (this.actRoute.queryParams || this.actRoute.queryParams != undefined){
+      this.actRoute.queryParams.pipe(take(1)).subscribe(
+         async params => {
+           console.log(params);
+           this.profileService.getProfile().pipe(take(1)).subscribe(
+             e => {
+               if (e['success'])
+                 this.id = e['data']['id'];
+                 this.username = params.profile;
 
-    this.chat.getMessages(this.match_id).pipe(take(1)).subscribe(data => {
-      this.messageList = data['data'];
-    })
+                 this.chat.joinChatroom(params.match_id);
+
+                  this.chat.getMessages(params.match_id).pipe(take(1)).subscribe(data => {
+                    this.messageList = data['data'];
+                  })
+
+                  this.match_id = params.match_id;
+             })
+         }
+     )
+   }
+
+    
 
     this.chat.getMessagesFromSocket().subscribe((message :Message) =>{
       if (message.author != this.id)
@@ -39,6 +61,7 @@ export class ChatComponent extends CoreComponent implements OnInit {
   }
 
   sendMessage(){
+    console.log(this.match_id);
     this.chat.sendMessage(this.message, this.match_id).subscribe(data => {return data});
     this.messageList.push({author : this.id, content : this.message, date : new Date()});
     this.message = "";

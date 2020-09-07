@@ -16,6 +16,7 @@ export class NotificationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.notificationService.getNotificationsFromSocket().subscribe((notification : Notification) => {
+      console.log(notification);
       this.notifications.push(notification);
       switch(notification['type']){
         case 'like' : {
