@@ -1,131 +1,98 @@
 <div class="container-fluid">
+    <div class=" mx-auto col-sm-12 col-md-8 col-lg-6">
+        <div class="row profile-tray no-gutters h-100">
+            <div class="col-sm-4 text-center">
+                <img class="profile-image" [src]="profile?.profile_picture || 'assets/user-circle-solid.svg'">
+            </div>
+            <div class="col-sm-4 profile-details align-items-center">
+                <div class="profile-details-container">
+                    <h4 class="profile-name">
+                        {{profile?.firstname}} {{profile?.lastname}}
+                    </h4>
+                    <h6 class="profile-gender ">
+                        {{profile?.gender}}
+                    </h6>
+                    <h6 class="profile-interests ">
+                        Interested in: {{profile?.sexual_preference}}
+                    </h6>
+                </div>
+            </div>
 
-  <!-- profile tray -->
-  <div class="row profile-tray no-gutters h-100">
-
-    <!-- profile image -->
-    <div class="col-sm-4 text-center">
-      <img class="profile-image"
-           [src]="profile?.profile_picture || 'assets/user-circle-solid.svg'">
-    </div>
-    <div class="col-sm-4 profile-details align-items-center">
-
-      <div class="profile-details-container">
-        <h4 class="profile-name">
-          {{profile?.firstname}} {{profile?.lastname}}
-        </h4>
-        <h6 class="profile-gender ">
-          {{profile?.gender}}
-        </h6>
-
-        <h6 class="profile-interests ">
-          Interested in: {{profile?.sexual_preference}}
-        </h6>
-      </div>
-    </div>
-
-    <div class="col-4 h-100 text-center">
-      <div class="row h-100 text-center">
-        <img class="my-auto rating-icon" src="assets/star-half-alt-solid.svg">
-        <h4 class="profile-rating my-auto ml-3">
-          {{profile?.popularity || '0'}}
-        </h4>
-      </div>
-      <div class="row h-100 text-center mt-5">
-        <button *ngIf="!editMode" (click)="editMode = true" class="btn-warning">
+            <div class="col-4 h-100 text-center">
+                <div class="row h-100 text-center">
+                    <img class="my-auto rating-icon" src="assets/star-half-alt-solid.svg">
+                    <h4 class="profile-rating my-auto ml-3">
+                        {{profile?.popularity || '0'}}
+                    </h4>
+                </div>
+                <div class="row h-100 text-center mt-5">
+                    <button *ngIf="!editMode" (click)="editMode = true" class="btn-warning">
          Edit Profile <fa-icon [icon]="faPen"></fa-icon>
         </button>
-        <button *ngIf="editMode" (click)="onUpdateProfileEventEvent($event)" class="btn-primary mr-1">
+                    <button *ngIf="editMode" (click)="onUpdateProfileEventEvent($event)" class="btn-primary mr-1">
           Save Profile <fa-icon [icon]="faPen"></fa-icon>
         </button>
-        <button *ngIf="editMode" (click)="editMode = false" class="btn-secondary">
+                    <button *ngIf="editMode" (click)="editMode = false" class="btn-secondary">
           Discard Changes <fa-icon [icon]="faPen"></fa-icon>
         </button>
-        <ng-container *ngIf="visitorMode">
-          <button class="btn-success mr-1">Like</button>
-          <button class="btn-success">Follow</button>
-        </ng-container>
-      </div>
-    </div>
-  </div>
-
-  <div class="row h-100 profile-photos-container no-gutters">
-    <input type="file"
-           accept="image/*"
-           style="visibility: collapse"
-           #inputImageUpload
-           id="inputImageUpload"
-           (change)="onImageSelected($event)"/>
-    <div class="col-12 mt-3 profile-photos h-100">
-      <div class="row h-100">
-        <div class="col-3">
-          <h3>Photos</h3>
+                    <ng-container *ngIf="visitorMode">
+                        <button class="btn-success mr-1">Like</button>
+                        <button class="btn-success">Follow</button>
+                    </ng-container>
+                </div>
+            </div>
         </div>
-        <div class="col-9 h-100 my-auto">
-          <button *ngIf="profile.images.length < 5 || selectedCarouselImage"
-                  class="float-right my-auto"
-                  id="carouselUpdateImageButton"
-                  (mousedown)="onCarouselButtonEvent($event)"
-                  (click)="onCarouselButtonEvent($event)"
-                  [ngClass]="selectedCarouselImage ? 'btn-danger' : 'btn-primary'">
+
+        <div class="row h-100 profile-photos-container no-gutters">
+            <input type="file" accept="image/*" style="visibility: collapse" #inputImageUpload id="inputImageUpload" (change)="onImageSelected($event)" />
+            <div class="col-12 mt-3 profile-photos h-100">
+                <div class="row h-100">
+                    <div class="col-3">
+                        <h3>Photos</h3>
+                    </div>
+                    <div class="col-9 h-100 my-auto">
+                        <button *ngIf="profile.images.length < 5 || selectedCarouselImage" class="float-right my-auto" id="carouselUpdateImageButton" (mousedown)="onCarouselButtonEvent($event)" (click)="onCarouselButtonEvent($event)" [ngClass]="selectedCarouselImage ? 'btn-danger' : 'btn-primary'">
             {{selectedCarouselImage ? 'Remove' : 'Add'}}
           </button>
-          <button *ngIf="selectedCarouselImage"
-                  id="carouselProfileImageButton"
-                  (mousedown)="onCarouselButtonEvent($event)"
-                  (click)="onCarouselButtonEvent($event)"
-                  class="btn-secondary float-right my-auto mr-3">
+                        <button *ngIf="selectedCarouselImage" id="carouselProfileImageButton" (mousedown)="onCarouselButtonEvent($event)" (click)="onCarouselButtonEvent($event)" class="btn-secondary float-right my-auto mr-3">
             Make Profile Picture
           </button>
+                    </div>
+                </div>
+                <div class="row ml-1 mb-3">
+                    <img *ngFor="let image of profile?.images" [ngClass]="selectedCarouselImage === image ? 'border border-info' : ''" class="mr-2 carousel-image" [src]="image" [tabIndex]="0" (focusout)="onCarouselImageEvent($event, image)" (mousedown)="onCarouselImageEvent($event, image)">
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="row ml-1 mb-3">
-        <img *ngFor="let image of profile?.images"
-             [ngClass]="selectedCarouselImage === image ? 'border border-info' : ''"
-             class="mr-2 carousel-image"
-             [src]="image"
-             [tabIndex]="0"
-             (focusout)="onCarouselImageEvent($event, image)"
-             (mousedown)="onCarouselImageEvent($event, image)">
-      </div>
-    </div>
-  </div>
 
-  <div class="row bio-interests-tray">
-    <div class="col bio-container">
+        <div class="row bio-interests-tray">
+            <div class="col bio-container">
 
-      <h4 class="bio-heading text-sm-center">Bio</h4>
-      <p *ngIf="!editMode" class="bio text-justify"> {{profile.description}} </p>
+                <h4 class="bio-heading text-sm-center">Bio</h4>
+                <p *ngIf="!editMode" class="bio text-justify"> {{profile.description}} </p>
 
-      <div class="form-group">
-        <textarea
-          [style.visibility]="editMode ? 'visible' : 'collapse'"
-          #inputBioUpdate
-          type="text"
-          id="editBio"
-          [value]="profile.description"
-          class="form-control"
-          rows="3"></textarea>
-      </div>
+                <div class="form-group">
+                    <textarea [style.visibility]="editMode ? 'visible' : 'collapse'" #inputBioUpdate type="text" id="editBio" [value]="profile.description" class="form-control" rows="3"></textarea>
+                </div>
 
-    </div>
+            </div>
 
-    <div class="col interest-container">
-      <h4 class="interests-heading text-sm-center">
-        Interests
-      </h4>
-      <div class="interests">
-        <div *ngIf="editMode && !visitorMode">
-          <ng-select [items]="interests" bindLabel="name" placeholder="Select interests" appendTo="body" multiple="true" id="interests"
-                     [(ngModel)]="profile.interests" name="interests">
-          </ng-select>
+            <div class="col interest-container">
+                <h4 class="interests-heading text-sm-center">
+                    Interests
+                </h4>
+                <div class="interests">
+                    <div *ngIf="editMode && !visitorMode">
+                        <ng-select [items]="interests" bindLabel="name" placeholder="Select interests" appendTo="body" multiple="true" id="interests" [(ngModel)]="profile.interests" name="interests">
+                        </ng-select>
+                    </div>
+                    <ul *ngIf="!editMode || visitorMode">
+                        <li *ngFor="let interest of profile?.interests">
+                            {{interest}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <ul *ngIf="!editMode || visitorMode">
-          <li *ngFor="let interest of profile?.interests">
-            {{interest}}
-          </li>
-        </ul>
-      </div>
     </div>
-  </div>
 </div>

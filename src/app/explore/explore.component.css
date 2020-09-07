@@ -14,6 +14,7 @@ body {
 }
 
 .search-form-container {
+    border-radius: 7px;
     border: 2px solid blue;
     /* white-space: nowrap; */
 }
@@ -220,4 +221,9 @@ body {
 .pagination-container {
     /* border: 2px solid violet; */
     margin: 10px 10px;
+}
+
+.no-profiles-found h4 {
+    color: blue;
+    padding: 10px;
 }
