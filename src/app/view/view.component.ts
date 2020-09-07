@@ -4,7 +4,7 @@ import { LikesService } from '../services/likes.service';
 import { VisitService } from '../services/visit.service';
 import { MatchService } from '../services/match.service';
 import { Profile } from '../profile/models/profile.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 // import * as $ from 'jquery';
 
@@ -18,22 +18,25 @@ export class ViewComponent implements OnInit {
 
   profiles : Profile [] = [];
   tabSelection : string;
-  profileSelect :Profile;
+  profileSelect ;
 
   constructor(private profileService : ProfileService, private likeService : LikesService,
               private visitService : VisitService, private matchService : MatchService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     
-    this.route.queryParams.pipe(take(1)).subscribe(
-      async params => {
-        this.profileService.getUserById(params.profile).pipe(take(1)).subscribe(
-          e => {
-            if (e['success'])
-              this.profileSelect = e['data'][0];
-          })
-      }
-    )
+    if (this.route.queryParams || this.route.queryParams != undefined){
+      //  this.route.queryParams.pipe(take(1)).subscribe(
+      //     async params => {
+      //       this.profileService.getUserById(params.profile).pipe(take(1)).subscribe(
+      //         e => {
+      //           if (e['success'])
+      //             this.profileSelect = e['data'][0];
+      //         })
+      //     }
+      // )
+    }
+   
 
     // //Toggle Click Function
     // $("#menu-toggle").click(function(e) {
@@ -42,7 +45,7 @@ export class ViewComponent implements OnInit {
     // });
 
 
-    this.tabSelection = 'match';
+    this.tabSelection = 'like';
     this.tabSelect();
   }
 
@@ -98,20 +101,20 @@ export class ViewComponent implements OnInit {
   }
 
   unlikeUser(profile){
-    return this.likeService.deleteLike(profile.id).pipe(take(1)).subscribe(e=> {
+    return this.likeService.deleteLike(profile.like_id).pipe(take(1)).subscribe(e=> {
       if (e['success']){
-        profile['like_id'] = 0;
+        profile['like_id'] = null;
         this.profiles.filter(a => a.id != profile.id);
       }
     });
   }
 
   unmatchUser(profile){
-    return this.matchService.deleteMatch(profile.id).pipe(take(1)).subscribe(e=> {
+    return this.matchService.deleteMatch(profile.match_id).pipe(take(1)).subscribe(e=> {
       if (e['success']){
         this.profiles.filter(a => a.id != profile.id);
-        profile['match_id'] = 0;
-        profile['like_id'] = 0;
+        profile['match_id'] = null;
+        profile['like_id'] = null;
       }
     });
   }
@@ -119,7 +122,7 @@ export class ViewComponent implements OnInit {
   likeUser(profile){
     return this.likeService.postLike(profile.id).pipe(take(1)).subscribe(e => {
       if (e['success']){
-        profile['like'] = e['data']['like_id'];
+        profile['like_id'] = e['data']['like_id'];
         profile['match_id'] = e['data']['match_id'];
         profile['date'] = new Date();
       }
@@ -144,6 +147,8 @@ export class ViewComponent implements OnInit {
         else
           profile['match_id'] = null;
       }
+      this.profileSelect = profile;
+      console.log(this.profileSelect);
     })
   }
 
