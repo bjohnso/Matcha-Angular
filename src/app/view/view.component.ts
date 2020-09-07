@@ -20,21 +20,23 @@ export class ViewComponent implements OnInit {
   tabSelection : string;
   profileSelect ;
 
-  constructor(private profileService : ProfileService, private likeService : LikesService,
-              private visitService : VisitService, private matchService : MatchService, private route: ActivatedRoute) { }
+  constructor(private profileService : ProfileService, private likeService : LikesService, private route : Router,
+              private visitService : VisitService, private matchService : MatchService, private actRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     
-    if (this.route.queryParams || this.route.queryParams != undefined){
-      //  this.route.queryParams.pipe(take(1)).subscribe(
-      //     async params => {
-      //       this.profileService.getUserById(params.profile).pipe(take(1)).subscribe(
-      //         e => {
-      //           if (e['success'])
-      //             this.profileSelect = e['data'][0];
-      //         })
-      //     }
-      // )
+    if (this.actRoute.queryParams || this.actRoute.queryParams != undefined){
+       this.actRoute.queryParams.pipe(take(1)).subscribe(
+          async params => {
+            console.log(params)
+            this.profileService.getUserById(params.profile).pipe(take(1)).subscribe(
+              e => {
+                console.log(e);
+                if (e['success'])
+                  this.showProfile(e['data'][0]);
+              })
+          }
+      )
     }
    
 
@@ -167,6 +169,15 @@ export class ViewComponent implements OnInit {
         break;
       }
     }
+  }
+
+  goToChat(profile){
+    const match_id = profile.match_id
+    delete profile.match_id;
+    delete profile.like_id;
+    delete profile.date;
+    console.log(profile);
+    this.route.navigate(['/chat'], {queryParams : {profile : profile.username, match_id :match_id}})
   }
   
 

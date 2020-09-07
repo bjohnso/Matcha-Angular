@@ -21,11 +21,12 @@ import {JWT_OPTIONS, JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 import { NotificationsComponent } from './notifications/notifications.component';
 import {ViewComponent} from './view/view.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { JWTTokenService } from './services/jwt-token.service';
 
 // temporary for testing
 // tslint:disable-next-line:max-line-length
-const config: SocketIoConfig = { url: environment.api.baseURL, options: {query : {token : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjIzLCJpYXQiOjE1OTg1MjI1MzR9.tYa0OB9dm0gLwABXofuMRIW45e8G06GbW1IH0kBeCes'}}};
-// const config: SocketIoConfig = { url: environment.api.baseURL, options: {query : {token : JWTTokenService.jwtToken}}};
+const token = localStorage.getItem('user');
+const config: SocketIoConfig = { url: environment.api.baseURL, options: {query : {token}}};
 @NgModule({
   declarations: [
     AppComponent,

@@ -75,7 +75,8 @@
     </div>
 </div>
 <div class="button-container text-center">
-    <button *ngIf="!(profileSelect?.like_id  && profileSelect?.match_id)" class="btn-primary blue-button text-sm-center" (click)="likeUser(profileSelect);">Like</button>
-    <button *ngIf="(profileSelect?.like_id && profileSelect?.match_id)" class="btn-primary blue-button text-sm-center" (click)="unlikeUser(profileSelect);">Unlike</button>
+    <button *ngIf="!(profileSelect?.like_id  || profileSelect?.match_id)" class="btn-primary blue-button text-sm-center" (click)="likeUser(profileSelect);">Like</button>
+    <button *ngIf="(profileSelect?.like_id && !profileSelect?.match_id)" class="btn-primary blue-button text-sm-center" (click)="unlikeUser(profileSelect);">Unlike</button>
     <button *ngIf="profileSelect?.match_id" class="btn-primary blue-button text-sm-center" (click)="unmatchUser(profileSelect)">UnMatch</button>
+    <button *ngIf="profileSelect?.match_id" class="btn-primary blue-button text-sm-center" (click)="goToChat(profileSelect)">Chat</button>
 </div>
