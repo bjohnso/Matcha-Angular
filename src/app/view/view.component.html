@@ -1,77 +1,89 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="container-fluid">
 
     <div class="row">
-        <div class="d-flex sidenav " id="wrapper">
-            <div class="bg-light border-right" id="sidebar-wrapper">
-                <div class="sidebar-heading">Matcha Navbar </div>
-                <div class="list-group list-group-flush" *ngFor="let profile of profiles">
-                    <a role="button" class="list-group-item list-group-item-action bg-light" (click)="showProfile(profile)">{{profile?.username}}</a>
+        <div class="col page col-sm-12 col-md-8 col-lg-6">
+            <div class="col menu">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            view menu
+          </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <button class="dropdown-item" type="button">like</button>
+                        <button class="dropdown-item" type="button">match</button>
+                        <button class="dropdown-item" type="button">visit</button>
+                    </div>
+                </div>
+
+                <div class="d-flex sidenav " id="wrapper">
+                    <div class="bg-light border-right" id="sidebar-wrapper">
+                        <div class="sidebar-heading">Matcha Navbar </div>
+                        <div class="list-group list-group-flush" *ngFor="let profile of profiles">
+                            <a role="button" class="list-group-item list-group-item-action bg-light" (click)="showProfile(profile)">{{profile?.username}}</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="profile col-sm-12 col-md-8 col-lg-6">
+            <div class="col profile">
+                <div class="row profile-tray no-gutters justify-content-center">
+                    <div class="col-sm-4 profile-image text-center">
+                        <!-- <img [src]="profileSelect?.profile_picture" alt="profile picture"> -->
+                    </div>
 
-            <div class="row profile-tray no-gutters justify-content-center">
-                <div class="col-sm-4 profile-image text-center">
-                    <!-- <img [src]="profileSelect?.profile_picture" alt="profile picture"> -->
+                    <div class="col-sm-4 profile-details align-items-center">
+                        <div class="profile-details-container">
+                            <h4 class="profile-name ">
+                                {{profileSelect?.firstname}} {{profileSelect?.lastname}}
+                            </h4>
+                            <h6 class="profile-gender ">
+                                {{profileSelect?.gender}}
+                            </h6>
+
+                            <h6 class="profile-interests ">
+                                Interested in: {{profileSelect?.sexual_preference}}
+                            </h6>
+                        </div>
+                    </div>
+
+                    <div class=" col-sm-4 fame-rating text-center">
+                        <i class="material-icons">star_half</i>
+                        <div class="profile-rating">
+                            {{profileSelect?.popularity || '0'}}
+                        </div>
+                    </div>
                 </div>
 
-                <div class="col-sm-4 profile-details align-items-center">
-                    <div class="profile-details-container">
-                        <h4 class="profile-name ">
-                            {{profileSelect?.firstname}} {{profileSelect?.lastname}}
+                <div class="row profile-photos">
+                    <div class="profile-photos-container text-center">
+                        <div class="profile-photos-image-container">
+                            <!-- <img class="profile-photos-image" [src]="picture" alt="profile photo"> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row bio-interests-tray">
+                    <div class="col bio-container">
+
+                        <h4 class="bio-heading text-sm-center">Bio</h4>
+                        <p class="bio-text text-justify">{{profileSelect?.description}} </p>
+                    </div>
+
+                    <div class="col interest-container">
+                        <h4 class="interests-heading text-sm-center">
+                            Interests
                         </h4>
-                        <h6 class="profile-gender ">
-                            {{profileSelect?.gender}}
-                        </h6>
+                        <div class="interests">
 
-                        <h6 class="profile-interests ">
-                            Interested in: {{profileSelect?.sexual_preference}}
-                        </h6>
+                            <ul class="interest-list" *ngFor="let interest of profileSelect?.interests">
+                                <li class="interest">{{profileSelect?.interest}}</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-
-                <div class=" col-sm-4 fame-rating text-center">
-                    <i class="material-icons">star_half</i>
-                    <div class="profile-rating">
-                        {{profileSelect?.popularity}}
-                    </div>
-                </div>
-            </div>
-
-            <div class="row profile-photos">
-                <div class="profile-photos-container text-center">
-                    <div class="profile-photos-image-container">
-                        <!-- <img class="profile-photos-image" [src]="picture" alt="profile photo"> -->
-                    </div>
-                </div>
-            </div>
-
-            <div class="row bio-interests-tray">
-                <div class="col bio-container">
-
-                    <h4 class="bio-heading text-sm-center">Bio</h4>
-                    <p class="bio-text text-justify">{{profileSelect?.description}}  </p>
-                </div>
-
-                <div class="col interest-container">
-                    <h4 class="interests-heading text-sm-center">
-                        Interests
-                    </h4>
-                    <div class="interests" >
-
-                        <ul class="interest-list" *ngFor = "let interest of profileSelect?.interests">
-                            <li class="interest">{{profileSelect?.interest}}</li>
-                        </ul>
-                    </div>
-
-                </div>
-
             </div>
         </div>
-
     </div>
 </div>
 <div class="button-container text-center">
