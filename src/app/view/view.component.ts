@@ -6,6 +6,8 @@ import { MatchService } from '../services/match.service';
 import { Profile } from '../profile/models/profile.model';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
+// import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-view',
@@ -32,6 +34,13 @@ export class ViewComponent implements OnInit {
           })
       }
     )
+
+    // //Toggle Click Function
+    // $("#menu-toggle").click(function(e) {
+    //   e.preventDefault();
+    //   $("#wrapper").toggleClass("toggled");
+    // });
+
 
     this.tabSelection = 'match';
     this.tabSelect();

@@ -1,0 +1,237 @@
+body {
+    /* border: 2px solid blue; */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* overflow-x: hidden; */
+}
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+
+#page-content-wrapper {
+    min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+}
+
+.sidenav {
+    border: 2px solid pink;
+}
+
+.profile {
+    border: 2px solid cyan;
+}
+
+.profile-tray {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    /* border: 2px solid red; */
+    background: #eee;
+    padding: 10px 15px;
+    border-radius: 7px;
+}
+
+.profile-image {
+    min-width: 150px;
+    /* border: 2px solid yellow; */
+}
+
+.profile-image img {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.profile-details {
+    max-height: 150px;
+    padding: 10px 10px;
+    /* border: 2px solid green; */
+    overflow: hidden;
+}
+
+.profile-details-container {
+    vertical-align: middle;
+    /* border: 2px solid hotpink; */
+}
+
+.profile-name {
+    /* border: 2px solid palevioletred; */
+    margin-left: 10px;
+    margin-right: 10px;
+    /* margin-bottom: 0px; */
+    max-width: 100%;
+    max-height: 30px;
+    overflow: hidden;
+}
+
+.profile-gender {
+    /* border: 2px solid palevioletred; */
+    margin-left: 10px;
+    margin-right: 10px;
+    /* margin-bottom: 0px; */
+    /* margin-top: 10px; */
+    padding-top: 10px;
+    max-width: 100%;
+    height: 50px;
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+
+.profile-interests {
+    /* border: 2px solid palevioletred; */
+    margin-left: 10px;
+    margin-right: 10px;
+    /* margin-bottom: 0px; */
+    max-width: 100%;
+    max-height: 25px;
+    overflow: hidden;
+}
+
+.fame-rating {
+    /* border: 2px solid purple; */
+}
+
+.fame-rating i {
+    /* color: gold; */
+    font-size: 100px;
+}
+
+.profile-rating {
+    /* color: gold; */
+    font-weight: bold;
+    /* border: 2px solid cyan; */
+}
+
+
+/* profile photos */
+
+.profile-photos-container {
+    background: #eee;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    /* border: 2px solid crimson; */
+    height: 100%;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.profile-photos-image-container {
+    display: inline;
+}
+
+.profile-photos-image {
+    height: 180px;
+    width: 180px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 50%;
+}
+
+.bio-interests-tray {
+    /* border: 2px solid indianred; */
+}
+
+.bio-heading {
+    padding-top: 10px;
+}
+
+.bio-container {
+    min-width: 180px;
+    background: #eee;
+    margin: 10px;
+    /* border: 2px solid darkred; */
+}
+
+.bio-text {
+    max-height: 400px;
+    overflow-x: auto;
+}
+
+.interests-heading {
+    padding-top: 10px;
+}
+
+.interest-container {
+    min-width: 180px;
+    background: #eee;
+    margin: 10px;
+    /* border: 2px solid salmon; */
+}
+
+.interests {
+    background: #eee;
+    max-height: 380px;
+    overflow-x: auto;
+}
+
+.interest-list {
+    margin: none;
+    padding: 0px;
+    list-style-type: none;
+}
+
+.interest {
+    margin: 10px;
+    max-width: 90%;
+}
+
+.button-container {
+    /* border: 2px solid aquamarine; */
+}
+
+.blue-button {
+    margin: 10px;
+    width: 20%;
+    min-width: 100px;
+    border-radius: 7px;
+}
+
+.pagination-container {
+    /* border: 2px solid violet; */
+    margin: 10px 10px;
+}
+
+.no-profiles-found h4 {
+    color: blue;
+    padding: 10px;
+}

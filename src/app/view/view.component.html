@@ -1,1 +1,93 @@
-<div></div>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="d-flex sidenav " id="wrapper">
+            <div class="bg-light border-right" id="sidebar-wrapper">
+                <div class="sidebar-heading">Matcha Navbar </div>
+                <div class="list-group list-group-flush">
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Home</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Likes</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Unlikes</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Messages</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Visits</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Matches</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile col-sm-12 col-md-8 col-lg-6">
+
+            <div class="row profile-tray no-gutters justify-content-center">
+                <div class="col-sm-4 profile-image text-center">
+                    <img [src]="profile.profile_picture" alt="profile picture">
+                </div>
+
+                <div class="col-sm-4 profile-details align-items-center">
+                    <div class="profile-details-container">
+                        <h4 class="profile-name ">
+                            profile.firstname profile.lastname
+                        </h4>
+                        <h6 class="profile-gender ">
+                            profile.gender
+                        </h6>
+
+                        <h6 class="profile-interests ">
+                            Interested in: profile.sexual_preference
+                        </h6>
+                    </div>
+                </div>
+
+                <div class=" col-sm-4 fame-rating text-center">
+                    <i class="material-icons">star_half</i>
+                    <div class="profile-rating">
+                        profile.popularity
+                    </div>
+                </div>
+            </div>
+
+            <div class="row profile-photos">
+                <div class="profile-photos-container text-center">
+                    <div class="profile-photos-image-container">
+                        <img class="profile-photos-image" [src]="picture" alt="profile photo">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row bio-interests-tray">
+                <div class="col bio-container">
+
+                    <h4 class="bio-heading text-sm-center">Bio</h4>
+                    <p class="bio-text text-justify"> profile.description </p>
+                </div>
+
+                <div class="col interest-container">
+                    <h4 class="interests-heading text-sm-center">
+                        Interests
+                    </h4>
+                    <div class="interests">
+
+                        <ul class="interest-list">
+                            <li class="interest">interest</li>
+                            <li class="interest">interest</li>
+                            <li class="interest">interest</li>
+                            <li class="interest">interest</li>
+                            <li class="interest">interest</li>
+                            <li class="interest">interest</li>
+                            <li class="interest">interest</li>
+                            <li class="interest">interest</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- <div class="button-container text-center">
+    <button *ngIf="!(profile.like||profile.match)" class="btn-primary blue-button text-sm-center" (click)="likeProfile(profile.id)">Like</button>
+    <button *ngIf="profile.like" class="btn-primary blue-button text-sm-center" (click)="unlikeProfile(profile.id)">Unlike</button>
+    <button *ngIf="profile.match" class="btn-primary blue-button text-sm-center" (click)="unlikeProfile(profile.id)">Message</button>
+</div> -->
