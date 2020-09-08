@@ -7,6 +7,7 @@ import { Match } from '../models/block.model';
 import { LikesService } from '../services/likes.service';
 import { MatchService } from '../services/match.service';
 import {JWTTokenService} from '../services/jwt-token.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-explore',
@@ -31,7 +32,8 @@ export class ExploreComponent implements OnInit {
   hideFilter = 'Hide Filter';
 
   constructor(private profileService: ProfileService, private like: LikesService,
-              private match: MatchService, private jwTokenService: JWTTokenService) {}
+              private match: MatchService, private jwTokenService: JWTTokenService,
+              private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.like.getLiked().pipe(take(1)).subscribe( e => {this.likes = e.data; console.log(this.likes); });
@@ -133,6 +135,22 @@ export class ExploreComponent implements OnInit {
     } else {
       this.likeProfile(userId);
     }
+  }
+
+  onViewEvent(userId) {
+    this.profileService.viewUser(userId)
+      .subscribe(result => {
+        const {error, success} = result as any;
+        if (success) {
+          this.router.navigate(['profile', userId], {
+            skipLocationChange: true,
+            queryParamsHandling: 'merge',
+            relativeTo: this.activatedRoute.parent
+          }).then();
+        } else {
+          console.log(error);
+        }
+      });
   }
 
   likeProfile(liked_user) {

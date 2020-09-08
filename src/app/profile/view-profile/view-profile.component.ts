@@ -32,9 +32,10 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
     super();
     this.activatedRoute.data.subscribe(data => {
       const profileData = data.profileData;
-      this.profile = new Profile(profileData.profile.data as ProfileInterface);
+      console.log(data);
+      this.profile = new Profile(profileData.profile as ProfileInterface);
       console.log(this.profile);
-      this.interests = profileData.interests.data.hobbies;
+      this.interests = profileData.interests;
       this.mode.visitor = profileData.isVistor;
     });
   }

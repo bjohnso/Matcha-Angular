@@ -99,6 +99,10 @@ export class ProfileService {
       return this.http.get('/api/profile/all');
   }
 
+  viewUser(userId) {
+    return this.http.post('/api/visit/', {visited: userId, date: new Date().toISOString().slice(0, 10)});
+  }
+
   changePassword(oldPassword, newPassword) {
       if (oldPassword && oldPassword !== undefined && newPassword && newPassword !== undefined) {
           return this.http.post('/api/profile/changePassword',

@@ -3,8 +3,8 @@ import {NgModule} from '@angular/core';
 import {ProfileComponent} from './profile.component';
 import {AuthGuardService} from '../services/auth-guard.service';
 import {ViewProfileComponent} from './view-profile/view-profile.component';
-import {ProfileResolverService} from '../services/profile-resolver.service';
-import {ProfileGuardService} from '../services/profile-guard.service';
+import {ProfileResolverService} from './services/profile-resolver.service';
+import {ProfileGuardService} from './services/profile-guard.service';
 
 const routes: Routes = [
   {
