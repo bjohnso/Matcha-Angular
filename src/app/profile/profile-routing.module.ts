@@ -20,6 +20,7 @@ const routes: Routes = [
         path: 'view',
         component: ViewProfileComponent,
         resolve: {profileData: ProfileResolverService},
+        runGuardsAndResolvers: 'always',
         canActivate: [AuthGuardService, ProfileGuardService],
         canLoad: [AuthGuardService],
       },
@@ -27,9 +28,9 @@ const routes: Routes = [
         path: 'settings',
         component: ViewProfileComponent,
         resolve: {profileData: ProfileResolverService},
+        runGuardsAndResolvers: 'always',
         canActivate: [AuthGuardService, ProfileGuardService],
         canLoad: [AuthGuardService],
-        runGuardsAndResolvers: 'always',
       }
     ]
   }

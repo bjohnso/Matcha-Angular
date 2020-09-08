@@ -11,6 +11,8 @@
         [value]="profile?.firstname"
         class="form-control"
         name="firstname"
+        (input)="onInputEvent($event)"
+        [readOnly]="!editMode"
         required/>
     </div>
     <div class="form-group">
@@ -21,6 +23,8 @@
         [value]="profile?.lastname"
         class="form-control"
         name="lastname"
+        (input)="onInputEvent($event)"
+        [readOnly]="!editMode"
         required/>
     </div>
     <div class="form-group">
@@ -31,6 +35,8 @@
         [value]="profile?.username"
         class="form-control"
         name="username"
+        (input)="onInputEvent($event)"
+        [readOnly]="!editMode"
         required/>
     </div>
     <div class="form-group">
@@ -41,6 +47,8 @@
              class="form-control"
              name="email"
              required
+             (input)="onInputEvent($event)"
+             [readOnly]="!editMode"
              email/>
     </div>
 
@@ -64,7 +72,8 @@
                  type="text"
                  readonly="readonly"
                  ngbDropdownAnchor
-                 (click)="genderDrop.open()"/>
+                 [readOnly]="!editMode"
+                 (click)="editMode ? genderDrop.open() : null"/>
         </div>
       </div>
     </div>
@@ -89,7 +98,8 @@
                  type="text"
                  readonly="readonly"
                  ngbDropdownAnchor
-                 (click)="sexualPreferenceDrop.open()"/>
+                 [readOnly]="!editMode"
+                 (click)="editMode ? sexualPreferenceDrop.open() : null"/>
         </div>
       </div>
     </div>
@@ -114,18 +124,10 @@
                  type="text"
                  readonly="readonly"
                  ngbDropdownAnchor
-                 (click)="sexualOrientationDrop.open()"/>
+                 [readOnly]="!editMode"
+                 (click)="editMode ? sexualOrientationDrop.open() : null"/>
         </div>
       </div>
-    </div>
-
-    <div>
-      <button
-        class="btn btn-primary"
-        type="submit"
-        [disabled]="!authForm.valid">
-        Save Info
-      </button>
     </div>
   </form>
 </div>

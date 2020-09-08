@@ -82,7 +82,6 @@ export class ProfileService {
             delete updateProfile[key];
           }
         });
-        console.log(updateProfile);
         return this.http.put('/api/profile', Object.assign({}, updateProfile));
   }
 

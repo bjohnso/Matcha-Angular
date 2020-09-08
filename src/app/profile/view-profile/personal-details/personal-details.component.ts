@@ -13,6 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class PersonalDetailsComponent extends CoreComponent implements OnInit {
 
   @Input() profile;
+  @Input() editMode;
 
   // META-DATA
   GENDER_OPTIONS = GENDER;
@@ -25,24 +26,39 @@ export class PersonalDetailsComponent extends CoreComponent implements OnInit {
   }
 
   onInputEvent(event: Event, item?: any) {
+    const elem: HTMLElement = (event.target as HTMLElement);
+    const id: string = (elem.id as string);
     if (event.type === 'input') {
-      this.textInputUpdate(event);
+      this.textInputUpdate(elem, id);
     } else if (event.type === 'click') {
-      const elem: HTMLElement = (event.target as HTMLElement);
-      const id: string = (elem.id as string);
-      const fieldsProperty = Object.keys(EDIT_PROFILE_FIELDS)
-        .find(prop => id.includes(EDIT_PROFILE_FIELDS[prop].LINK_ID));
-      if (fieldsProperty && item) {
-        const profileProperty = EDIT_PROFILE_FIELDS[fieldsProperty].PROP;
-        if (this.profile) {
-          this.profile[profileProperty] = item;
-        }
+      const field: any = this.getFieldFromLink(id);
+      if (field && item) {
+        const prop = EDIT_PROFILE_FIELDS[field].PROP;
+        this.profile[prop] = item;
+        console.log(prop);
       }
     }
   }
 
-  textInputUpdate(event) {
+  textInputUpdate(elem, id) {
+    const field: any = this.getFieldFromID(id);
+    if (field) {
+      console.log('update');
+      const prop = EDIT_PROFILE_FIELDS[field].PROP;
+      this.profile[prop] = (elem as HTMLInputElement).value.toString();
+    }
+  }
 
+  getFieldFromID(id) {
+    return Object.keys(EDIT_PROFILE_FIELDS).find(key => {
+      return EDIT_PROFILE_FIELDS[key].INPUT_ID === id;
+    });
+  }
+
+  getFieldFromLink(link) {
+    return Object.keys(EDIT_PROFILE_FIELDS).find(key => {
+      return EDIT_PROFILE_FIELDS[key].LINK_ID === link.split('-')[0];
+    });
   }
 
   ngOnInit(): void {

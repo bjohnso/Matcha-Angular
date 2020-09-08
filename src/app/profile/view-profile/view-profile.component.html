@@ -97,7 +97,9 @@
           </div>
         </div>
 
-        <app-personal-details [profile]="profile">
+        <app-personal-details *ngIf="!visitorMode"
+                              [profile]="profile"
+                              [editMode]="editMode">
         </app-personal-details>
 
     </div>
