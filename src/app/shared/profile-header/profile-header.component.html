@@ -1,15 +1,15 @@
 <div class="row profile-tray no-gutters h-100">
-  <div *ngIf="mode.visitor" class="position-absolute" style="right: 30px; z-index: 1000">
-    <div class="d-inline-block" ngbDropdown #profileOptions="ngbDropdown">
-      <button class="btn-outline-dark" id="dropdownManual" (focus)="profileOptions.open()" ngbDropdownAnchor>
-        <fa-icon [icon]="faBars"></fa-icon>
-      </button>
-      <div ngbDropdownMenu aria-labelledby="dropdownManual">
-        <button ngbDropdownItem (click)="onReportUser($event)">Report</button>
-        <button ngbDropdownItem (click)="onBlockUser($event)">Block</button>
-      </div>
-    </div>
-  </div>
+<!--  <div *ngIf="mode.visitor" class="position-absolute" style="right: 30px; z-index: 1000">-->
+<!--    <div class="d-inline-block" ngbDropdown #profileOptions="ngbDropdown">-->
+<!--      <button class="btn-outline-dark" id="dropdownManual" (focus)="profileOptions.open()" ngbDropdownAnchor>-->
+<!--        <fa-icon [icon]="faBars"></fa-icon>-->
+<!--      </button>-->
+<!--      <div ngbDropdownMenu aria-labelledby="dropdownManual">-->
+<!--        <button ngbDropdownItem (click)="onReportUser($event)">Report</button>-->
+<!--        <button ngbDropdownItem (click)="onBlockUser($event)">Block</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 
   <div class="col-md-3 col-lg-3 col-sm-3 text-center mt-2 mb-2 my-auto">
     <img class="profile-image" [src]="profile?.profile_picture || 'assets/user-circle-solid.svg'">

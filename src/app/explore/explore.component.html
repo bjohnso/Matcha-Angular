@@ -72,7 +72,7 @@
             <app-profile-header *ngFor="let profile of profilesShown"
                                         [profile]="profile"
                                         [mode]="{visitor: true, edit: false, liked: isLiked(profile.id)}"
-                                        (likeUserEvent)="likeProfile(profile.id)">
+                                        (likeUserEvent)="onLikeEvent(profile.id)">
             </app-profile-header>
           </div>
 

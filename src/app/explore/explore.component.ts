@@ -98,9 +98,9 @@ export class ExploreComponent implements OnInit {
               return (new Date(a.birthdate).getTime() - new Date(b.birthdate).getTime());
             } else if (element === 'location') {
               return  ((a.location[0] - b.location[0]) || (a.location[1] - b.location[1]));
- } else if (element === 'popularity') {
+            } else if (element === 'popularity') {
               return a.popularity - b.popularity;
- }
+            }
            });
         });
       }
