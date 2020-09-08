@@ -122,6 +122,14 @@ export class ProfileService {
     return this.http.get<any>('/api/profile/visits');
   }
 
+  blockUser(userId) {
+    return this.http.post('/api/block/', { blocked_user: userId, date: Date.now().toString() });
+  }
+
+  reportUser(userId) {
+    return this.http.post('/api/report/', { reported_user: userId, date: Date.now().toString(), content: 'This offends me' });
+  }
+
   // link to upload images in Angular https://www.techiediaries.com/angular-formdata/
 
   uploadImage(image: File) {

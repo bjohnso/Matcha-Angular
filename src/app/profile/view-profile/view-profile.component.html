@@ -1,9 +1,11 @@
 <div class="container-fluid">
-    <div class=" mx-auto col-sm-12 col-md-8 col-lg-6">
+    <div class="mx-auto col-sm-12 col-md-8 col-lg-6">
 
       <app-profile-header [mode]="mode"
                           [profile]="profile"
-                          (updateProfileEvent)="onUpdateProfileEventEvent($event)">
+                          (updateProfileEvent)="onUpdateProfileEventEvent($event)"
+                          (reportUserEvent)="onReportUser($event)"
+                          (blockUserEvent)="onBlockUser($event)">
       </app-profile-header>
 
         <div class="row h-100 profile-photos-container no-gutters">

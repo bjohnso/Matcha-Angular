@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 import { Match } from '../models/block.model';
 import { LikesService } from '../services/likes.service';
 import { MatchService } from '../services/match.service';
+import {JWTTokenService} from '../services/jwt-token.service';
 
 @Component({
   selector: 'app-explore',
@@ -29,11 +30,12 @@ export class ExploreComponent implements OnInit {
   isCollapsed = false;
   hideFilter = "Hide Filter";
 
-  constructor(private profileService : ProfileService, private like : LikesService, private match : MatchService) {}
+  constructor(private profileService : ProfileService, private like : LikesService, private match : MatchService, private jwTokenService: JWTTokenService) {}
 
   ngOnInit(): void {
     this.like.getLiked().pipe(take(1)).subscribe( e => {this.likes = e['data']; });
-    this.match.getMatches().pipe(take(1)).subscribe(e => this.matches = e['data']);
+    this.match.getMatches().pipe(take(1)).subscribe(e => this.matches = e['data']
+      .filter(match => match.id + '' !== this.jwTokenService.getUserId()));
     this.profileService.getInterests().pipe(take(1)).subscribe(data => {
       this.interests = data["data"]['hobbies'];
     });
@@ -81,7 +83,7 @@ export class ExploreComponent implements OnInit {
     if (form.value.interests && form.value.interests.length > 0)
       interests = form.value.interests;
 
-    this.profileService.getUserByFilter(radius, popularity,sexual_preference, interests, age).pipe(take(1)).subscribe((e) => {
+    this.profileService.getUserByFilter(radius, popularity, sexual_preference, interests, age).pipe(take(1)).subscribe((e) => {
       let data = e['data'];
       if (form.value.sortable){
          form.value['sortable'].forEach(element => {
@@ -96,15 +98,16 @@ export class ExploreComponent implements OnInit {
         });
       }
 
-      this.profiles = data;
+      this.profiles = data.filter(profile => profile.id + '' !== this.jwTokenService.getUserId());
       this.collectionSize = this.profiles.length;
       this.refreshProfiles();
-    })
+    });
   }
 
   refreshProfiles() {
     this.like.getLiked().pipe(take(1)).subscribe( e => {this.likes = e['data']; });
-    this.match.getMatches().pipe(take(1)).subscribe(e => this.matches = e['data']);
+    this.match.getMatches().pipe(take(1)).subscribe(e => this.matches = e['data']
+      .filter(match => match.id + '' !== this.jwTokenService.getUserId()));
     this.profilesShown = this.profiles
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
     this.profilesShown.forEach(data => {
@@ -152,10 +155,10 @@ export class ExploreComponent implements OnInit {
 }
 
 changeText() {
-  if(this.hideFilter === 'Show Fiter') { 
-    this.hideFilter = 'Hide Filter'
+  if(this.hideFilter === 'Show Fiter') {
+    this.hideFilter = 'Hide Filter';
   } else {
-    this.hideFilter = 'Show Fiter'
+    this.hideFilter = 'Show Fiter';
   }
 }
 

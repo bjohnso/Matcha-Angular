@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {faPen, faBars} from '@fortawesome/free-solid-svg-icons';
+import {EmailValidator} from '@angular/forms';
 
 @Component({
   selector: 'app-profile-header',
@@ -12,6 +13,8 @@ export class ProfileHeaderComponent implements OnInit {
   @Input() profile;
 
   @Output() updateProfileEvent = new EventEmitter();
+  @Output() blockUserEvent = new EventEmitter();
+  @Output() reportUserEvent = new EventEmitter();
 
   faPen = faPen;
   faBars = faBars;
@@ -20,6 +23,14 @@ export class ProfileHeaderComponent implements OnInit {
 
   onUpdateProfileEventEvent(event: Event) {
     this.updateProfileEvent.emit(event);
+  }
+
+  onBlockUser(event: Event) {
+    this.blockUserEvent.emit(event);
+  }
+
+  onReportUser(event: Event) {
+    this.reportUserEvent.emit(event);
   }
 
   ngOnInit(): void {

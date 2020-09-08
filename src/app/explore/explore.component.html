@@ -1,19 +1,4 @@
-<!doctype html>
-<html lang="en">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="explore.component.css">
-
-    <title>Matcha</title>
-</head>
-
-<body>
     <!-- page container -->
     <div class="explore-container container-fluid">
 
@@ -32,14 +17,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="age">Age</label>
+                        <label>Age</label>
                         <input type="number" id="age.min" min="18" max="120" class="form-control" ngModel name="age.min" placeholder="Please input minimum age (18+)" required/>
 
                         <input type="number" id="age.max" min="18" max="120" class="form-control" ngModel name="age.max" placeholder="Please input max age (-120)" required/>
                     </div>
 
                     <div class="form-group">
-                        <label for="popularity">Popularity</label>
+                        <label>Popularity</label>
                         <input type="number" min=0 id="popularity.min" class="form-control" ngModel name="popularity.min" placeholder="Please input minimum popularity" required/>
 
                         <input type="number" min=0 id="popularity.max" class="form-control" ngModel name="popularity.max" placeholder="Please input max popularity" required/>
@@ -80,100 +65,42 @@
 
         <!-- filter results conainer -->
         <a #profiletop name="profile-top" id="profile-top"></a>
-        <div *ngIf="profiles && profilesShown.length > 0" class="row filter-results-container justify-content-center">
-            <div class="col-sm-12 col-md-8 col-lg-6">
-
-                <div class="filter-results-profile" *ngFor="let profile of profilesShown">
-                    <!-- profile tray -->
-                    <div class="row profile-tray no-gutters justify-content-center">
-
-                        <!-- profile image -->
-                        <div class="col-sm-4 profile-image text-center">
-                            <img [src]="profile.profile_picture" alt="profile picture">
-                        </div>
-                        <div class="col-sm-4 profile-details align-items-center">
-
-                            <div class="profile-details-container">
-                                <h4 class="profile-name ">
-                                    {{profile.firstname}} {{profile.lastname}}
-                                </h4>
-                                <h6 class="profile-gender ">
-                                    {{profile.gender}}
-                                </h6>
-
-                                <h6 class="profile-interests ">
-                                    Interested in: {{profile.sexual_preference}}
-                                </h6>
-                            </div>
-                        </div>
-
-                        <div class=" col-sm-4 fame-rating text-center">
-                            <i class="material-icons">star_half</i>
-                            <div class="profile-rating">
-                                {{profile.popularity}}
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- profile images row -->
-                    <div *ngIf="(profile.images && profile.images.length > 0)" class="row profile-photos">
-                        <div class="profile-photos-container text-center">
-                            <div class="profile-photos-image-container" *ngFor="let picture of profile.images">
-                                <img class="profile-photos-image" [src]="picture" alt="profile photo">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- profile info row -->
-                    <div class="row bio-interests-tray">
-                        <div class="col bio-container">
-
-                            <h4 class="bio-heading text-sm-center">Bio</h4>
-                            <p class="bio-text text-justify"> {{profile.description}} </p>
-                        </div>
-
-                        <div class="col interest-container">
-                            <h4 class="interests-heading text-sm-center">
-                                Interests
-                            </h4>
-                            <div class="interests">
-
-                                <ul class="interest-list" *ngFor="let interest of profile.interests">
-                                    <li class="interest">{{interest}}</li>
-                                </ul>
-                            </div>
-
-                            <div class="button-container text-center">
-
-                                <button *ngIf="!(profile.like||profile.match)" class="btn-primary blue-button text-sm-center" (click)="likeProfile(profile.id)">Like</button>
-                                <button *ngIf="profile.like" class="btn-primary blue-button text-sm-center" (click)="unlikeProfile(profile.id)">Unlike</button>
-
-                                <!-- <i *ngIf="profile.match" class="material-icons">favorite_bord...</i> -->
-                                <button *ngIf="profile.match" class="btn-primary blue-button text-sm-center" (click)="unlikeProfile(profile.id)">Message</button>
-                            </div>
-
-                        </div>
-                    </div>
-
+        <div *ngIf="profiles && profilesShown.length > 0">
                     <!-- profile closing div -->
-                </div>
+
+          <div class="mx-auto col-sm-12 col-md-8 col-lg-6">
+            <app-profile-header *ngFor="let profile of profilesShown"
+                                        [profile]="profile"
+                                        [mode]="{visitor: true, edit: false}"
+                                        (reportUserEvent)=""
+                                        (blockUserEvent)=""
+                                        (likeUservEvent)=""
+                                        (followUserEvent)="">
+            </app-profile-header>
+          </div>
+
 
                 <div class=" pagination-container  d-flex justify-content-center p-2 hidden-xs">
-                    <ngb-pagination class="pagination-responsive" [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="scrollToTop(profiletop);refreshProfiles()" [maxSize]="4" [rotate]="true" [ellipses]="false" [boundaryLinks]="false">
+                    <ngb-pagination class="pagination-responsive"
+                                    [collectionSize]="collectionSize"
+                                    [(page)]="page"
+                                    [pageSize]="pageSize"
+                                    (pageChange)="scrollToTop(profiletop);refreshProfiles()"
+                                    [maxSize]="4"
+                                    [rotate]="true"
+                                    [ellipses]="false"
+                                    [boundaryLinks]="false">
                     </ngb-pagination>
 
                     <select class="custom-select" [(ngModel)]="pageSize" (ngModelChange)="scrollToTop(profiletop);refreshProfiles()">
-                  <option [ngValue]="10">10 items per page</option>
-                  <option [ngValue]="25">25 items per page</option>
-                  <option [ngValue]="50">50 items per page</option>
-                </select>
+                      <option [ngValue]="10">10 items per page</option>
+                      <option [ngValue]="25">25 items per page</option>
+                      <option [ngValue]="50">50 items per page</option>
+                    </select>
                 </div>
-            </div>
+
         </div>
         <div *ngIf="profilesShown.length < 1" class="row no-profiles-found justify-content-center">
             <h4>Nothing to see here :( try a broad search to find your match</h4>
         </div>
     </div>
-</body>
-
-</html>

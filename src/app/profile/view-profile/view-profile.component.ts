@@ -142,6 +142,36 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
     }
   }
 
+  onBlockUser(event: Event) {
+    this.profileService.blockUser(this.profile.id)
+      .subscribe(result => {
+        const {error, success} = result as any;
+        if (success) {
+          this.router.navigate([], {
+            skipLocationChange: true,
+            queryParamsHandling: 'merge'
+          }).then();
+        } else {
+          console.log(error);
+        }
+      });
+  }
+
+  onReportUser(event: Event) {
+    this.profileService.reportUser(this.profile.id)
+      .subscribe(result => {
+        const {error, success} = result as any;
+        if (success) {
+          this.router.navigate([], {
+            skipLocationChange: true,
+            queryParamsHandling: 'merge'
+          }).then();
+        } else {
+          console.log(error);
+        }
+      });
+  }
+
   ngOnInit(): void {
     this.inputImageUpload = this.inputImageRef.nativeElement as HTMLInputElement;
     this.inputBioUpdate = this.inputBioUpdateRef.nativeElement as HTMLTextAreaElement;
