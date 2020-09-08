@@ -26,7 +26,7 @@
                     </h4>
                 </div>
                 <div class="row h-100 text-center mt-5">
-                    <button *ngIf="!editMode" (click)="editMode = true" class="btn-warning">
+                    <button *ngIf="!visitorMode && !editMode" (click)="editMode = true" class="btn-warning">
          Edit Profile <fa-icon [icon]="faPen"></fa-icon>
         </button>
                     <button *ngIf="editMode" (click)="onUpdateProfileEventEvent($event)" class="btn-primary mr-1">
@@ -51,7 +51,7 @@
                         <h3>Photos</h3>
                     </div>
                     <div class="col-9 h-100 my-auto">
-                        <button *ngIf="profile.images.length < 5 || selectedCarouselImage" class="float-right my-auto" id="carouselUpdateImageButton" (mousedown)="onCarouselButtonEvent($event)" (click)="onCarouselButtonEvent($event)" [ngClass]="selectedCarouselImage ? 'btn-danger' : 'btn-primary'">
+                        <button *ngIf="profile?.images?.length < 5 || selectedCarouselImage" class="float-right my-auto" id="carouselUpdateImageButton" (mousedown)="onCarouselButtonEvent($event)" (click)="onCarouselButtonEvent($event)" [ngClass]="selectedCarouselImage ? 'btn-danger' : 'btn-primary'">
             {{selectedCarouselImage ? 'Remove' : 'Add'}}
           </button>
                         <button *ngIf="selectedCarouselImage" id="carouselProfileImageButton" (mousedown)="onCarouselButtonEvent($event)" (click)="onCarouselButtonEvent($event)" class="btn-secondary float-right my-auto mr-3">
@@ -65,34 +65,40 @@
             </div>
         </div>
 
-        <div class="row bio-interests-tray">
-            <div class="col bio-container">
-
+        <div class="row bio-interests-tray h-100 row-eq-height mb-3">
+          <div class="col-6">
+            <div class="col-12 bio-container">
                 <h4 class="bio-heading text-sm-center">Bio</h4>
                 <p *ngIf="!editMode" class="bio text-justify"> {{profile.description}} </p>
 
                 <div class="form-group">
-                    <textarea [style.visibility]="editMode ? 'visible' : 'collapse'" #inputBioUpdate type="text" id="editBio" [value]="profile.description" class="form-control" rows="3"></textarea>
-                </div>
-
-            </div>
-
-            <div class="col interest-container">
-                <h4 class="interests-heading text-sm-center">
-                    Interests
-                </h4>
-                <div class="interests">
-                    <div *ngIf="editMode && !visitorMode">
-                        <ng-select [items]="interests" bindLabel="name" placeholder="Select interests" appendTo="body" multiple="true" id="interests" [(ngModel)]="profile.interests" name="interests">
-                        </ng-select>
-                    </div>
-                    <ul *ngIf="!editMode || visitorMode">
-                        <li *ngFor="let interest of profile?.interests">
-                            {{interest}}
-                        </li>
-                    </ul>
+                  <textarea [style.visibility]="editMode ? 'visible' : 'collapse'" #inputBioUpdate type="text" id="editBio" [value]="profile.description" class="form-control" rows="3"></textarea>
                 </div>
             </div>
+          </div>
+
+          <div class="col-6">
+            <div class="col-12 interest-container">
+              <h4 class="interests-heading text-sm-center">
+                Interests
+              </h4>
+              <div class="interests">
+                <div *ngIf="editMode && !visitorMode">
+                  <ng-select [items]="interests" bindLabel="name" placeholder="Select interests" appendTo="body" multiple="true" id="interests" [(ngModel)]="profile.interests" name="interests">
+                  </ng-select>
+                </div>
+                <ul *ngIf="!editMode || visitorMode">
+                  <li *ngFor="let interest of profile?.interests">
+                    {{interest}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <app-personal-details>
+        </app-personal-details>
+
     </div>
 </div>

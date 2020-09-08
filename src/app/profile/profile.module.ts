@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {ProfileComponent} from './profile.component';
-import {EditProfileComponent} from './edit-profile/edit-profile.component';
+import {PersonalDetailsComponent} from './view-profile/personal-details/personal-details.component';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
@@ -13,7 +13,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
 @NgModule({
   declarations: [
     ProfileComponent,
-    EditProfileComponent,
+    PersonalDetailsComponent,
     ViewProfileComponent,
   ],
   imports: [
@@ -24,7 +24,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
     FontAwesomeModule,
     NgSelectModule
   ],
-  exports: [ProfileComponent, ViewProfileComponent, EditProfileComponent],
+  exports: [ProfileComponent, ViewProfileComponent, PersonalDetailsComponent],
   providers: [
     NgxImageCompressService
   ]

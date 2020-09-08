@@ -1,16 +1,16 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CoreComponent} from '../../core/core.component';
-import {SEXUAL_PREFERENCE, GENDER, SEXUAL_ORIENTATION} from '../../data/profile.data';
-import {EDIT_PROFILE_FIELDS} from '../constants/input-fields.constant';
-import {Profile} from '../models/profile.model';
+import {CoreComponent} from '../../../core/core.component';
+import {SEXUAL_PREFERENCE, GENDER, SEXUAL_ORIENTATION} from '../../../data/profile.data';
+import {EDIT_PROFILE_FIELDS} from '../../constants/input-fields.constant';
+import {Profile} from '../../models/profile.model';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.css']
+  selector: 'app-personal-details',
+  templateUrl: './personal-details.component.html',
+  styleUrls: ['./personal-details.component.css']
 })
-export class EditProfileComponent extends CoreComponent implements OnInit {
+export class PersonalDetailsComponent extends CoreComponent implements OnInit {
 
   // META-DATA
   GENDER_OPTIONS = GENDER;

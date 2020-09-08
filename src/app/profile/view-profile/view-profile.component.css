@@ -131,10 +131,10 @@ body {
 }
 
 .bio-container {
-    min-width: 180px;
-    background: #eee;
-    margin: 10px;
-    /* border: 2px solid darkred; */
+  /* border: 2px solid red; */
+  background: #eee;
+  border-radius: 7px;
+  height: 100%;
 }
 
 .bio-heading {
@@ -142,10 +142,10 @@ body {
 }
 
 .interest-container {
-    min-width: 180px;
-    background: #eee;
-    margin: 10px;
-    /* border: 2px solid salmon; */
+  /* border: 2px solid red; */
+  height: 100%;
+  background: #eee;
+  border-radius: 7px;
 }
 
 .interests-heading {

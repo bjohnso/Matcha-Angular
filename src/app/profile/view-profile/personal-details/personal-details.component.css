@@ -1,3 +1,9 @@
+.details-container {
+  background: #eee;
+  /* border: 2px solid darkred; */
+  border-radius: 7px;
+}
+
 .edit-profile {
   background-color: lightgrey;
 }

@@ -1,0 +1,131 @@
+
+<div class="col-12 details-container p-2 mb-3">
+  <h4>Personal Details</h4>
+  <br>
+  <form #authForm="ngForm">
+    <div class="form-group">
+      <label for="{{EDIT_PROFILE_FIELDS.FIRST_NAME.INPUT_ID}}">First Name</label>
+      <input
+        type="text"
+        id="{{EDIT_PROFILE_FIELDS.FIRST_NAME.INPUT_ID}}"
+        [value]="profile.firstname"
+        class="form-control"
+        name="firstname"
+        required/>
+    </div>
+    <div class="form-group">
+      <label for="{{EDIT_PROFILE_FIELDS.LAST_NAME.INPUT_ID}}">Last Name</label>
+      <input
+        type="text"
+        id="{{EDIT_PROFILE_FIELDS.LAST_NAME.INPUT_ID}}"
+        [value]="profile.lastname"
+        class="form-control"
+        name="lastname"
+        required/>
+    </div>
+    <div class="form-group">
+      <label for="{{EDIT_PROFILE_FIELDS.USERNAME.INPUT_ID}}">Username</label>
+      <input
+        type="text"
+        id="{{EDIT_PROFILE_FIELDS.USERNAME.INPUT_ID}}"
+        [value]="profile.username"
+        class="form-control"
+        name="username"
+        required/>
+    </div>
+    <div class="form-group">
+      <label for="{{EDIT_PROFILE_FIELDS.EMAIL.INPUT_ID}}">Email</label>
+      <input type="email"
+             id="{{EDIT_PROFILE_FIELDS.EMAIL.INPUT_ID}}"
+             [value]="profile.email"
+             class="form-control"
+             name="email"
+             required
+             email/>
+    </div>
+
+    <div class="form-group">
+      <label for="{{EDIT_PROFILE_FIELDS.GENDER.PROP}}">Gender</label>
+      <div id="{{EDIT_PROFILE_FIELDS.GENDER.PROP}}" name="gender">
+        <div #genderDrop="ngbDropdown" ngbDropdown autoClose="outside">
+          <div class="optionDD" ngbDropdownMenu #genderMenu aria-labelledby="genderDDToggle">
+            <a *ngFor="let option of GENDER_OPTIONS.OPTIONS; let i = index"
+               class="text-truncate dropdown-item"
+               id="{{EDIT_PROFILE_FIELDS.GENDER.LINK_ID}}-{{i}}"
+               (click)="onInputEvent($event, option);genderDrop.close()">
+              {{option}}
+            </a>
+          </div>
+          <input autocomplete="off"
+                 placeholder="select gender"
+                 class="form-control"
+                 id="{{EDIT_PROFILE_FIELDS.GENDER.INPUT_ID}}"
+                 [value]="profile.gender"
+                 type="text"
+                 readonly="readonly"
+                 ngbDropdownAnchor
+                 (click)="genderDrop.open()"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="{{EDIT_PROFILE_FIELDS.SEXUAL_PREFERENCE.PROP}}">Sexual Preference</label>
+      <div id="{{EDIT_PROFILE_FIELDS.SEXUAL_PREFERENCE.PROP}}" name="sexualPreference">
+        <div #sexualPreferenceDrop="ngbDropdown" ngbDropdown autoClose="outside">
+          <div class="optionDD" ngbDropdownMenu #sexualPreferenceMenu aria-labelledby="sexualPreferenceDDToggle">
+            <a *ngFor="let option of SEXUAL_PREFERENCE_OPTIONS.OPTIONS; let i = index"
+               class="text-truncate dropdown-item"
+               id="{{EDIT_PROFILE_FIELDS.SEXUAL_PREFERENCE.LINK_ID}}-{{i}}"
+               (click)="onInputEvent($event, option);sexualPreferenceDrop.close()">
+              {{option}}
+            </a>
+          </div>
+          <input autocomplete="off"
+                 placeholder="select sexual preference"
+                 class="form-control"
+                 id="{{EDIT_PROFILE_FIELDS.SEXUAL_PREFERENCE.INPUT_ID}}"
+                 [value]="profile.sexual_preference"
+                 type="text"
+                 readonly="readonly"
+                 ngbDropdownAnchor
+                 (click)="sexualPreferenceDrop.open()"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="{{EDIT_PROFILE_FIELDS.SEXUAL_ORIENTATION.PROP}}">Sexual Orientation</label>
+      <div id="{{EDIT_PROFILE_FIELDS.SEXUAL_ORIENTATION.PROP}}" name="sexualOrientation">
+        <div #sexualOrientationDrop="ngbDropdown" ngbDropdown autoClose="outside">
+          <div class="optionDD" ngbDropdownMenu #sexualOrientationMenu aria-labelledby="sexualOrientationDDToggle">
+            <a *ngFor="let option of SEXUAL_ORIENTATION_OPTIONS.OPTIONS; let i = index"
+               class="text-truncate dropdown-item"
+               id="{{EDIT_PROFILE_FIELDS.SEXUAL_ORIENTATION.LINK_ID}}-{{i}}"
+               (click)="onInputEvent($event, option);sexualOrientationDrop.close()">
+              {{option}}
+            </a>
+          </div>
+          <input autocomplete="off"
+                 placeholder="select sexual orientation"
+                 class="form-control"
+                 id="{{EDIT_PROFILE_FIELDS.SEXUAL_ORIENTATION.INPUT_ID}}"
+                 [value]="profile.sexual_orientation"
+                 type="text"
+                 readonly="readonly"
+                 ngbDropdownAnchor
+                 (click)="sexualOrientationDrop.open()"/>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="!authForm.valid">
+        Save Info
+      </button>
+    </div>
+  </form>
+</div>
