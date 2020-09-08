@@ -180,7 +180,14 @@ export class ViewComponent implements OnInit {
     this.route.navigate(['/chat'], {queryParams : {profile : profile.username, match_id :match_id}})
   }
   
+   openNav() {
+    document.getElementById("mySidebar").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+  }
 
-
+ closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+  }
 
 }
