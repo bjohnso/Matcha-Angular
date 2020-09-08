@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,7 +14,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ProfileModule} from './profile/profile.module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import {NgSelectModule} from '@ng-select/ng-select';
-import {environment} from '../environments/environment';;
+import {environment} from '../environments/environment';
 import {SharedModule} from './shared/shared.module';
 import {InterceptorService} from './services/interceptor.service';
 import {JWT_OPTIONS, JwtHelperService, JwtModule} from '@auth0/angular-jwt';
@@ -22,6 +22,9 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import {ViewComponent} from './view/view.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JWTTokenService } from './services/jwt-token.service';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import {CommonModule} from '@angular/common';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 // temporary for testing
 // tslint:disable-next-line:max-line-length
@@ -40,9 +43,11 @@ const config: SocketIoConfig = { url: environment.api.baseURL, options: {query :
     NgSelectModule,
     FormsModule,
     BrowserModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    CommonModule,
 
     // THIRD PARTY
     SocketIoModule.forRoot(config),
@@ -54,6 +59,7 @@ const config: SocketIoConfig = { url: environment.api.baseURL, options: {query :
     AuthModule,
     ProfileModule,
     FontAwesomeModule,
+    NgxSpinnerModule
   ],
   providers: [
     // THE INTERCEPTOR WILL CATCH ALL HTTP REQUESTS AND ADD AN AUTH TOKEN WHERE APPLICABLE
@@ -68,6 +74,7 @@ const config: SocketIoConfig = { url: environment.api.baseURL, options: {query :
     JwtHelperService,
     NgxImageCompressService,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

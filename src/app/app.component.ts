@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router, RouterEvent} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterEvent} from '@angular/router';
 import {CoreComponent} from './core/core.component';
 import { Socket } from 'ngx-socket-io';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { Socket } from 'ngx-socket-io';
 export class AppComponent extends CoreComponent implements OnInit {
   title = 'matcha';
   currentRoute;
-  constructor(private router: Router, private socket : Socket) {
+  constructor(private router: Router, private socket : Socket, private spinner: NgxSpinnerService) {
     super();
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
@@ -20,10 +21,12 @@ export class AppComponent extends CoreComponent implements OnInit {
   ngOnInit() {
     super.ngOnInit();
     this.router.events.subscribe(event => {
-      if (event instanceof RouterEvent && event instanceof NavigationEnd) {
+      if (event instanceof RouterEvent && event instanceof NavigationStart) {
+        this.spinner.show('nav-spinner');
+      } else if (event instanceof RouterEvent && event instanceof NavigationEnd) {
+        this.spinner.hide('nav-spinner');
         const nav: NavigationEnd =  event as NavigationEnd;
         this.currentRoute = nav.urlAfterRedirects;
-        console.log(this.currentRoute);
       };
     });
   }

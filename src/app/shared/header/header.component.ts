@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
               private jwtService: JWTTokenService) {}
 
   isActiveRoute(route: string) {
-    if (this.currentRoute.includes(route)) {
+    if (this.currentRoute && this.currentRoute.includes(route)) {
       if (route === 'profile' &&
         this.jwtService.isCurrentUser(this.jwtService.getUserId() as unknown as number)) {
         return true;
@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.currentRoute);
+    console.log(`Header Nav : ${this.currentRoute}`);
   }
 
 }
