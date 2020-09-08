@@ -10,7 +10,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 const routes: Routes = [
   {path: '', redirectTo: 'auth', pathMatch: 'full'},
   {
-    path: 'profile',
+    path: 'profile/:id',
     loadChildren: () => import('./profile/profile-routing.module')
       .then(m => m.ProfileRoutingModule),
     canActivate : [AuthGuardService],

@@ -38,8 +38,9 @@ export class AuthComponent extends CoreComponent implements OnInit {
           if (response.success) {
             console.log(response);
             this.jwtService.setToken(response.data.token);
+            this.jwtService.setUserId(response.data.id);
             this.router.navigate(
-              ['profile'],
+              ['profile', response.data.id],
               {relativeTo: this.activatedRoute.parent})
               .then();
           }
