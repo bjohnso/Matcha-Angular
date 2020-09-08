@@ -54,10 +54,7 @@
         Discard
         <fa-icon [icon]="faPen"></fa-icon>
       </button>
-      <ng-container *ngIf="mode.visitor">
-        <button class="btn-success mr-1">Like</button>
-        <button class="btn-success">Follow</button>
-      </ng-container>
+      <button *ngIf="mode.visitor" class="btn-success mr-1" (click)="onLikeUser($event)">{{mode.liked ? 'Unlike' : 'Like'}}</button>
     </div>
   </div>
 </div>

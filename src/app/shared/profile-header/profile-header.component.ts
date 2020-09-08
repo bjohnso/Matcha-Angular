@@ -15,6 +15,8 @@ export class ProfileHeaderComponent implements OnInit {
   @Output() updateProfileEvent = new EventEmitter();
   @Output() blockUserEvent = new EventEmitter();
   @Output() reportUserEvent = new EventEmitter();
+  @Output() likeUserEvent = new EventEmitter();
+  @Output() followUserEvent = new EventEmitter();
 
   faPen = faPen;
   faBars = faBars;
@@ -31,6 +33,14 @@ export class ProfileHeaderComponent implements OnInit {
 
   onReportUser(event: Event) {
     this.reportUserEvent.emit(event);
+  }
+
+  onLikeUser(event: Event) {
+    this.likeUserEvent.emit(event);
+  }
+
+  onFollowUser(event: Event) {
+    this.followUserEvent.emit(event);
   }
 
   ngOnInit(): void {

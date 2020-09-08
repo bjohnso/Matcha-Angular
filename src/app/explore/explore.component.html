@@ -71,14 +71,10 @@
           <div class="mx-auto col-sm-12 col-md-8 col-lg-6">
             <app-profile-header *ngFor="let profile of profilesShown"
                                         [profile]="profile"
-                                        [mode]="{visitor: true, edit: false}"
-                                        (reportUserEvent)=""
-                                        (blockUserEvent)=""
-                                        (likeUservEvent)=""
-                                        (followUserEvent)="">
+                                        [mode]="{visitor: true, edit: false, liked: isLiked(profile.id)}"
+                                        (likeUserEvent)="likeProfile(profile.id)">
             </app-profile-header>
           </div>
-
 
                 <div class=" pagination-container  d-flex justify-content-center p-2 hidden-xs">
                     <ngb-pagination class="pagination-responsive"
