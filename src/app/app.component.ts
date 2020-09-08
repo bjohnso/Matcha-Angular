@@ -22,9 +22,9 @@ export class AppComponent extends CoreComponent implements OnInit {
     super.ngOnInit();
     this.router.events.subscribe(event => {
       if (event instanceof RouterEvent && event instanceof NavigationStart) {
-        this.spinner.show('nav-spinner');
+        this.spinner.show('nav-spinner').then();
       } else if (event instanceof RouterEvent && event instanceof NavigationEnd) {
-        this.spinner.hide('nav-spinner');
+        this.spinner.hide('nav-spinner').then();
         const nav: NavigationEnd =  event as NavigationEnd;
         this.currentRoute = nav.urlAfterRedirects;
       };
