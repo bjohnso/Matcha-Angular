@@ -7,47 +7,6 @@ body {
 }
 
 
-/* 
-#sidebar-wrapper {
-    min-height: 100vh;
-    margin-left: -15rem;
-    -webkit-transition: margin .25s ease-out;
-    -moz-transition: margin .25s ease-out;
-    -o-transition: margin .25s ease-out;
-    transition: margin .25s ease-out;
-}
-
-#sidebar-wrapper .sidebar-heading {
-    padding: 0.875rem 1.25rem;
-    font-size: 1.2rem;
-}
-
-#sidebar-wrapper .list-group {
-    width: 15rem;
-}
-
-#page-content-wrapper {
-    min-width: 100vw;
-}
-
-#wrapper.toggled #sidebar-wrapper {
-    margin-left: 0;
-}
-
-@media (min-width: 768px) {
-    #sidebar-wrapper {
-        margin-left: 0;
-    }
-    #page-content-wrapper {
-        min-width: 0;
-        width: 100%;
-    }
-    #wrapper.toggled #sidebar-wrapper {
-        margin-left: -15rem;
-    }
-} */
-
-
 /*  */
 
 .sidebar {
@@ -103,9 +62,6 @@ body {
     padding: 16px;
 }
 
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-
 @media screen and (max-height: 450px) {
     .sidebar {
         padding-top: 15px;
@@ -115,15 +71,28 @@ body {
     }
 }
 
-@media screen and (min-height: 575px) {
+@media screen and (max-width: 575px) {
     .sidebar {
         margin-top: 108px;
     }
 }
 
-@media screen and (min-height: 490) {
+@media screen and (max-width: 490px) {
     .sidebar {
         margin-top: 148px;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .sidebar {
+        margin-top: 148px;
+    }
+}
+
+@media screen and (max-width: 170px) {
+    .sidebar {
+        margin-top: 188px;
+        width: 150px;
     }
 }
 
