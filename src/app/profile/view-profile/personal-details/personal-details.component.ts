@@ -12,14 +12,14 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class PersonalDetailsComponent extends CoreComponent implements OnInit {
 
+  @Input() profile;
+
   // META-DATA
   GENDER_OPTIONS = GENDER;
   SEXUAL_PREFERENCE_OPTIONS = SEXUAL_PREFERENCE;
   SEXUAL_ORIENTATION_OPTIONS = SEXUAL_ORIENTATION;
   EDIT_PROFILE_FIELDS = EDIT_PROFILE_FIELDS;
 
-  // MODELS
-  profile: Profile;
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     super();
   }
@@ -28,7 +28,6 @@ export class PersonalDetailsComponent extends CoreComponent implements OnInit {
     if (event.type === 'input') {
       this.textInputUpdate(event);
     } else if (event.type === 'click') {
-      console.log('click');
       const elem: HTMLElement = (event.target as HTMLElement);
       const id: string = (elem.id as string);
       const fieldsProperty = Object.keys(EDIT_PROFILE_FIELDS)
@@ -47,8 +46,6 @@ export class PersonalDetailsComponent extends CoreComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const data = history.state.profile || {};
-    this.profile = new Profile(data);
   }
 
 }
