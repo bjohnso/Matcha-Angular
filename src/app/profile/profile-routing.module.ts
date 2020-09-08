@@ -1,5 +1,4 @@
 import {RouterModule, Routes} from '@angular/router';
-import {EditProfileComponent} from './edit-profile/edit-profile.component';
 import {NgModule} from '@angular/core';
 import {ProfileComponent} from './profile.component';
 import {AuthGuardService} from '../services/auth-guard.service';
@@ -12,11 +11,19 @@ const routes: Routes = [
     component: ProfileComponent,
     children: [
       {
-        path: 'view',
-        component: ViewProfileComponent,
+        path: '',
+        redirectTo: 'view',
+        pathMatch: 'full',
       },
       {
-        path: 'settings/:id',
+        path: 'view',
+        component: ViewProfileComponent,
+        resolve: {profileData: ProfileResolverService},
+        canActivate: [AuthGuardService],
+        canLoad: [AuthGuardService],
+      },
+      {
+        path: 'settings',
         component: ViewProfileComponent,
         resolve: {profileData: ProfileResolverService},
         canActivate: [AuthGuardService],

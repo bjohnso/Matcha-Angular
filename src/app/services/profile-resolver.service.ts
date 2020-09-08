@@ -12,7 +12,9 @@ export class ProfileResolverService implements Resolve<any> {
   constructor(private profileService: ProfileService, private jwtService: JWTTokenService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    const userId = route.params.id;
+    console.log(state);
+    console.log(route);
+    const userId = route.paramMap.get('id') as unknown as number;
     let dictionary;
     if (this.jwtService.isCurrentUser(userId)) {
       dictionary = {
