@@ -1,0 +1,65 @@
+/* profile tray */
+
+.profile-tray {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  /* border: 2px solid red; */
+  background: #eee;
+  padding: 10px 15px;
+  border-radius: 7px;
+}
+
+.profile-image {
+  width: 10vw;
+  height: 10vw;
+  max-width: 200px;
+  max-height: 200px;
+  min-width: 100px;
+  min-height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/*.profile-name {*/
+/*  !* border: 2px solid palevioletred; *!*/
+/*  margin-left: 10px;*/
+/*  margin-right: 10px;*/
+/*  !* margin-bottom: 0px; *!*/
+/*  max-width: 100%;*/
+/*  max-height: 30px;*/
+/*  overflow: hidden;*/
+/*}*/
+
+/*.profile-gender {*/
+/*  !* border: 2px solid palevioletred; *!*/
+/*  margin-left: 10px;*/
+/*  margin-right: 10px;*/
+/*  !* margin-bottom: 0px; *!*/
+/*  !* margin-top: 10px; *!*/
+/*  padding-top: 10px;*/
+/*  max-width: 100%;*/
+/*  height: 50px;*/
+/*  white-space: nowrap;*/
+/*  overflow-x: scroll;*/
+/*}*/
+
+/*.profile-interests {*/
+/*  !* border: 2px solid palevioletred; *!*/
+/*  margin-left: 10px;*/
+/*  margin-right: 10px;*/
+/*  !* margin-bottom: 0px; *!*/
+/*  max-width: 100%;*/
+/*  max-height: 25px;*/
+/*  overflow: hidden;*/
+/*}*/
+
+.rating-icon {
+  /* color: gold; */
+  font-weight: bold;
+  width: 5vw;
+  height: 5vw;
+  max-width: 30px;
+  max-height: 30px;
+  min-width: 20px;
+  min-height: 20px;
+}

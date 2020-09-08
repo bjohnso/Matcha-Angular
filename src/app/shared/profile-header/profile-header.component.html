@@ -1,37 +1,50 @@
 <div class="row profile-tray no-gutters h-100">
-  <div class="col-sm-4 text-center">
+    <button class="position-absolute btn-outline-dark" style="right: 30px">
+      <fa-icon [icon]="faBars"></fa-icon>
+    </button>
+
+  <div class="col-md-3 col-lg-3 col-sm-3 text-center mt-2 mb-2 my-auto">
     <img class="profile-image" [src]="profile?.profile_picture || 'assets/user-circle-solid.svg'">
   </div>
-  <div class="col-sm-4 profile-details align-items-center">
+
+  <div class="col-md-4 col-lg-4 col-sm-4 text-center mt-2 h-100">
     <div class="profile-details-container">
       <h4 class="profile-name">
         {{profile?.firstname}} {{profile?.lastname}}
       </h4>
       <h6 class="profile-gender ">
-        {{profile?.gender}}
+        Gender: {{profile?.gender}}
       </h6>
       <h6 class="profile-interests ">
         Interested in: {{profile?.sexual_preference}}
       </h6>
     </div>
+    <div class="row h-100">
+      <div class="col-12 text-center">
+        <div class="row justify-content-center">
+          <img class="rating-icon my-auto mr-1"
+               src="assets/star-half-alt-solid.svg">
+          <h4 class="my-auto">
+            {{profile?.popularity || '0'}}
+          </h4>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="col-4 h-100 text-center">
-    <div class="row h-100 text-center">
-      <img class="my-auto rating-icon" src="assets/star-half-alt-solid.svg">
-      <h4 class="profile-rating my-auto ml-3">
-        {{profile?.popularity || '0'}}
-      </h4>
-    </div>
-    <div class="row h-100 text-center mt-5">
+  <div class="col-md-5 col-lg-5 col-sm-5 text-center mt-2">
+    <div class="row justify-content-end mr-2 h-100 align-items-end">
       <button *ngIf="!visitorMode && !editMode" (click)="editMode = true" class="btn-warning">
-        Edit Profile <fa-icon [icon]="faPen"></fa-icon>
+        Edit
+        <fa-icon [icon]="faPen"></fa-icon>
       </button>
       <button *ngIf="editMode" (click)="onUpdateProfileEventEvent($event)" class="btn-primary mr-1">
-        Save Profile <fa-icon [icon]="faPen"></fa-icon>
+        Save
+        <fa-icon [icon]="faPen"></fa-icon>
       </button>
       <button *ngIf="editMode" (click)="editMode = false" class="btn-secondary">
-        Discard Changes <fa-icon [icon]="faPen"></fa-icon>
+        Discard
+        <fa-icon [icon]="faPen"></fa-icon>
       </button>
       <ng-container *ngIf="visitorMode">
         <button class="btn-success mr-1">Like</button>

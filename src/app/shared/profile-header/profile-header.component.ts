@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {faPen} from '@fortawesome/free-solid-svg-icons';
+import {faPen, faBars} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-profile-header',
@@ -15,8 +15,13 @@ export class ProfileHeaderComponent implements OnInit {
   @Output() updateProfileEvent = new EventEmitter();
 
   faPen = faPen;
+  faBars = faBars;
 
   constructor() { }
+
+  onUpdateProfileEventEvent(event: Event) {
+    this.updateProfileEvent.emit(event);
+  }
 
   ngOnInit(): void {
   }

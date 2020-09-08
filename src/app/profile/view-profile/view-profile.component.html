@@ -3,8 +3,8 @@
 
       <app-profile-header [visitorMode]="visitorMode"
                           [editMode]="editMode"
-                          [profile]="profile">
-
+                          [profile]="profile"
+                          (updateProfileEvent)="onUpdateProfileEventEvent($event)">
       </app-profile-header>
 
         <div class="row h-100 profile-photos-container no-gutters">
