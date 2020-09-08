@@ -8,8 +8,7 @@ import {faPen, faBars} from '@fortawesome/free-solid-svg-icons';
 })
 export class ProfileHeaderComponent implements OnInit {
 
-  @Input() editMode;
-  @Input() visitorMode;
+  @Input() mode;
   @Input() profile;
 
   @Output() updateProfileEvent = new EventEmitter();

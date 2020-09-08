@@ -13,7 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class PersonalDetailsComponent extends CoreComponent implements OnInit {
 
   @Input() profile;
-  @Input() editMode;
+  @Input() mode;
 
   // META-DATA
   GENDER_OPTIONS = GENDER;

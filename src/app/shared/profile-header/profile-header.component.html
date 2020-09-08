@@ -34,19 +34,19 @@
 
   <div class="col-md-5 col-lg-5 col-sm-5 text-center mt-2">
     <div class="row justify-content-end mr-2 h-100 align-items-end">
-      <button *ngIf="!visitorMode && !editMode" (click)="editMode = true" class="btn-warning">
+      <button *ngIf="!mode.visitor && !mode.edit" (click)="mode.edit = true" class="btn-warning">
         Edit
         <fa-icon [icon]="faPen"></fa-icon>
       </button>
-      <button *ngIf="editMode" (click)="onUpdateProfileEventEvent($event)" class="btn-primary mr-1">
+      <button *ngIf="mode.edit" (click)="onUpdateProfileEventEvent($event)" class="btn-primary mr-1">
         Save
         <fa-icon [icon]="faPen"></fa-icon>
       </button>
-      <button *ngIf="editMode" (click)="editMode = false" class="btn-secondary">
+      <button *ngIf="mode.edit" (click)="mode.edit = false" class="btn-secondary">
         Discard
         <fa-icon [icon]="faPen"></fa-icon>
       </button>
-      <ng-container *ngIf="visitorMode">
+      <ng-container *ngIf="mode.visitor">
         <button class="btn-success mr-1">Like</button>
         <button class="btn-success">Follow</button>
       </ng-container>

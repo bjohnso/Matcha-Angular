@@ -15,13 +15,15 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
   @ViewChild('inputImageUpload', {static: true}) inputImageRef: ElementRef;
   @ViewChild('inputBioUpdate', {static: true}) inputBioUpdateRef: ElementRef;
   profile: Profile;
+  mode = {
+    edit: false,
+    visitor: false,
+  };
   interests: string[];
   selectedCarouselImage: string;
   carouselButtonEvent = false;
   inputImageUpload: HTMLInputElement;
   inputBioUpdate: HTMLTextAreaElement;
-  editMode = false;
-  visitorMode = false;
 
   faPen = faPen;
   constructor(private profileService: ProfileService,
@@ -33,7 +35,7 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
       this.profile = new Profile(profileData.profile.data as ProfileInterface);
       console.log(this.profile);
       this.interests = profileData.interests.data.hobbies;
-      this.visitorMode = profileData.isVistor;
+      this.mode.visitor = profileData.isVistor;
     });
   }
 
@@ -91,7 +93,8 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
   }
 
   onUpdateProfileEventEvent(event: Event) {
-    if (this.editMode) {
+    if (this.mode.edit) {
+      this.mode.edit = false;
       this.profile.description = this.inputBioUpdate.value.toString();
       this.profileService.updateProfile(this.profile)
        .subscribe(result => {
