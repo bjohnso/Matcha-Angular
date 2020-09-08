@@ -9,6 +9,7 @@ import { ViewProfileComponent } from './view-profile/view-profile.component';
 import {NgxImageCompressService} from 'ngx-image-compress';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NgSelectModule} from '@ng-select/ng-select';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {NgSelectModule} from '@ng-select/ng-select';
     RouterModule,
     NgbDropdownModule,
     FontAwesomeModule,
-    NgSelectModule
+    NgSelectModule,
+    SharedModule
   ],
   exports: [ProfileComponent, ViewProfileComponent, PersonalDetailsComponent],
   providers: [
