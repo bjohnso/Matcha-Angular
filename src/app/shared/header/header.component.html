@@ -6,21 +6,21 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item"
-          [ngClass]="currentRoute === '/explore' ? 'active' : ''">
+          [ngClass]="isActiveRoute('explore') ? 'active' : ''">
         <a class="nav-link"
            (click)="navigate($event, 'explore')">
           Explore<span class="sr-only">(current)</span>
         </a>
       </li>
-<!--      <li class="nav-item"-->
-<!--          [ngClass]="currentRoute.includes('/profile') ? 'active' : ''">-->
-<!--        <a class="nav-link"-->
-<!--           (click)="navigate($event, 'profile')">-->
-<!--          Profile-->
-<!--        </a>-->
-<!--      </li>-->
       <li class="nav-item"
-          [ngClass]="currentRoute === '/chat' ? 'active' : ''">
+          [ngClass]="isActiveRoute('profile') ? 'active' : ''">
+        <a class="nav-link"
+           (click)="navigate($event, 'profile')">
+          Profile
+        </a>
+      </li>
+      <li class="nav-item"
+          [ngClass]="isActiveRoute('chat') ? 'active' : ''">
         <a class="nav-link" (click)="navigate($event, 'chat')">
           Chat
         </a>
