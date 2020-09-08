@@ -33,6 +33,7 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
       const profileData = data.profileData;
       this.profile = new Profile(profileData.profile.data as ProfileInterface);
       this.interests = profileData.interests.data.hobbies;
+      this.visitorMode = profileData.isVistor;
     });
   }
 

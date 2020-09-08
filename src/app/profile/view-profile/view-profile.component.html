@@ -59,8 +59,8 @@
           </button>
                     </div>
                 </div>
-                <div class="row ml-1 mb-3">
-                    <img *ngFor="let image of profile?.images" [ngClass]="selectedCarouselImage === image ? 'border border-info' : ''" class="mr-2 carousel-image" [src]="image" [tabIndex]="0" (focusout)="onCarouselImageEvent($event, image)" (mousedown)="onCarouselImageEvent($event, image)">
+                <div class="row ml-1 mb-1">
+                    <img *ngFor="let image of profile?.images" [ngClass]="selectedCarouselImage === image ? 'border border-info' : ''" class="mr-2 mb-2 carousel-image" [src]="image" [tabIndex]="0" (focusout)="onCarouselImageEvent($event, image)" (mousedown)="onCarouselImageEvent($event, image)">
                 </div>
             </div>
         </div>

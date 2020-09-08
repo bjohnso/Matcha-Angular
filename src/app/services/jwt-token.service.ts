@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {StorageService} from './storage.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import {compareNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_version';
 
 @Injectable({providedIn: 'root'})
 export class JWTTokenService {
@@ -14,8 +15,24 @@ export class JWTTokenService {
     }
   }
 
+  setUserId(id: number) {
+    if (id) {
+      this.storageService.set('userId', id.toString());
+    }
+  }
+
   getToken() {
     return this.storageService.get('user');
+  }
+
+  getUserId() {
+    return this.storageService.get('userId');
+  }
+
+  isCurrentUser(id: number) {
+    if (id) {
+      return id.toString() === this.getUserId();
+    }
   }
 
   isTokenExpired(): boolean {
