@@ -1,2 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import "~@ng-select/ng-select/themes/material.theme.css";
+@media screen and (min-width: 1600px) {
+    p {
+        font-size: 1.25rem;
+    }
+    h3 {
+        font-size: 1.75rem;
+    }
+    h4 {
+        font-size: 1.50rem;
+    }
+    h6 {
+        font-size: 1.25rem;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    p {
+        font-size: 1rem;
+    }
+    h3 {
+        font-size: 1.50rem;
+    }
+    h4 {
+        font-size: 1.25rem;
+    }
+    h6 {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    p {
+        font-size: 0.75rem;
+    }
+    li {
+        font-size: 0.75rem;
+        list-style: none !important;
+    }
+    h3 {
+        font-size: 1.50;
+    }
+    h4 {
+        font-size: 1.25rem;
+    }
+    h6 {
+        font-size: 0.75rem;
+    }
+}
