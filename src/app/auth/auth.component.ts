@@ -40,7 +40,7 @@ export class AuthComponent extends CoreComponent implements OnInit {
             this.jwtService.setToken(response.data.token);
             this.jwtService.setUserId(response.data.id);
             this.router.navigate(
-              ['profile', response.data.id],
+              [{outlets: {matcha : ['profile', response.data.id]}}],
               {relativeTo: this.activatedRoute.parent})
               .then();
           }

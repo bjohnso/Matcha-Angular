@@ -7,37 +7,33 @@ import { JWTTokenService } from './jwt-token.service';
 })
 export class MatchService {
 
-  
 
-  constructor(private http : HttpClient, private tokenService : JWTTokenService) {
 
-    
-    
-  }
+  constructor(private http: HttpClient, private tokenService: JWTTokenService) {}
 
-  getMatches(date = null){
-    if (date != null && date != undefined){
-      let params = new HttpParams().set('date', date);
+  getMatches(date = null) {
+    if (date != null && date !== undefined) {
+      const params = new HttpParams().set('date', date);
       return this.http.get<any>('/api/match', {params});
-    }else{
+    } else {
       return this.http.get<any>('/api/match');
     }
   }
 
-  getMatchesCount(){
+  getMatchesCount() {
     return this.http.get<any>('/api/match/count');
   }
 
-  deleteMatch(id){
-    if (id && id != undefined){
-      let params : HttpParams = new HttpParams().set('id', id);
+  deleteMatch(id) {
+    if (id && id !== undefined) {
+      const params: HttpParams = new HttpParams().set('id', id);
       return this.http.delete('/api/match', {params});
     }
   }
 
-  getLikeMatch(liked_user){
-    if (liked_user && liked_user != undefined){
-      let params : HttpParams = new HttpParams().set('liked_user', liked_user);
+  getLikeMatch(liked_user) {
+    if (liked_user && liked_user !== undefined) {
+      const params: HttpParams = new HttpParams().set('liked_user', liked_user);
       return this.http.get<any>('/api/likeMatch', {params});
     }
   }

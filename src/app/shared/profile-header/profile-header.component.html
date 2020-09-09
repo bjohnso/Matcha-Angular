@@ -12,11 +12,11 @@
 <!--  </div>-->
 
   <div class="col-md-3 col-lg-3 col-sm-3 text-center mt-2 mb-2 my-auto">
-    <img class="profile-image" [src]="profile?.profile_picture || 'assets/user-circle-solid.svg'">
+    <img [ngClass]="!mode.chat ? 'profile-image' : 'profile-image-chat'" [src]="profile?.profile_picture || 'assets/user-circle-solid.svg'">
   </div>
 
   <div class="col-md-4 col-lg-4 col-sm-4 text-center mt-2 h-100">
-    <div class="profile-details-container">
+    <div *ngIf="!mode.chat" class="profile-details-container">
       <h4 class="profile-name">
         {{profile?.firstname}} {{profile?.lastname}}
       </h4>
@@ -27,7 +27,7 @@
         Interested in: {{profile?.sexual_preference}}
       </h6>
     </div>
-    <div class="row h-100">
+    <div *ngIf="!mode.chat" class="row h-100">
       <div class="col-12 text-center">
         <div class="row justify-content-center">
           <img class="rating-icon my-auto mr-1"
@@ -40,7 +40,7 @@
     </div>
   </div>
 
-  <div class="col-md-5 col-lg-5 col-sm-5 text-center mt-2">
+  <div *ngIf="!mode.chat" class="col-md-5 col-lg-5 col-sm-5 text-center mt-2">
     <div class="row justify-content-end mr-2 h-100 align-items-end">
       <button *ngIf="!mode.visitor && !mode.edit" (click)="mode.edit = true" class="btn-warning">
         Edit

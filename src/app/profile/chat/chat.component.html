@@ -1,0 +1,64 @@
+<div class="message-tray p-3">
+
+  <div class="col-sm-12 col-md-12 col-lg-12">
+    <app-profile-header [profile]="profile"
+                        [mode]="{visitor: true, edit: false, chat: true}">
+    </app-profile-header>
+  </div>
+
+      <!-- chat area -->
+      <div class="row chat-area col-12 mx-auto">
+        <!-- chat history container (scrollable) -->
+        <div class="container-fluid">
+          <!-- chat history display loop -->
+          <div *ngFor="let m of messageList">
+            <!-- sent texts -->
+            <div class="row no-gutters justify-content-end" *ngIf="id == m.author; else elseBlock">
+              <div class="col-10 ">
+                <div class="chat-bubble chat-bubble--right justify-content-end">
+                  <div class="timestamp-container text-center">
+                    <span class="timestamp ">
+                      {{m.date}}
+                    </span>
+                  </div>
+                  <span>
+                    {{m.content}}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <ng-template #elseBlock>
+              <!-- received texts -->
+              <div class="row no-gutters ">
+                <div class="col-10 ">
+                  <div class="chat-bubble chat-bubble--left">
+                    <div class="timestamp-container text-center">
+                      <span class="timestamp ">
+                        {{m.date}}
+                      </span>
+                    </div>
+                    <span>
+                      {{m.content}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        <a #messageBottom></a>
+      </div>
+
+
+      <div class="row justify-content-center">
+        <input type="text" placeholder="Type your message here..." [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" />
+      </div>
+
+      <div class="row justify-content-center">
+        <a style="cursor: pointer" (click)="sendMessage()">
+          send
+          <fa-icon id="send-icon" [icon]="faArrowRight" class="cursor-pointer" onclick="sendMessage()"></fa-icon>
+        </a>
+      </div>
+
+</div>

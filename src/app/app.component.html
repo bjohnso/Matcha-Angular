@@ -1,6 +1,14 @@
 <app-shared-header [currentRoute]="currentRoute"></app-shared-header>
+
 <router-outlet>
+  <div class="position-absolute" style="height: 30vh;z-index: 1000">
+    <router-outlet name="chat">
+    </router-outlet>
+  </div>
+  <router-outlet name="matcha">
+  </router-outlet>
 </router-outlet>
+
 <ngx-spinner
   name="nav-spinner"
   bdColor="rgba(51,51,51,0.8)"

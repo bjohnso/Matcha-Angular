@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
     if (route === 'profile') {
       commands.push(this.jwtService.getUserId());
     }
-    this.router.navigate(commands)
+    this.router.navigate([{outlets: {matcha : commands}}])
       .then();
   }
 

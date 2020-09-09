@@ -37,8 +37,7 @@ export class ExploreComponent implements OnInit {
 
   ngOnInit(): void {
     this.like.getLiked().pipe(take(1)).subscribe( e => {this.likes = e.data; console.log(this.likes); });
-    this.match.getMatches().pipe(take(1)).subscribe(e => this.matches = e.data
-      .filter(match => match.id + '' !== this.jwTokenService.getUserId()));
+    this.match.getMatches().pipe(take(1)).subscribe(e => { this.matches = e.data; console.log(e.data); });
     this.profileService.getInterests().pipe(take(1)).subscribe(data => {
       this.interests = (data as any).data.hobbies;
     });
@@ -137,12 +136,31 @@ export class ExploreComponent implements OnInit {
     }
   }
 
+  confirmMatch(match, host_user, guest_user) {
+    if (match.user1 + '' === host_user + '' && match.user2 + '' === guest_user + '') {
+      return true;
+    }
+
+    if (match.user1 + '' === guest_user + '' && match.user2 + '' === host_user + '') {
+      return true;
+    }
+  }
+
   onViewEvent(userId) {
+    console.log(this.matches);
     this.profileService.viewUser(userId)
       .subscribe(result => {
         const {error, success} = result as any;
         if (success) {
-          this.router.navigate(['profile', userId], {
+          const match = this.matches.find(m => {
+           return this.confirmMatch(m, userId + '', this.jwTokenService.getUserId());
+          });
+          let matchId;
+          if (match) {
+            matchId = match.id;
+          }
+          console.log('MATCH ID ' + matchId);
+          this.router.navigate([{outlets: {matcha: ['profile', userId], chat: ['chat', userId, matchId]}}], {
             skipLocationChange: true,
             queryParamsHandling: 'merge',
             relativeTo: this.activatedRoute.parent

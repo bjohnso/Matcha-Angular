@@ -12,7 +12,8 @@ import {NgxSpinnerService} from 'ngx-spinner';
 export class AppComponent extends CoreComponent implements OnInit {
   title = 'matcha';
   currentRoute;
-  constructor(private router: Router, private socket : Socket, private spinner: NgxSpinnerService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute,
+              private socket: Socket, private spinner: NgxSpinnerService) {
     super();
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
@@ -27,7 +28,7 @@ export class AppComponent extends CoreComponent implements OnInit {
         this.spinner.hide('nav-spinner').then();
         const nav: NavigationEnd =  event as NavigationEnd;
         this.currentRoute = nav.urlAfterRedirects;
-      };
+      }
     });
   }
 }

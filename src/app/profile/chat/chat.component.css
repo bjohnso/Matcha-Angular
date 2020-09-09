@@ -1,0 +1,74 @@
+.profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 40px;
+}
+
+.profile-tray {
+  background: rgb(222, 222, 222);
+  /* padding: 10px 15px; */
+  border-radius: 7px;
+}
+
+.profile-name {
+  /* font-weight: lighter; */
+  font-weight: 100;
+  max-width: 30vw;
+  padding-right: 20px;
+  padding-left: 20px;
+  /* margin-top: auto; */
+}
+
+.return-icon {
+  vertical-align: middle;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/*  */
+
+.chat-area {
+  height: 30vh;
+  overflow-y: scroll;
+}
+
+.chat-bubble {
+  width: 100%;
+  padding: 10px 14px;
+  background: #eee;
+  margin: 10px 20px;
+  border-radius: 9px;
+  position: relative;
+  animation: fadeIn 1s ease-in;
+}
+
+.chat-bubble--right {
+  background: lightblue;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.message-tray {
+  background: rgb(222, 222, 222);
+  width: 215px;
+  border-radius: 7px;
+  align-items: center;
+}
+
+.message-tray input {
+  border-radius: 7px;
+}
+
+#send-icon {
+  color: grey;
+  font-size: 2vw;
+  vertical-align: middle;
+  pointer-events: all;
+}

@@ -20,6 +20,17 @@
   overflow: hidden;
 }
 
+.profile-image-chat {
+  width: 10vw;
+  height: 10vw;
+  max-width: 50px;
+  max-height: 100px;
+  min-width: 100px;
+  min-height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
 /*.profile-name {*/
 /*  !* border: 2px solid palevioletred; *!*/
 /*  margin-left: 10px;*/

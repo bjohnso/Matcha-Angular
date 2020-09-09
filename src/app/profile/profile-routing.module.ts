@@ -24,16 +24,8 @@ const routes: Routes = [
         canActivate: [AuthGuardService, ProfileGuardService],
         canLoad: [AuthGuardService],
       },
-      {
-        path: 'settings',
-        component: ViewProfileComponent,
-        resolve: {profileData: ProfileResolverService},
-        runGuardsAndResolvers: 'always',
-        canActivate: [AuthGuardService, ProfileGuardService],
-        canLoad: [AuthGuardService],
-      }
     ]
-  }
+  },
 ];
 
 @NgModule({
