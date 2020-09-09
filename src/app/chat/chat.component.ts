@@ -1,12 +1,12 @@
 import { Component, OnInit , ViewChild, ElementRef} from '@angular/core';
-import {CoreComponent} from '../../core/core.component';
-import {ChatService} from '../../services/chat.service';
+import {CoreComponent} from '../core/core.component';
+import {ChatService} from '../services/chat.service';
 import {ActivatedRoute} from '@angular/router';
-import {ProfileService} from '../services/profile.service';
+import {ProfileService} from '../profile/services/profile.service';
 import {take} from 'rxjs/operators';
-import {Message} from '../../models/message.model';
+import {Message} from '../models/message.model';
 import {faArrowRight} from '@fortawesome/free-solid-svg-icons';
-import {Profile, ProfileInterface} from '../models/profile.model';
+import {Profile, ProfileInterface} from '../profile/models/profile.model';
 
 @Component({
   selector: 'app-chat',

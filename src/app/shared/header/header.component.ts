@@ -10,6 +10,7 @@ import {JWTTokenService} from '../../services/jwt-token.service';
 export class HeaderComponent implements OnInit {
 
   @Input() currentRoute;
+  isChatActive = false;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
@@ -34,6 +35,14 @@ export class HeaderComponent implements OnInit {
     }
     this.router.navigate([{outlets: {matcha : commands}}])
       .then();
+  }
+
+  onChatActivateEvent(event: Event) {
+    this.isChatActive = true;
+  }
+
+  onChatDeactivateEvent(event: Event) {
+    this.isChatActive = false;
   }
 
   ngOnInit(): void {

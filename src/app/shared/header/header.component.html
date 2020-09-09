@@ -21,12 +21,14 @@
       </li>
 
 
-      <li class="nav-item d-inline-block" ngbDropdown>
+      <li [hidden]="!isChatActive" class="nav-item d-inline-block" ngbDropdown>
         <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown2" role="button">
           Chat
         </a>
         <div ngbDropdownMenu aria-labelledby="navbarDropdown">
-          <router-outlet name="chat">
+          <router-outlet (activate)="onChatActivateEvent($event)"
+                         (deactivate)="onChatDeactivateEvent($event)"
+                         name="chat">
           </router-outlet>
         </div>
       </li>

@@ -21,6 +21,7 @@ import {NgxSpinnerModule} from 'ngx-spinner';
 import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UserModule} from './user/user.module';
+import {ChatComponent} from './chat/chat.component';
 
 // temporary for testing
 // tslint:disable-next-line:max-line-length
@@ -31,6 +32,7 @@ const config: SocketIoConfig = { url: environment.api.baseURL, options: {query :
     AppComponent,
     // TODO: CREATE MODULES AND ROUTING FLOWS FOR THESE ROGUE COMPONENTS
     ExploreComponent,
+    ChatComponent
   ],
   imports: [
     // ANGULAR

@@ -2,7 +2,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {AuthGuardService} from '../services/auth-guard.service';
 import {UserComponent} from './user.component';
-import {ChatComponent} from '../profile/chat/chat.component';
+import {ChatComponent} from '../chat/chat.component';
 import {NotificationComponent} from './notification/notification.component';
 
 

@@ -3,8 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { ExploreComponent } from './explore/explore.component';
 import { AuthGuardService } from './services/auth-guard.service';
-import {ChatComponent} from './profile/chat/chat.component';
-import {ChatResolverService} from './profile/services/chat-resolver.service';
+import {ChatComponent} from './chat/chat.component';
+import {ChatResolverService} from './chat/services/chat-resolver.service';
+import {ChatGuardService} from './chat/services/chat-guard.service';
 
 const routes: Routes = [
   {
@@ -39,7 +40,7 @@ const routes: Routes = [
     outlet: 'chat',
     resolve: {chatData: ChatResolverService},
     runGuardsAndResolvers: 'always',
-    canActivate: [AuthGuardService],
+    canActivate: [AuthGuardService, ChatGuardService],
     canLoad: [AuthGuardService],
   },
   // {

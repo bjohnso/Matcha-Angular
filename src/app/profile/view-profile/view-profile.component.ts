@@ -103,7 +103,6 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
          if (success) {
            this.router.navigate([], {
              skipLocationChange: true,
-             queryParamsHandling: 'merge'
            }).then();
          } else {
            console.log(error);
@@ -121,7 +120,6 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
           if (success) {
             this.router.navigate([], {
               skipLocationChange: true,
-              queryParamsHandling: 'merge'
             }).then();
           } else {
             console.log(error);
@@ -150,7 +148,6 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
         if (success) {
           this.router.navigate([], {
             skipLocationChange: true,
-            queryParamsHandling: 'merge'
           }).then();
         } else {
           console.log(error);
@@ -165,7 +162,6 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
         if (success) {
           this.router.navigate([], {
             skipLocationChange: true,
-            queryParamsHandling: 'merge'
           }).then();
         } else {
           console.log(error);
