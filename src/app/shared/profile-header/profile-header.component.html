@@ -61,7 +61,7 @@
       </button>
             <ng-container *ngIf="mode.visitor">
                 <button class="btn-success mr-1" (click)="onLikeUser($event)">{{mode.liked ? 'Unlike' : 'Like'}}</button>
-                <button class="btn-success" (click)="onViewUser($event)">View</button>
+                <button *ngIf="!mode.viewing" class="btn-success" (click)="onViewUser($event)">View</button>
             </ng-container>
         </div>
     </div>

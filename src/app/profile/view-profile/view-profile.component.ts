@@ -4,6 +4,9 @@ import {Profile, ProfileInterface} from '../models/profile.model';
 import {ProfileService} from '../services/profile.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {faPen} from '@fortawesome/free-solid-svg-icons';
+import {take} from 'rxjs/operators';
+import {LikesService} from '../../services/likes.service';
+import {JWTTokenService} from '../../services/jwt-token.service';
 
 @Component({
   selector: 'app-view-profile',
@@ -18,7 +21,9 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
   mode = {
     edit: false,
     visitor: false,
+    viewing: true
   };
+  likes: [] = [];
   interests: string[];
   selectedCarouselImage: string;
   carouselButtonEvent = false;
@@ -27,8 +32,8 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
 
   faPen = faPen;
   constructor(private profileService: ProfileService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private router: Router, private likeService: LikesService,
+              private activatedRoute: ActivatedRoute, private jwtService: JWTTokenService) {
     super();
     this.activatedRoute.data.subscribe(data => {
       const profileData = data.profileData;
@@ -130,6 +135,43 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
     }
   }
 
+  onLikeEvent(userId) {
+    if (this.isLiked(userId)) {
+      this.unlikeProfile(userId);
+    } else {
+      this.likeProfile(userId);
+    }
+  }
+
+  likeProfile(liked_user) {
+    this.likeService.getLiked().pipe(take(1)).subscribe( e => {this.likes = e.data; });
+    this.likeService.postLike(liked_user).pipe(take(1)).subscribe(e => {
+      if ((e as any).success) {
+        console.log(e);
+        this.refreshProfiles();
+      }});
+  }
+
+  unlikeProfile(liked_user) {
+    this.likeService.getLiked().pipe(take(1)).subscribe( e => {this.likes = e.data; });
+    this.likeService.deleteLike((this.likes.find(e => (e as any).liked_user === liked_user) as any).id).
+    pipe(take(1)).subscribe(e => {
+      if ((e as any).success === true) {
+        console.log(e);
+        this.refreshProfiles();
+      }
+    });
+  }
+
+  isLiked(userId) {
+    return this.likes.find(like => (like as any).liked_user === userId &&
+      (like as any).liking_user + '' === this.jwtService.getUserId()) != null;
+  }
+
+  refreshProfiles() {
+    this.likeService.getLiked().pipe(take(1)).subscribe( e => {this.likes = e.data; });
+  }
+
   @HostListener('document:mouseup', ['$event'])
   onDocumentMouseUp(event: Event) {
     if (this.carouselButtonEvent) {
@@ -173,8 +215,7 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
   ngOnInit(): void {
     this.inputImageUpload = this.inputImageRef.nativeElement as HTMLInputElement;
     this.inputBioUpdate = this.inputBioUpdateRef.nativeElement as HTMLTextAreaElement;
-    // const data = history.state.profile || {};
-    // this.profile = new Profile(data);
+    this.likeService.getLiked().pipe(take(1)).subscribe( e => {this.likes = e.data; console.log(this.likes); });
   }
 
 }

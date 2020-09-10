@@ -3,6 +3,7 @@
 
       <app-profile-header [mode]="mode"
                           [profile]="profile"
+                          (likeUserEvent)="onLikeEvent(profile.id)"
                           (updateProfileEvent)="onUpdateProfileEventEvent($event)">
       </app-profile-header>
 
