@@ -41,7 +41,7 @@ export class ExploreComponent implements OnInit {
               private blockService: BlockService) {}
 
   ngOnInit(): void {
-    // this.profileService.getBlockedUsers().pipe(take(1)).subscribe(e => { console.log('BLOCKED'); e.console.log(e.data); });
+    this.profileService.getBlockedUsers().pipe(take(1)).subscribe(e => { this.blockedUsers = e.data});
     this.like.getLiked().pipe(take(1)).subscribe( e => {this.likes = e.data; console.log(this.likes); });
     this.blockService.getBlocked().pipe(take(1)).subscribe( e => {this.blocks = e.data; console.log(this.blocks); });
     this.match.getMatches().pipe(take(1)).subscribe(e => { this.matches = e.data; console.log(e.data); });
@@ -136,10 +136,15 @@ export class ExploreComponent implements OnInit {
     this.like.getLiked().pipe(take(1)).subscribe( e => {this.likes = e.data; });
     this.match.getMatches().pipe(take(1)).subscribe(e => this.matches = e.data
       .filter(match => match.id + '' !== this.jwTokenService.getUserId()));
-    if (this.blockedFilter == false) {
-      console.log('non blocked');
+    if (this.blockedFilter === false) {
+      console.log('non blocked results');
       this.profilesShown = this.profiles
         .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+      if (this.profilesShown.length < 1) {
+        this.page = 1;
+        this.profilesShown = this.profiles
+          .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+      }
       this.profilesShown.forEach(data => {
         (data as any).like = (this.likes.filter(e => {
           return ((e as any).liked_user === data.id || (e as any).liking_user === data.id); }).length > 0);
@@ -147,8 +152,14 @@ export class ExploreComponent implements OnInit {
           return ((e as any).user1 === data.id || (e as any).user2 === data.id); }).length > 0);
       });
     } else {
+      console.log('blocked results');
       this.profilesShown = this.blockedUsers
         .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+      if (this.profilesShown.length < 1) {
+        this.page = 1;
+        this.profilesShown = this.blockedUsers
+          .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+      }
       this.profilesShown.forEach(data => {
         (data as any).like = (this.likes.filter(e => {
           return ((e as any).liked_user === data.id || (e as any).liking_user === data.id); }).length > 0);
