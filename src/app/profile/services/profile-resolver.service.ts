@@ -22,6 +22,7 @@ export class ProfileResolverService implements Resolve<any> {
       dictionary = {
         isVistor: Promise.resolve(false),
         profile: this.profileService.getProfile().pipe(map(data => (data as any).data), catchError(err => of(err))),
+        location: this.profileService.getLocation().pipe(map(data => (data as any)), catchError(err => of(err))),
         interests: this.profileService.getInterests().pipe(map(data => (data as any).data.hobbies), catchError(err => of(err)))
       };
     } else {

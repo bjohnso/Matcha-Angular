@@ -160,11 +160,18 @@ export class ExploreComponent implements OnInit {
             matchId = match.id;
           }
           console.log('MATCH ID ' + matchId);
-          this.router.navigate([{outlets: {matcha: ['profile', userId], chat: ['chat', userId, matchId]}}], {
+          this.router.navigate([{outlets: {matcha: ['profile', userId]}}], {
             skipLocationChange: true,
             queryParamsHandling: 'merge',
             relativeTo: this.activatedRoute.parent
-          }).then();
+          }).then(() => {
+            const commands = ['chat', userId];
+            this.router.navigate([{outlets: {chat: ['chat', userId, matchId]}}], {
+              skipLocationChange: true,
+              queryParamsHandling: 'merge',
+              relativeTo: this.activatedRoute.parent.parent
+            }).then();
+          });
         } else {
           console.log(error);
         }

@@ -1,15 +1,15 @@
 <div class="row profile-tray no-gutters h-100">
-    <!--  <div *ngIf="mode.visitor" class="position-absolute" style="right: 30px; z-index: 1000">-->
-    <!--    <div class="d-inline-block" ngbDropdown #profileOptions="ngbDropdown">-->
-    <!--      <button class="btn-outline-dark" id="dropdownManual" (focus)="profileOptions.open()" ngbDropdownAnchor>-->
-    <!--        <fa-icon [icon]="faBars"></fa-icon>-->
-    <!--      </button>-->
-    <!--      <div ngbDropdownMenu aria-labelledby="dropdownManual">-->
-    <!--        <button ngbDropdownItem (click)="onReportUser($event)">Report</button>-->
-    <!--        <button ngbDropdownItem (click)="onBlockUser($event)">Block</button>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <!--  </div>-->
+      <div *ngIf="mode.visitor" class="position-absolute" style="right: 30px; z-index: 1000">
+        <div class="d-inline-block" ngbDropdown #profileOptions="ngbDropdown">
+          <button class="btn-outline-dark" id="dropdownManual" (focus)="profileOptions.open()" ngbDropdownAnchor>
+            <fa-icon [icon]="faBars"></fa-icon>
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownManual">
+            <button ngbDropdownItem>Report</button>
+            <button ngbDropdownItem>Block</button>
+          </div>
+        </div>
+      </div>
 
     <div class="col-md-3 col-lg-3 col-sm-3 text-center mt-2 mb-2 my-auto">
         <img [ngClass]="!mode.chat ? 'profile-image' : 'profile-image-chat'" [src]="profile?.profile_picture || 'assets/user-circle-solid.svg'">
@@ -26,11 +26,11 @@
             <h6 class="profile-interests ">
                 Interested in: {{profile?.sexual_preference}}
             </h6>
-            <h6 *ngIf="profile.loaction != 0 && profile.location.length > 0" class="profile-interests ">
+            <h6 *ngIf="profile?.location && profile?.location?.length > 0" class="profile-interests ">
                 Location:
             </h6>
             <h6 class="profile-interests " class="inline">
-                ({{profile?.location[0] || 0}} ; {{profile?.location[1] || 0}})
+                ({{profile?.location?.latitude || 0}} ; {{profile?.location?.longitude || 0}})
             </h6>
         </div>
         <div *ngIf="!mode.chat" class="row h-100">

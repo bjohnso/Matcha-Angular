@@ -6,6 +6,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import {ChatComponent} from './chat/chat.component';
 import {ChatResolverService} from './chat/services/chat-resolver.service';
 import {ChatGuardService} from './chat/services/chat-guard.service';
+import {NotificationsComponent} from './notifications/notifications.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
   },
   {
     path: 'profile/:id',
+    // redirectTo: 'profile/:id(notification:notification)',
     outlet: 'matcha',
     loadChildren: () => import('./profile/profile-routing.module')
       .then(m => m.ProfileRoutingModule),
@@ -43,14 +45,13 @@ const routes: Routes = [
     canActivate: [AuthGuardService, ChatGuardService],
     canLoad: [AuthGuardService],
   },
-  // {
-  //   path: 'user',
-  //   outlet: 'user',
-  //   loadChildren: () => import('./user/user-routing.module')
-  //     .then(m => m.UserRoutingModule),
-  //   canActivate : [AuthGuardService],
-  //   canLoad : [AuthGuardService]
-  // }
+  {
+    path: 'notification',
+    component: NotificationsComponent,
+    outlet: 'notification',
+    canActivate : [AuthGuardService],
+    canLoad : [AuthGuardService]
+  }
 ];
 
 @NgModule({

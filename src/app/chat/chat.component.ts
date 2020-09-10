@@ -41,7 +41,12 @@ export class ChatComponent extends CoreComponent implements OnInit {
     this.username = this.profile.username;
     this.chat.joinChatroom(this.match_id);
     this.chat.getMessages(this.match_id).pipe(take(1)).subscribe(data => {
-      this.messageList = data.data;
+      console.log(data);
+      if (JSON.stringify(data.data) === JSON.stringify({})) {
+        this.messageList = [];
+      } else {
+        this.messageList = (data as any).data;
+      }
     });
     this.chat.getMessagesFromSocket().subscribe((message: Message) => {
       if (message.author !== this.id) {

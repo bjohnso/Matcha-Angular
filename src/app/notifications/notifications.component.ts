@@ -9,16 +9,16 @@ import { Router } from '@angular/router';
 })
 export class NotificationsComponent implements OnInit {
 
-  notifications : Notification [] = [];
+  notifications: Notification [] = [];
   notificationCounter = {likes : 0, messages : 0, visits : 0, matches : 0};
 
-  constructor(private notificationService : NotificationsService, private router: Router) { }
+  constructor(private notificationService: NotificationsService, private router: Router) { }
 
   ngOnInit(): void {
-    this.notificationService.getNotificationsFromSocket().subscribe((notification : Notification) => {
+    this.notificationService.getNotificationsFromSocket().subscribe((notification: Notification) => {
       console.log(notification);
       this.notifications.push(notification);
-      switch(notification['type']){
+      switch ((notification as any).type) {
         case 'like' : {
           this.notificationCounter.likes++;
           break;
@@ -36,45 +36,45 @@ export class NotificationsComponent implements OnInit {
           break;
         }
       }
-    })
+    });
   }
 
-  getType(type){
+  getType(type) {
 
-    switch(type){
-      case "unlike" : {
+    switch (type) {
+      case 'unlike' : {
         return 'warning';
         break;
       }
-      case "like" : {
+      case 'like' : {
         return 'info';
         break;
       }
-      case "match" : {
+      case 'match' : {
         return 'danger';
         break;
       }
-      case "unmatch" : {
+      case 'unmatch' : {
         return 'primary';
         break;
       }
-      case "unlike" : {
+      case 'unlike' : {
         return 'primary';
         break;
       }
-      case "message" :{
+      case 'message' : {
         return 'success';
         break;
       }
     }
   }
 
-  removeNotification(not){
-    this.notifications.filter(e => (e['type'] != not['type'] &&
-       e['sender'] != not['sender'] && e['receiver'] != not['receiver']));
+  removeNotification(not) {
+    this.notifications.filter(e => ((e as any).type !== not.type &&
+      (e as any).sender !== not.sender && (e as any).receiver !== not.receiver));
   }
 
-  routePage(notification){
-    this.router.navigate(['/view'], {queryParams : {profile : notification.sender, type : notification.type}})
+  routePage(notification) {
+    this.router.navigate(['/view'], {queryParams : {profile : notification.sender, type : notification.type}});
   }
 }
