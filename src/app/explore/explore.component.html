@@ -71,9 +71,11 @@
           <div class="mx-auto col-sm-12 col-md-8 col-lg-6">
             <app-profile-header *ngFor="let profile of profilesShown"
                                         [profile]="profile"
-                                        [mode]="{visitor: true, edit: false, liked: isLiked(profile.id)}"
+                                        [mode]="{visitor: true, edit: false, liked: isLiked(profile.id), blocked: isBlocked(profile.id)}"
                                         (likeUserEvent)="onLikeEvent(profile.id)"
-                                        (viewUserEvent)="onViewEvent(profile.id)">
+                                        (viewUserEvent)="onViewEvent(profile.id)"
+                                        (blockUserEvent)="onBlockEvent(profile.id)"
+                                        (reportUserEvent)="onReportEvent(profile.id)">
             </app-profile-header>
           </div>
 

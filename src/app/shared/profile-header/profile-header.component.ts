@@ -13,8 +13,8 @@ export class ProfileHeaderComponent implements OnInit {
   @Input() profile;
 
   @Output() updateProfileEvent = new EventEmitter();
-  // @Output() blockUserEvent = new EventEmitter();
-  // @Output() reportUserEvent = new EventEmitter();
+  @Output() blockUserEvent = new EventEmitter();
+  @Output() reportUserEvent = new EventEmitter();
   @Output() likeUserEvent = new EventEmitter();
   @Output() viewUserEvent = new EventEmitter();
 
@@ -27,13 +27,13 @@ export class ProfileHeaderComponent implements OnInit {
     this.updateProfileEvent.emit(event);
   }
 
-  // onBlockUser(event: Event) {
-  //   this.blockUserEvent.emit(event);
-  // }
-  //
-  // onReportUser(event: Event) {
-  //   this.reportUserEvent.emit(event);
-  // }
+  onBlockEvent(event: Event) {
+    this.blockUserEvent.emit(event);
+  }
+
+  onReportEvent(event: Event) {
+    this.reportUserEvent.emit(event);
+  }
 
   onLikeUser(event: Event) {
     this.likeUserEvent.emit(event);

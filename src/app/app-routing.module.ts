@@ -29,7 +29,6 @@ const routes: Routes = [
   },
   {
     path: 'profile/:id',
-    // redirectTo: 'profile/:id(notification:notification)',
     outlet: 'matcha',
     loadChildren: () => import('./profile/profile-routing.module')
       .then(m => m.ProfileRoutingModule),

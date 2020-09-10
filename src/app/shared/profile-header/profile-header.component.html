@@ -5,8 +5,8 @@
             <fa-icon [icon]="faBars"></fa-icon>
           </button>
           <div ngbDropdownMenu aria-labelledby="dropdownManual">
-            <button ngbDropdownItem>Report</button>
-            <button ngbDropdownItem>Block</button>
+            <button ngbDropdownItem (click)="onReportEvent($event)">Report</button>
+            <button ngbDropdownItem (click)="onBlockEvent($event)">{{!mode.blocked ? 'Block' : 'Unblock'}}</button>
           </div>
         </div>
       </div>

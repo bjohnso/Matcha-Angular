@@ -8,6 +8,7 @@ import { LikesService } from '../services/likes.service';
 import { MatchService } from '../services/match.service';
 import {JWTTokenService} from '../services/jwt-token.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {BlockService} from '../services/block.service';
 
 @Component({
   selector: 'app-explore',
@@ -22,6 +23,7 @@ export class ExploreComponent implements OnInit {
   profilesShown: Profile [] = [];
   matches: Match [] = [];
   likes: [] = [];
+  blocks: [] = [];
   sortable: string[] = ['age', 'location', 'popularity'];
   page = 1;
   pageSize = 10;
@@ -33,10 +35,12 @@ export class ExploreComponent implements OnInit {
 
   constructor(private profileService: ProfileService, private like: LikesService,
               private match: MatchService, private jwTokenService: JWTTokenService,
-              private activatedRoute: ActivatedRoute, private router: Router) {}
+              private activatedRoute: ActivatedRoute, private router: Router,
+              private blockService: BlockService) {}
 
   ngOnInit(): void {
     this.like.getLiked().pipe(take(1)).subscribe( e => {this.likes = e.data; console.log(this.likes); });
+    this.blockService.getBlocked().pipe(take(1)).subscribe( e => {this.blocks = e.data; console.log(this.blocks); });
     this.match.getMatches().pipe(take(1)).subscribe(e => { this.matches = e.data; console.log(e.data); });
     this.profileService.getInterests().pipe(take(1)).subscribe(data => {
       this.interests = (data as any).data.hobbies;
@@ -92,6 +96,10 @@ export class ExploreComponent implements OnInit {
 
     this.profileService.getUserByFilter(radius, popularity, sexual_preference, interests, age).pipe(take(1)).subscribe((e) => {
       let data = (e as any).data;
+      if (JSON.stringify(data) === JSON.stringify({})) {
+        data = [];
+        console.log('No Users');
+      }
       if (form.value.sortable) {
          form.value.sortable.forEach(element => {
           data = data.sort((a, b ) => {
@@ -210,11 +218,19 @@ export class ExploreComponent implements OnInit {
   }
 
   isBlocked(userId) {
-
+    return this.blocks.find(block => (block as any).blocked_user === userId &&
+      (block as any).blocking_user + '' === this.jwTokenService.getUserId()) != null;
   }
 
-  isReported(userId) {
+  onBlockEvent(userId) {
+    this.blockService.postBlocked(userId).subscribe();
+  }
 
+  onReportEvent(userId) {
+    this.blockService.reportUser(userId).subscribe((result) => {
+      console.log('result');
+      console.log(result);
+    });
   }
 
   notificationError(error) {
