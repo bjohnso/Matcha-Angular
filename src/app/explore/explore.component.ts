@@ -165,7 +165,6 @@ export class ExploreComponent implements OnInit {
             queryParamsHandling: 'merge',
             relativeTo: this.activatedRoute.parent
           }).then(() => {
-            const commands = ['chat', userId];
             this.router.navigate([{outlets: {chat: ['chat', userId, matchId]}}], {
               skipLocationChange: true,
               queryParamsHandling: 'merge',

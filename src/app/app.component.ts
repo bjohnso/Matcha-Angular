@@ -28,6 +28,12 @@ export class AppComponent extends CoreComponent implements OnInit {
         this.spinner.hide('nav-spinner').then();
         const nav: NavigationEnd =  event as NavigationEnd;
         this.currentRoute = nav.urlAfterRedirects;
+        if (!event.url.includes('notification:notification')) {
+          this.router.navigate([{outlets: {notification: ['notification']}}], {
+            skipLocationChange: true,
+            queryParamsHandling: 'merge',
+          }).then();
+        }
       }
     });
   }
