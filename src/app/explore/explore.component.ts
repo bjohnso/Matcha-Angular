@@ -263,6 +263,10 @@ export class ExploreComponent implements OnInit {
     this.blockService.postBlocked(userId).subscribe();
   }
 
+  onUnBlockEvent(userId) {
+    this.blockService.deleteBlocked(userId).subscribe();
+  }
+
   onReportEvent(userId) {
     this.blockService.reportUser(userId).subscribe((result) => {
       console.log('result');

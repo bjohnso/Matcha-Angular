@@ -6,7 +6,7 @@
           </button>
           <div ngbDropdownMenu aria-labelledby="dropdownManual">
             <button ngbDropdownItem (click)="onReportEvent($event)">Report</button>
-            <button ngbDropdownItem (click)="onBlockEvent($event)">{{!mode.blocked ? 'Block' : 'Unblock'}}</button>
+            <button ngbDropdownItem (click)="!mode.blocked ? onBlockEvent($event) : onUnBlockEvent($event)">{{!mode.blocked ? 'Block' : 'Unblock'}}</button>
           </div>
         </div>
       </div>

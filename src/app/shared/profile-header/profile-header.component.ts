@@ -14,6 +14,7 @@ export class ProfileHeaderComponent implements OnInit {
 
   @Output() updateProfileEvent = new EventEmitter();
   @Output() blockUserEvent = new EventEmitter();
+  @Output() unblockUserEvent = new EventEmitter();
   @Output() reportUserEvent = new EventEmitter();
   @Output() likeUserEvent = new EventEmitter();
   @Output() viewUserEvent = new EventEmitter();
@@ -29,6 +30,11 @@ export class ProfileHeaderComponent implements OnInit {
 
   onBlockEvent(event: Event) {
     this.blockUserEvent.emit(event);
+  }
+
+  onUnBlockEvent(event: Event) {
+    console.log('Unblock');
+    this.unblockUserEvent.emit(event);
   }
 
   onReportEvent(event: Event) {
