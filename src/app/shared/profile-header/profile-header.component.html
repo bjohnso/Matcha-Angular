@@ -6,7 +6,7 @@
           </button>
           <div ngbDropdownMenu aria-labelledby="dropdownManual">
             <button ngbDropdownItem (click)="onReportEvent($event)">Report</button>
-            <button ngbDropdownItem (click)="onBlockEvent($event)">{{!mode.blocked ? 'Block' : 'Unblock'}}</button>
+            <button ngbDropdownItem (click)="!mode.blocked ? onBlockEvent($event) : onUnBlockEvent($event)">{{!mode.blocked ? 'Block' : 'Unblock'}}</button>
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@
                 Location:
             </h6>
             <h6 class="profile-interests " class="inline">
-                ({{profile?.location?.latitude || 0}} ; {{profile?.location?.longitude || 0}})
+                ({{profile?.location?.latitude || profile?.location[0]}} ; {{profile?.location?.longitude || profile?.location[1]}})
             </h6>
         </div>
         <div *ngIf="!mode.chat" class="row h-100">
@@ -59,7 +59,7 @@
         Discard
         <fa-icon [icon]="faPen"></fa-icon>
       </button>
-            <ng-container *ngIf="mode.visitor">
+            <ng-container *ngIf="mode.visitor && !mode.blocked">
                 <button class="btn-success mr-1" (click)="onLikeUser($event)">{{mode.liked ? 'Unlike' : 'Like'}}</button>
                 <button *ngIf="!mode.viewing" class="btn-success" (click)="onViewUser($event)">View</button>
             </ng-container>

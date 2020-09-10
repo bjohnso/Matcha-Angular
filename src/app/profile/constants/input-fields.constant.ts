@@ -54,5 +54,12 @@ export const EDIT_PROFILE_FIELDS = {
     ID_SUFFIX: 'Description',
     PROP: 'description',
     VALIDATION_ID: 'validationDescription'
-  }
+  },
+  BIRTHDATE: {
+    INPUT_ID: 'inputBirthdate',
+    LINK_ID: 'linkBirthdate',
+    ID_SUFFIX: 'Birthdate',
+    PROP: 'birthdate',
+    VALIDATION_ID: 'validationBirthdate'
+  },
 };

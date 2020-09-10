@@ -18,10 +18,10 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
   @ViewChild('inputImageUpload', {static: true}) inputImageRef: ElementRef;
   @ViewChild('inputBioUpdate', {static: true}) inputBioUpdateRef: ElementRef;
   profile: Profile;
-  mode = {
+  mode: any = {
     edit: false,
     visitor: false,
-    viewing: true
+    viewing: true,
   };
   likes: [] = [];
   interests: string[];
@@ -38,11 +38,13 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
     this.activatedRoute.data.subscribe(data => {
       const profileData = data.profileData;
       this.profile = new Profile(profileData.profile as ProfileInterface);
+      console.log(this.profile);
       if (profileData.location) {
         this.profile.location = profileData.location;
       }
       this.interests = profileData.interests;
       this.mode.visitor = profileData.isVistor;
+      this.mode.liked = profileData.isLiked;
     });
   }
 
@@ -153,13 +155,15 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
   }
 
   unlikeProfile(liked_user) {
-    this.likeService.getLiked().pipe(take(1)).subscribe( e => {this.likes = e.data; });
-    this.likeService.deleteLike((this.likes.find(e => (e as any).liked_user === liked_user) as any).id).
-    pipe(take(1)).subscribe(e => {
-      if ((e as any).success === true) {
-        console.log(e);
-        this.refreshProfiles();
-      }
+    this.likeService.getLiked().pipe(take(1)).subscribe( e => {
+      this.likes = e.data;
+      this.likeService.deleteLike((this.likes.find(r => (r as any).liked_user === liked_user) as any).id).
+      pipe(take(1)).subscribe(r => {
+        if ((r as any).success === true) {
+          console.log(r);
+          this.refreshProfiles();
+        }
+      });
     });
   }
 
@@ -169,7 +173,11 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
   }
 
   refreshProfiles() {
-    this.likeService.getLiked().pipe(take(1)).subscribe( e => {this.likes = e.data; });
+    this.likeService.getLiked().pipe(take(1)).subscribe( e => {
+      console.log('Profile Refreshed');
+      this.likes = e.data;
+      this.mode.liked = this.isLiked(this.profile.id);
+    });
   }
 
   @HostListener('document:mouseup', ['$event'])
@@ -215,7 +223,6 @@ export class ViewProfileComponent extends CoreComponent implements OnInit {
   ngOnInit(): void {
     this.inputImageUpload = this.inputImageRef.nativeElement as HTMLInputElement;
     this.inputBioUpdate = this.inputBioUpdateRef.nativeElement as HTMLTextAreaElement;
-    this.likeService.getLiked().pipe(take(1)).subscribe( e => {this.likes = e.data; console.log(this.likes); });
   }
 
 }

@@ -15,6 +15,10 @@ export class PersonalDetailsComponent extends CoreComponent implements OnInit {
   @Input() profile;
   @Input() mode;
 
+  // DATE
+
+  birtdate;
+
   // META-DATA
   GENDER_OPTIONS = GENDER;
   SEXUAL_PREFERENCE_OPTIONS = SEXUAL_PREFERENCE;
@@ -53,6 +57,10 @@ export class PersonalDetailsComponent extends CoreComponent implements OnInit {
     return Object.keys(EDIT_PROFILE_FIELDS).find(key => {
       return EDIT_PROFILE_FIELDS[key].INPUT_ID === id;
     });
+  }
+
+  getBirtdate() {
+    return Date.parse(this.profile?.birthdate);
   }
 
   getFieldFromLink(link) {

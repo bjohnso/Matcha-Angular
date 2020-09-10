@@ -81,6 +81,7 @@
                                         (likeUserEvent)="onLikeEvent(profile.id)"
                                         (viewUserEvent)="onViewEvent(profile.id)"
                                         (blockUserEvent)="onBlockEvent(profile.id)"
+                                        (unblockUserEvent)="onUnBlockEvent(profile.id)"
                                         (reportUserEvent)="onReportEvent(profile.id)">
             </app-profile-header>
           </div>
@@ -106,6 +107,6 @@
 
         </div>
         <div *ngIf="profilesShown.length < 1" class="row no-profiles-found justify-content-center">
-            <h4>Nothing to see here :( try a broad search to find your match</h4>
+            <h5>Nothing to see here :( try a broad search to find your match</h5>
         </div>
     </div>
