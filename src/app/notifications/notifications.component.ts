@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from '../services/notifications.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-notifications',
@@ -12,11 +12,11 @@ export class NotificationsComponent implements OnInit {
   notifications: Notification [] = [];
   notificationCounter = {likes : 0, messages : 0, visits : 0, matches : 0};
 
-  constructor(private notificationService: NotificationsService, private router: Router) { }
+  constructor(private notificationService: NotificationsService, private router: Router,
+              private activatedRoute : ActivatedRoute) { }
 
   ngOnInit(): void {
     this.notificationService.getNotificationsFromSocket().subscribe((notification: Notification) => {
-      console.log(notification);
       this.notifications.push(notification);
       switch ((notification as any).type) {
         case 'like' : {
@@ -70,11 +70,18 @@ export class NotificationsComponent implements OnInit {
   }
 
   removeNotification(not) {
-    this.notifications.filter(e => ((e as any).type !== not.type &&
-      (e as any).sender !== not.sender && (e as any).receiver !== not.receiver));
+    console.log('hello');
+    this.notifications.filter((e : Notification) => {
+      console.log(not);
+      return (JSON.stringify(e) == JSON.stringify(not));
+    });
   }
 
   routePage(notification) {
-    this.router.navigate(['/view'], {queryParams : {profile : notification.sender, type : notification.type}});
+    this.router.navigate([{outlets: {matcha: ['profile', notification.sender]}}], {
+      skipLocationChange: true,
+      queryParamsHandling: 'merge',
+      relativeTo: this.activatedRoute.parent
+    });
   }
 }

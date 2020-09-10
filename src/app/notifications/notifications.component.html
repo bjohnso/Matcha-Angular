@@ -1,15 +1,15 @@
 <div>
-    <div>
+    <!-- <div>
         <div>Visits : {{notificationCounter.visits}}</div>
         <div>Likes: {{notificationCounter.likes}}</div>
         <div>Matches : {{notificationCounter.matches}}</div>
         <div>Messages : {{notificationCounter.messages}}</div>
-    </div>
+    </div> -->
     
 
     <div *ngFor = "let notification of notifications">
-        <ngb-alert [type]="getType(notification.type)" (click)="routePage(notification);"  (close)="removeNotification(notification);">
-            {{notification.content}}
+        <ngb-alert [type]="getType(notification.type)"  (close)="removeNotification(notification);">
+            <div (click)="routePage(notification);" >{{notification.content}}</div>
         </ngb-alert>
     </div>
 </div>
