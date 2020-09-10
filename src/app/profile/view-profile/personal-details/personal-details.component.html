@@ -2,7 +2,7 @@
 <div class="col-12 details-container p-2 mb-3">
   <h4>Personal Details</h4>
   <br>
-  <form #authForm="ngForm">
+  <form #authForm="ngForm" name="myForm">
     <div class="form-group">
       <label for="{{EDIT_PROFILE_FIELDS.FIRST_NAME.INPUT_ID}}">First Name</label>
       <input
@@ -127,6 +127,20 @@
                  [readOnly]="!mode.edit"
                  (click)="mode.edit ? sexualOrientationDrop.open() : null"/>
         </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="{{EDIT_PROFILE_FIELDS.BIRTHDATE.PROP}}">Birthdate</label>
+      <div id="{{EDIT_PROFILE_FIELDS.BIRTHDATE.PROP}}" name="birthdate">
+          <input autocomplete="off"
+                 type="date"
+                 name="birtdate"
+                 placeholder="select birthdate"
+                 class="form-control"
+                 id="{{EDIT_PROFILE_FIELDS.BIRTHDATE.INPUT_ID}}"
+                 [value]="profile?.birtdate"
+                 [readOnly]="!mode.edit"/>
       </div>
     </div>
   </form>

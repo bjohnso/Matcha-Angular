@@ -108,6 +108,8 @@ export class ExploreComponent implements OnInit {
 
     this.profileService.getUserByFilter(radius, popularity, sexual_preference, interests, age).pipe(take(1)).subscribe((e) => {
       let data = (e as any).data;
+      console.log('User');
+      console.log(e);
       if (JSON.stringify(data) === JSON.stringify({})) {
         data = [];
         console.log('No Users');
