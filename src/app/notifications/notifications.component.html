@@ -6,10 +6,12 @@
         <div>Messages : {{notificationCounter.messages}}</div>
     </div> -->
     
+        <button class="primary" (click)="clearNotifications();">Clear Notifications</button>
 
-    <div *ngFor = "let notification of notifications">
-        <ngb-alert [type]="getType(notification.type)"  (close)="removeNotification(notification);">
-            <div (click)="routePage(notification);" >{{notification.content}}</div>
+
+    <div *ngFor = "let notification of notifications"(click)="routePage(notification);">
+        <ngb-alert [type]="getType(notification.type)">
+            {{notification.content}}
         </ngb-alert>
     </div>
 </div>

@@ -69,12 +69,8 @@ export class NotificationsComponent implements OnInit {
     }
   }
 
-  removeNotification(not) {
-    console.log('hello');
-    this.notifications.filter((e : Notification) => {
-      console.log(not);
-      return (JSON.stringify(e) == JSON.stringify(not));
-    });
+  clearNotifications(){
+    this.notifications = [];
   }
 
   routePage(notification) {
