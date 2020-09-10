@@ -33,9 +33,6 @@ export class InterceptorService implements HttpInterceptor {
         return next.handle(clone).pipe(map(event => {
           return event;
         })).pipe(finalize(() => { this.spinner.hide('nav-spinner').then(); }));
-      } else {
-        // No Auth Token - Please Login
-        this.router.navigate(['auth']).then();
       }
     } else {
       return next.handle(req).pipe(finalize(() => { this.spinner.hide('nav-spinner').then(); }));

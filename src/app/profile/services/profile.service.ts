@@ -13,6 +13,10 @@ export class ProfileService {
   constructor(private http: HttpClient, private imageCompressService: ImageCompressService) {
   }
 
+  getBlockedUsers() {
+    return this.http.get<any>('/api/profile/blocks');
+  }
+
   getUserById(userId) {
       if (userId && userId !== undefined) {
           return this.http.post('/api/profile/filter', {id : userId});

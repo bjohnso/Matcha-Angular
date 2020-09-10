@@ -3,6 +3,7 @@ import {ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterEvent} fro
 import {CoreComponent} from './core/core.component';
 import { Socket } from 'ngx-socket-io';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {JWTTokenService} from './services/jwt-token.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ export class AppComponent extends CoreComponent implements OnInit {
   title = 'matcha';
   currentRoute;
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
-              private socket: Socket, private spinner: NgxSpinnerService) {
+              private socket: Socket, private spinner: NgxSpinnerService,
+              private jwtService: JWTTokenService) {
     super();
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
@@ -28,7 +30,7 @@ export class AppComponent extends CoreComponent implements OnInit {
         this.spinner.hide('nav-spinner').then();
         const nav: NavigationEnd =  event as NavigationEnd;
         this.currentRoute = nav.urlAfterRedirects;
-        if (!event.url.includes('notification:notification')) {
+        if (!event.url.includes('notification:notification') && this.jwtService.getUserId() && !this.jwtService.isTokenExpired()) {
           this.router.navigate([{outlets: {notification: ['notification']}}], {
             skipLocationChange: true,
             queryParamsHandling: 'merge',

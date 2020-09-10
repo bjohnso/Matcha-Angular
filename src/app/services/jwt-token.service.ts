@@ -15,6 +15,12 @@ export class JWTTokenService {
     }
   }
 
+  resetAuthState() {
+    this.storageService.remove('user');
+    this.storageService.remove('userId');
+    return true;
+  }
+
   setUserId(id: number) {
     if (id) {
       this.storageService.set('userId', id.toString());

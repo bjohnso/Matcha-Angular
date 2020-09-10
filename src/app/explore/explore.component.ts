@@ -24,6 +24,8 @@ export class ExploreComponent implements OnInit {
   matches: Match [] = [];
   likes: [] = [];
   blocks: [] = [];
+  blockedUsers: Profile[] = [];
+  blockedFilter = false;
   sortable: string[] = ['age', 'location', 'popularity'];
   page = 1;
   pageSize = 10;
@@ -39,6 +41,7 @@ export class ExploreComponent implements OnInit {
               private blockService: BlockService) {}
 
   ngOnInit(): void {
+    // this.profileService.getBlockedUsers().pipe(take(1)).subscribe(e => { console.log('BLOCKED'); e.console.log(e.data); });
     this.like.getLiked().pipe(take(1)).subscribe( e => {this.likes = e.data; console.log(this.likes); });
     this.blockService.getBlocked().pipe(take(1)).subscribe( e => {this.blocks = e.data; console.log(this.blocks); });
     this.match.getMatches().pipe(take(1)).subscribe(e => { this.matches = e.data; console.log(e.data); });
@@ -50,12 +53,21 @@ export class ExploreComponent implements OnInit {
     this.errorMessage = '';
   }
 
+  onSearch(event: Event) {
+    const button = event.target as HTMLButtonElement;
+    this.changeText();
+    this.isCollapsed = !this.isCollapsed;
 
+    if (button.id === 'searchButton') {
+      this.blockedFilter = false;
+    } else if (button.id === 'blockSearchButton') {
+      this.blockedFilter = true;
+    }
+  }
 
   onSubmit(form: NgForm) {
     this.like.getLiked().pipe(take(1)).subscribe( e => {this.likes = e.data; });
     this.match.getMatches().pipe(take(1)).subscribe(e => this.matches = e.data);
-    console.log(form.value);
     let sexual_preference;
     let age: { min: any; max: any; };
     let popularity: { min: any; max: any; };
@@ -124,14 +136,26 @@ export class ExploreComponent implements OnInit {
     this.like.getLiked().pipe(take(1)).subscribe( e => {this.likes = e.data; });
     this.match.getMatches().pipe(take(1)).subscribe(e => this.matches = e.data
       .filter(match => match.id + '' !== this.jwTokenService.getUserId()));
-    this.profilesShown = this.profiles
-      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-    this.profilesShown.forEach(data => {
-      (data as any).like = (this.likes.filter(e => {
-        return ((e as any).liked_user === data.id || (e as any).liking_user === data.id); }).length > 0);
-      (data as any).match = (this.matches.filter(e => {
-        return ((e as any).user1 === data.id || (e as any).user2 === data.id); }).length > 0);
-    });
+    if (this.blockedFilter == false) {
+      console.log('non blocked');
+      this.profilesShown = this.profiles
+        .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+      this.profilesShown.forEach(data => {
+        (data as any).like = (this.likes.filter(e => {
+          return ((e as any).liked_user === data.id || (e as any).liking_user === data.id); }).length > 0);
+        (data as any).match = (this.matches.filter(e => {
+          return ((e as any).user1 === data.id || (e as any).user2 === data.id); }).length > 0);
+      });
+    } else {
+      this.profilesShown = this.blockedUsers
+        .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+      this.profilesShown.forEach(data => {
+        (data as any).like = (this.likes.filter(e => {
+          return ((e as any).liked_user === data.id || (e as any).liking_user === data.id); }).length > 0);
+        (data as any).match = (this.matches.filter(e => {
+          return ((e as any).user1 === data.id || (e as any).user2 === data.id); }).length > 0);
+      });
+    }
     this.formError = false;
     this.errorMessage = '';
   }

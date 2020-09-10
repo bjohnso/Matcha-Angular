@@ -32,27 +32,27 @@
         </div>
       </li>
 
-      <li class="nav-item d-inline-block" ngbDropdown>
-        <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown2" role="button">
-          Notifications
-        </a>
-        <div ngbDropdownMenu aria-labelledby="navbarDropdown">
-<!--          <router-outlet (activate)="onNotificatiinActivateEvent($event)"-->
-<!--                         (deactivate)="onNotificationDeactivateEvent($event)"-->
-<!--                         name="notification">-->
-          <router-outlet
-                         name="notification">
-          </router-outlet>
-        </div>
-      </li>
+      <ng-container *ngIf="isAuth()">
+        <li [hidden]="!isNotificationActive" class="nav-item d-inline-block" ngbDropdown>
+          <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown2" role="button">
+            Notifications
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdown">
+            <router-outlet (activate)="onNotificationActivateEvent($event)"
+                           (deactivate)="onNotificationDeactivateEvent($event)"
+                           name="notification">
+            </router-outlet>
+          </div>
+        </li>
 
-      <li class="nav-item"
-          [ngClass]="isActiveRoute('logout') ? 'active' : ''">
-        <a class="nav-link"
-           (click)="navigate($event, 'logout')">
-          Logout
-        </a>
-      </li>
+        <li [hidden]="!isAuth()" class="nav-item"
+            [ngClass]="isActiveRoute('logout') ? 'active' : ''">
+          <a class="nav-link"
+             (click)="navigate($event, 'logout')">
+            Logout
+          </a>
+        </li>
+      </ng-container>
     </ul>
   </div>
 </nav>

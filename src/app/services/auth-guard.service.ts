@@ -10,10 +10,11 @@ export class AuthGuardService implements CanActivate, CanLoad {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    console.log('Can I Activate? - ' + state.url);
     if (!this.authService.isAuthenticated()) {
       // NOT AUTHED - PLEASE LOGIN
       console.log('BUSTED!');
-      this.router.navigate(['auth']).then();
+      this.router.navigate([{outlets : {matcha: 'auth'}}]).then();
       return false;
     }
     return true;
@@ -25,7 +26,7 @@ export class AuthGuardService implements CanActivate, CanLoad {
     if (!this.authService.isAuthenticated()) {
       // NOT AUTHED - PLEASE LOGIN
       console.log('BUSTED!');
-      this.router.navigate(['auth']).then();
+      this.router.navigate([{outlets : {matcha: 'auth'}}]).then();
       return false;
     }
     return true;

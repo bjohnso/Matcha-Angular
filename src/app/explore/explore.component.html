@@ -47,7 +47,13 @@
                     </div>
 
                     <div class="search-profiles-button-container text-center">
-                        <button class="btn btn-primary " (click)="changeText();isCollapsed = !isCollapsed" type="submit">Search Profiles </button>
+                        <button id="searchButton" class="btn btn-primary " (click)="onSearch($event)" type="submit">
+                          Search Profiles
+                        </button>
+                      <button *ngIf="blockedUsers.length > 0" id="blockSearchButton" class="btn btn-danger text-center" type="submit"
+                              (click)="onSearch($event)">
+                        See Blocked Users
+                      </button>
                     </div>
                 </form>
 

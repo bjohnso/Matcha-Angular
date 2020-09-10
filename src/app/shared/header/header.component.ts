@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
 
   @Input() currentRoute;
   isChatActive = false;
+  isNotificationActive = false;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
@@ -30,11 +31,32 @@ export class HeaderComponent implements OnInit {
 
   navigate(event: Event, route: string) {
     const commands = [route];
-    if (route === 'profile') {
-      commands.push(this.jwtService.getUserId());
+    if (this.isAuth()) {
+      if (route === 'logout') {
+        this.router.navigate([{outlets: {matcha: 'auth'}}])
+          .then(() => {
+            console.log(this.jwtService.resetAuthState());
+          });
+      } else {
+        if (route === 'profile') {
+          commands.push(this.jwtService.getUserId());
+        }
+        this.router.navigate([{outlets: {matcha: commands}}])
+          .then();
+      }
     }
-    this.router.navigate([{outlets: {matcha : commands}}])
-      .then();
+  }
+
+  isAuth() {
+    return this.jwtService.getToken() != null && this.jwtService.isTokenExpired() !== true;
+  }
+
+  onNotificationActivateEvent(event: Event) {
+    this.isNotificationActive = true;
+  }
+
+  onNotificationDeactivateEvent(event: Event) {
+    this.isNotificationActive = true;
   }
 
   onChatActivateEvent(event: Event) {
